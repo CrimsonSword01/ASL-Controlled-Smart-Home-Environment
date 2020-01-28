@@ -1,0 +1,152 @@
+.navBarStyle{
+	display: flex;
+	border-bottom: 1px solid white;
+	list-style: none;
+	padding-bottom: 20px;
+}
+.navLinkStyle{
+width: 33%;
+text-align: center;
+}
+html{
+	font-family: 'Raleway', sans-serif;
+	background-color:  #393f4d;
+	color: white;
+
+	/* background-color: #65CCB8; */
+}
+a { color: inherit; } 
+.containerHome {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows:  300px 100px;
+  }
+  .containerLogin{
+	display: grid;
+	grid-template-columns: 40% 25% 35%;
+	grid-template-rows:  500px;
+
+  }
+  .formWrapper{
+	  width: 100%;
+	  text-align: center;
+	  padding-top: 150px;
+
+  }
+  .loginInputStyle{
+	width: 80%;
+	height: 40px;
+	font-size: 16px;
+  }
+  .homeImgStyle{
+	  width: 60%;
+	  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+  .headerStyle{
+	  text-align: center;
+	  padding-bottom: 20px;
+	  height: 200px;
+  }
+  .homerow1col1{
+	display: flex;
+	/* background-color: orange; */
+	/* display: flex; */
+	align-items: center;
+	justify-content: center;
+}
+.inputFieldStyle{
+	padding-bottom: 30px;
+}
+.loginrow1col2{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid black;
+	font-size: 3em;
+}
+.buttonCont{
+	text-align: center;
+	font-size: 20px;
+}
+.buttonWrapper{
+    padding-top: 20px;
+}
+.homerow1col2{
+	font-size: 22px;
+}
+.signUpStyle{
+	background-color: #feda6a; /* Green */
+	border: none;
+	color: white;
+	width: 200px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	height: 50px;
+	border-radius: 4px;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	color: black;
+}
+.signUpStyle:hover{
+	cursor: pointer;
+	background-color: #e9cf80;
+}
+.loginStyle{
+	background-color: white; /* Green */
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	height: 50px;
+	border-radius: 4px;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	color: black;
+}
+ul{
+list-style-type: none;
+}
+.keywordStyle{
+	color:#feda6a;
+    padding-right: 9px;
+	font-size: 20px;
+	font-style: italic;
+}
+.attributeListStyle{
+	padding-bottom: 20px;
+}
+
+.mottoStyle{
+	padding-top: 20px;
+	color:#feda6a;
+	font-size: 19px;
+	font-style: italic;
+}
+  body{
+	overflow: scroll;
+  }
+
+  /* width */
+::-webkit-scrollbar {
+	width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+	background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+	background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+	background: #555;
+  }
+  /* @media */
