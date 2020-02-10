@@ -7,6 +7,7 @@ def logStatus(status):
     current_time = str(datetime.now())
     if status == 'opening':
         file = open('logHistory.txt', 'a')
+        file.write('=========================================\n')
         file.write('program opened at: ' + current_time + '\n')
         file.close()
     elif status == 'img':
