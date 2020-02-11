@@ -1,3 +1,8 @@
+
+
+
+# EDIT BY PAUL DURHAM - SEE EDIT 1 - 2/10/2020
+
 import time
 import cv2
 import numpy as numpy
@@ -20,7 +25,10 @@ def displayFrame():
     logStatus('opening')  # documenting that the program was opened
     img_counter = 0
     beginTime = time.time()
-    path = 'ImageGathering/'  # folder files are being saved to
+    # EDIT 1
+    # EDIT BY PAUL DURHAM ON 2/10/2020
+    # Added '..' to beginning of path to allow proper pathing in linux
+    path = '../ImageGathering/'  # folder files are being saved to
     while True:
         ret, frame = video.read()  # retrieving the video frame
         cv2.imshow('frame', frame)  # displaying the frame
