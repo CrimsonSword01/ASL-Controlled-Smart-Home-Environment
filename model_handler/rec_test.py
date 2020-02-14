@@ -3,75 +3,43 @@ from torchvision.transforms import transforms
 from PIL import Image
 from pathlib import Path
 import os
-
+from torchvision import datasets, models, transforms
+import torch.nn as nn
+import numpy as np
+from matplotlib import cm
+import cv2
 #global vars
 # onOrOffFan = 0
 # onOrOffLights = 0
 
+class Classifer:
+    def __init__(self):
+        self.model = models.resnet18(pretrained=True)
+        self.set_parameter_requires_grad(True)
+        num_ftrs = self.model.fc.in_features
+        self.model.fc = nn.Linear(num_ftrs, 2)
+        self.model.load_state_dict(torch.load('C:/Users/paulr/projects/450/ASL-Controlled-Smart-Home-Environment/model_handler/resnet.pt'))
+        self.model.eval()
+        self.trans = transforms.Compose([
+            transforms.RandomHorizontalFlip(),
+            transforms.Resize(32),
+            transforms.CenterCrop(32),
+            transforms.ToTensor(),
+            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+        ])
 
-def get_files(path):
-    dir = path
-    res = []
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            res.append(os.path.join(root, file))
-    return res
+    def classify(self,img):
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+        img_new = Image.fromarray(img)
+        input = self.trans(img_new)
+        input = input.view(1, 3, 32, 32)
+        output = self.model(input)
+        prediction = int(torch.max(output.data, 1)[1].numpy())
+        print("prediction = "+str(prediction))
+        ##return prediction
 
+    def set_parameter_requires_grad(self, feature_extracting):
+        if feature_extracting:
+            for param in self.model.parameters():
+                param.requires_grad = False
 
-def run(path, model, trans):
-
-    image = Image.open(path)
-
-    input = trans(image)
-
-    input = input.view(1, 3, 32, 32)
-
-    output = model(input)
-    print(output)
-    prediction = int(torch.max(output.data, 1)[1].numpy())
-    return prediction
-
-# def checkGesture(frame):
-# 	print('hello world')
-    # CALL FUNCTION TO ANALYZE FRAME()
-    # if frame == A:
-    # 	print('operating the lights')
-    # 	#todo: monitor the on/off status of the lights
-    # elif frame == B:
-    # 	print('operating the fan')
-    # else:
-    # 	print('An error occurred, please try again'...)
-
-
-def main():
-    model = torch.load(
-        'C:/Users/paulr/projects/450/ASL-Controlled-Smart-Home-Environment/model_handler/resnet.pt')
-
-    trans = transforms.Compose([
-        transforms.RandomHorizontalFlip(),
-        transforms.Resize(32),
-        transforms.CenterCrop(32),
-        transforms.ToTensor(),
-        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
-    ])
-
-    items = ['C:/Users/paulr/Documents/data-dir/train/asl_alphabet_train/A',
-             'C:/Users/paulr/Documents/data-dir/train/asl_alphabet_train/B']
-    files = []
-    result = 0
-    total = 0
-    for x in items:
-        files.append(get_files(x))
-    for x in range(2):
-        for y in range(len(files[x])):
-
-            if run(files[x][y], model, trans) == x:
-                result += 1
-                total += 1
-            else:
-                total += 1
-    print(total)
-    print(result/total)
-
-
-main()

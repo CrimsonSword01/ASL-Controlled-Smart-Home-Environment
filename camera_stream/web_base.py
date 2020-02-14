@@ -13,11 +13,11 @@ my_path = pathlib.Path('rec_test').parent.absolute()
 my_path = str(my_path) + '/model_handler'
 print(my_path)
 sys.path.insert(0, my_path)
+sys.path.append('../model_handler/')
+import rec_test as rec
 
-# import rec_test
 
-
-video = cv2.VideoCapture(1)  # create video object
+video = cv2.VideoCapture(0)  # create video object
 # recorded video is created into avi files
 # video file types (optional, if we ever need video for some reason)
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
@@ -36,6 +36,10 @@ def displayFrame():
     # EDIT BY PAUL DURHAM ON 2/10/2020
     # Added '..' to beginning of path to allow proper pathing in linux
     path = '../ImageGathering/'  # folder files are being saved to
+
+    # Creating classifer object from model
+    classifer = rec.Classifer()
+
     while True:
         ret, frame = video.read()  # retrieving the video frame
         cv2.imshow('frame', frame)  # displaying the frame
@@ -44,11 +48,15 @@ def displayFrame():
         # get the time to make every image name unique
         distinguishPath = str(time.time())
         if time.time() - beginTime >= 3:  # if it's been 3 seconds since the last image was taken
-            logStatus('img')  # log that an image was taken
-            # checkGesture(frame) #INTEGRATED w/ rec_test.py, checking for valid gestures
+
+            classifer.classify(frame)
             # format path name
             img_name = path + "opencv_frame_{}.png".format(distinguishPath)
             cv2.imwrite(img_name, frame)
+            print("{} written!".format(img_name))
+            img = cv2.imread(img_name)
+            beginTime = time.time()
+            classifer.classify(frame)
             print("{} written!".format(img_name))
             beginTime = time.time()
         if k % 256 == 27:  # if escape if pressed, close the program
