@@ -56,6 +56,9 @@ def displayFrame():
             logStatus('closing')  # log that the program was closed
             video.release()  # release video frames
             cv2.destroyAllWindows()  # close window
+        if k % 256 == ord('c'):
+            print('clearing log history')
+            logStatus('clear')
 
 
 displayFrame()
