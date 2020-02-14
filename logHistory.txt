@@ -1,7 +1,13 @@
-program cleared at: 2020-02-13 20:21:31.109196img taken at: 2020-02-13 20:21:33.270651
-img taken at: 2020-02-13 20:21:36.276903
-img taken at: 2020-02-13 20:21:39.284784
-img taken at: 2020-02-13 20:21:42.294676
-img taken at: 2020-02-13 20:21:45.302064
-img taken at: 2020-02-13 20:21:48.310242
-program closed at: 2020-02-13 20:21:50.756599
+program cleared at: 2020-02-13 22:35:01.611131
+program closed at: 2020-02-13 22:35:02.731485, 61 images recorded
+=========================================
+program opened at: 2020-02-13 22:36:15.904578
+program closed at: 2020-02-13 22:36:17.656461, 27 images recorded
+=========================================
+program opened at: 2020-02-13 22:38:36.412116
+=========================================
+program opened at: 2020-02-13 22:39:01.026008
+program closed at: 2020-02-13 22:39:03.020175, 39 images recorded
+=========================================
+program opened at: 2020-02-13 22:45:14.933147
+program closed at: 2020-02-13 22:45:18.167106, 72 images recorded
