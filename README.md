@@ -45,9 +45,14 @@ git clone https://github.com/mjp1997/ASL-Controlled-Smart-Home-Environment.git
 cd ASL-Controlled-Smart-Home-Environment/
 ```
 
+# Initial Camera and Log
+Controls for Camera:
+Press `Esc` to exit the camera (Note: If `Esc` doesn't work then press `Ctrl + C`)
+
+Controls for Log:
+Press `C` to Clear the Log
+
 # Developers
 
 Paul Durham, Allison Dorsett, Joseph Proctor, Benjamin Jinkerson, Mitchell Perez, Omnia Awad
-
-
 
