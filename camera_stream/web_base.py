@@ -1,16 +1,23 @@
 
 
-
 # EDIT BY PAUL DURHAM - SEE EDIT 1 - 2/10/2020
-
 import time
 import cv2
 import numpy as numpy
-import time
 import traceback
 from status_log import *
+# from rec_test import checkGesture
+import pathlib
+import sys
+my_path = pathlib.Path('rec_test').parent.absolute()
+my_path = str(my_path) + '/model_handler'
+print(my_path)
+sys.path.insert(0, my_path)
 
-video = cv2.VideoCapture(0)  # create video object
+# import rec_test
+
+
+video = cv2.VideoCapture(1)  # create video object
 # recorded video is created into avi files
 # video file types (optional, if we ever need video for some reason)
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
@@ -38,6 +45,7 @@ def displayFrame():
         distinguishPath = str(time.time())
         if time.time() - beginTime >= 3:  # if it's been 3 seconds since the last image was taken
             logStatus('img')  # log that an image was taken
+            # checkGesture(frame) #INTEGRATED w/ rec_test.py, checking for valid gestures
             # format path name
             img_name = path + "opencv_frame_{}.png".format(distinguishPath)
             cv2.imwrite(img_name, frame)
@@ -48,6 +56,9 @@ def displayFrame():
             logStatus('closing')  # log that the program was closed
             video.release()  # release video frames
             cv2.destroyAllWindows()  # close window
+        if k % 256 == ord('c'):
+            print('clearing log history')
+            logStatus('clear')
 
 
 displayFrame()

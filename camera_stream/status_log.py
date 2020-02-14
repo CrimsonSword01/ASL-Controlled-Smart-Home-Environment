@@ -18,5 +18,9 @@ def logStatus(status):
         file = open('logHistory.txt', 'a')
         file.write('program closed at: ' + current_time + '\n')
         file.close()
+    elif status == 'clear':
+        file = open('logHistory.txt', 'w')
+        file.write('program cleared at: ' + current_time + '\n')
+        file.close()
     else:
         print('invalid input')
