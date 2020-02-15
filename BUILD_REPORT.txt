@@ -1,0 +1,4 @@
+NIGHTLY BUILD -- 2/11/2020
+	WORKING - camera saving images to disk,camera streaming to window
+	NOT WORKING - none
+	BUGS - none

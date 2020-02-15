@@ -17,7 +17,7 @@ sys.path.insert(0, my_path)
 sys.path.append('../model_handler/')
 import classifier
 
-video = cv2.VideoCapture(0)  # create video object
+video = cv2.VideoCapture(1)  # create video object
 
 # recorded video is created into avi files
 # video file types (optional, if we ever need video for some reason)
