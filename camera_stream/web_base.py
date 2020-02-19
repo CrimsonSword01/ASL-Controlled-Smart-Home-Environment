@@ -44,7 +44,7 @@ def displayFrame():
 
     # EDIT 3
     # EDIT BY PAUL DURHAM ON 2/19/2020
-    gestures_per_second = 6
+    gestures_per_second = 1
 
     ### DO NOT CHANGE THIS VARIABLE BELOW##
     gestures_per_second = (60/gestures_per_second)/1000
@@ -82,7 +82,7 @@ def displayFrame():
             if res != None:
                 cv2.putText(frame, res, (200,300), cv2.FONT_HERSHEY_SIMPLEX, 5, (255,255,255), 2)	    
             cv2.putText(frame, "FPS : "+str(prior_total), (10,300), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
-
+            gestures_per_second_time_check = time.time()
         cv2.imshow('frame', frame)  # displaying the frame
 
         # if the user presses a key (i.e "escape" retrieve this action)
