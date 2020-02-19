@@ -1,6 +1,7 @@
 
 # EDIT BY PAUL DURHAM - SEE EDIT 1 - 2/10/2020 - edited path variable to work with linux
 # EDIT BY PAUL DURHAM - SEE EDIT 2 - 2/14/2020 - added a FPS calculator 
+# EDIT BY PAUL DURHAM - SEE EDIT 3 - 2/19/2020 - creating variable gestures/second
 
 import time
 import cv2
@@ -9,6 +10,7 @@ import traceback
 from status_log import *
 import keyboard
 import pathlib
+from sys import platform
 import sys
 my_path = pathlib.Path('rec_test').parent.absolute()
 my_path = str(my_path) + '/model_handler'
@@ -17,7 +19,14 @@ sys.path.insert(0, my_path)
 sys.path.append('../model_handler/')
 import classifier
 
-video = cv2.VideoCapture(1)  # create video object
+## Checks to see what operating system is being ran and knows if its a linux so the camera is created correctly
+if platform == "linux" or platform == "linux2":
+    video = cv2.VideoCapture(0)  # create video object
+elif platform == "darwin":
+    video = cv2.VideoCapture(1)  # create video object
+elif platform == "win32":
+    video = cv2.VideoCapture(1)  # create video object
+
 
 # recorded video is created into avi files
 # video file types (optional, if we ever need video for some reason)
@@ -33,6 +42,13 @@ def displayFrame():
     imgCount = 0
     beginTime = time.time()
 
+    # EDIT 3
+    # EDIT BY PAUL DURHAM ON 2/19/2020
+    gestures_per_second = 6
+
+    ### DO NOT CHANGE THIS VARIABLE BELOW##
+    gestures_per_second = (60/gestures_per_second)/1000
+
     # EDIT 1
     # EDIT BY PAUL DURHAM ON 2/10/2020
     # Added '..' to beginning of path to allow proper pathing in linux
@@ -46,6 +62,7 @@ def displayFrame():
     # Created objects necessary to keep track of and display FPS
     ## Creating time object to keep track of FPS and int to keep track of number of frames shown
     one_second_duration = time.time()
+    gestures_per_second_time_check = time.time()
     total = 0
     prior_total = 0
     while True:
@@ -57,12 +74,14 @@ def displayFrame():
             one_second_duration = time.time()
         ret, frame = video.read()  # retrieving the video frame
 
-	# EDIT 2
-	# EDIT BY PAUL DURHAM ON 2/14/2020
-        res = gesture_recognizer.classify(frame)
-        if res != None:
-            cv2.putText(frame, res, (200,300), cv2.FONT_HERSHEY_SIMPLEX, 5, (255,255,255), 2)	    
-        cv2.putText(frame, "FPS : "+str(prior_total), (10,300), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
+	## Checks to see if another gestures needs to be processed basd on the last time it was ran
+        if time.time() - gestures_per_second_time_check > gestures_per_second:
+	    # EDIT 2
+	    # EDIT BY PAUL DURHAM ON 2/14/2020
+            res = gesture_recognizer.classify(frame)
+            if res != None:
+                cv2.putText(frame, res, (200,300), cv2.FONT_HERSHEY_SIMPLEX, 5, (255,255,255), 2)	    
+            cv2.putText(frame, "FPS : "+str(prior_total), (10,300), cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255), 2)
 
         cv2.imshow('frame', frame)  # displaying the frame
 

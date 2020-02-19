@@ -19,7 +19,7 @@ class Classifier:
         self.set_parameter_requires_grad(True)
         num_ftrs = self.model.fc.in_features
         self.model.fc = nn.Linear(num_ftrs, 2)
-        self.model.load_state_dict(torch.load('C:/Users/paulr/projects/450/ASL-Controlled-Smart-Home-Environment/model_handler/resnet.pt'))
+        self.model.load_state_dict(torch.load('resnet.pt'))
         self.model.eval()
         self.trans = transforms.Compose([
             transforms.RandomHorizontalFlip(),
