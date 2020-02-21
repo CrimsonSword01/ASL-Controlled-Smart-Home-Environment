@@ -18,6 +18,7 @@ import sys
 class Camera:
 
     def __init__(self):
+        print('test')
         self.capture = self.getCamera()
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
         self.out = cv2.VideoWriter('output.avid', fourcc, 20.0,
@@ -87,13 +88,14 @@ class Camera:
     def getCamera(self):
         ## Checks to see what operating system is being ran and knows if its a linux so the camera is created correctly
         if platform == "linux" or platform == "linux2":
-            return cv2.VideoCapture(0)  # create video object
+            return cv2.VideoCapture(1)  # create video object
         else:
-            return cv2.VideoCapture(0)  # create video object
+            print('test')
+            return cv2.VideoCapture(1)  # create video object
 
 
 
-cam = Camera()
-test =  cam.capture_image()
-cam.close()
-print('test') 
+# cam = Camera()
+# test =  cam.capture_image()
+# cam.close()
+# print('test') 
