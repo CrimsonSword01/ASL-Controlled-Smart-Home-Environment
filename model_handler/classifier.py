@@ -22,7 +22,6 @@ class Classifier:
         # self.model.load_state_dict(torch.load('../model_handler/resnet.pt'))
         self.model.eval()
         self.trans = transforms.Compose([
-            transforms.RandomHorizontalFlip(),
             transforms.Resize(32),
             transforms.CenterCrop(32),
             transforms.ToTensor(),
@@ -38,7 +37,7 @@ class Classifier:
         pred= torch.max(output.data, 1)[1].numpy()
         if int(torch.max(output.data[0])) >.10:
 
-            return self.alphabet[pred.data[0]]
+            return self.labels[pred.data[0]]
 
         return None
 
@@ -46,4 +45,14 @@ class Classifier:
         if feature_extracting:
             for param in self.model.parameters():
                 param.requires_grad = False
+
+    def test(self, paths):
+        for x in paths:
+            img = self.Image.open(x)
+            img = self.trans(img)
+            img = img.unsqueeze(0)
+            res = model(img)
+            _, indices = torch.sort(res, descending=True)
+            percentage = torch.nn.functional.softmax(res, dim=1)[0] * 100
+            [(labels[idx], percentage[idx].item()) for idx in indices[0][:2]]
 
