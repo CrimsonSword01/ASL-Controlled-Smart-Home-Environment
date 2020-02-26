@@ -1,2 +1,0 @@
-def testTwo():
-	print('test')

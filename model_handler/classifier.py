@@ -13,9 +13,13 @@ import cv2
 # onOrOffLights = 0
 
 class Classifier:
-    def __init__(self, model):
-        self.labels = ['A','B']
-        self.model = torch.load('../model_handler/model.pt')
+    def __init__(self):
+        self.alphabet = ['A','B']
+        self.model = models.resnet18(pretrained=True)
+        self.set_parameter_requires_grad(True)
+        num_ftrs = self.model.fc.in_features
+        self.model.fc = nn.Linear(num_ftrs, 2)
+        # self.model.load_state_dict(torch.load('../model_handler/resnet.pt'))
         self.model.eval()
         self.trans = transforms.Compose([
             transforms.Resize(32),

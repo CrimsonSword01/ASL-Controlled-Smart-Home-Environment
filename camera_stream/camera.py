@@ -18,7 +18,6 @@ import sys
 class Camera:
 
     def __init__(self):
-        print('test')
         self.capture = self.getCamera()
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
         self.out = cv2.VideoWriter('output.avid', fourcc, 20.0,
@@ -73,12 +72,12 @@ class Camera:
     
     # Writes text to image
     def write_text(self,frame,text,x,y,font,size,color):
-        cv2.putText(frame, text, (x,y), font, size, color, 2)
+        cv2.putText(frame, text, (x,y), font, size, color)
 
     
     # Sets the necessary text and graphics to image
     def set_text_graphics(self,frame):
-        frame = self.write_text(frame,"FPS :" + str(self.prior_total), 10,300, cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
+        # frame = self.write_text(frame,"FPS :" + str(self.prior_total), 10,300, cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
         return frame
     
     # Sets the number of gestures per second
@@ -88,10 +87,10 @@ class Camera:
     def getCamera(self):
         ## Checks to see what operating system is being ran and knows if its a linux so the camera is created correctly
         if platform == "linux" or platform == "linux2":
-            return cv2.VideoCapture(1)  # create video object
+            return cv2.VideoCapture(0)  # create video object
         else:
             print('test')
-            return cv2.VideoCapture(1)  # create video object
+            return cv2.VideoCapture(0)  # create video object
 
 
 
