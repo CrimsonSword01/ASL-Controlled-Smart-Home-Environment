@@ -19,8 +19,8 @@ class Camera:
 
     def __init__(self):
         self.capture = self.getCamera()
-        fourcc = cv2.VideoWriter_fourcc(*'XVID')
-        self.out = cv2.VideoWriter('output.avid', fourcc, 20.0,
+        self.fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        self.out = cv2.VideoWriter('output.avid', self.fourcc, 20.0,
                       (640, 480))  # size of screen
 
         self.img_count = 0 # keep track of number of images saved
@@ -31,7 +31,7 @@ class Camera:
         self.prior_total = 0 # Used to keep track of the last second's number of frames
         self.current_total = 0 # Used to keep track of the current second's number of frames
         self.begin_time = time.time()
-        
+        self.capturing_video = True
     # Checks to see if frame needs to be saved and saves items
     def save_image(self,frame):
         if time.time() - self.begin_time >= 3:  # if it's been 3 seconds since the last image was taken    
@@ -53,20 +53,22 @@ class Camera:
     # Returns one frame to the SLISH application
     def capture_image(self):
         # Sees if the FPS needs to be updated
-        self.update_fps()
+        # self.update_fps()
         ret, frame = self.capture.read()  # retrieving the video frame
-        frame = self.set_text_graphics(frame)
-        self.save_image(frame)
+        print(frame)
+		# frame = self.set_text_graphics(frame)
+        # self.save_image(frame)
         cv2.imshow('frame', frame)  # displaying the frame
-
+        print('displaying frame')
         return frame
     
     # Uupdates the FPS if necessary
     def update_fps(self):
+        print('update fpss')
         # Sees if its been one seconds since FPS has been updated
         if time.time() - self.last_second_duration > 1:
             if self.last_second_duration != 0:
-    	        self.prior_total = total # Updates the prior seconds total
+    	        self.prior_total = self.last_second_duration # Updates the prior seconds total
     	        self.current_total = 0 # Sets the new seconds total to 0
             self.last_second_duration = time.time() # Starts the new second
     
@@ -77,7 +79,8 @@ class Camera:
     
     # Sets the necessary text and graphics to image
     def set_text_graphics(self,frame):
-        # frame = self.write_text(frame,"FPS :" + str(self.prior_total), 10,300, cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
+        print('set text graphics')
+        frame = self.write_text(frame,"FPS :" + str(self.prior_total), 10,300, cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
         return frame
     
     # Sets the number of gestures per second
@@ -87,10 +90,10 @@ class Camera:
     def getCamera(self):
         ## Checks to see what operating system is being ran and knows if its a linux so the camera is created correctly
         if platform == "linux" or platform == "linux2":
-            return cv2.VideoCapture(0)  # create video object
+            return cv2.VideoCapture(1)  # create video object
         else:
-            print('test')
-            return cv2.VideoCapture(0)  # create video object
+            print('displaying camera')
+            return cv2.VideoCapture(1)  # create video object
 
 
 
