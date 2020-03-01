@@ -14,7 +14,8 @@ import cv2
 
 class Classifier:
     def __init__(self):
-        self.alphabet = ['A','B']
+        self.alphabet = ['A','B', 'C']
+        self.numbers = ['1','2','3']
         self.model = models.resnet18(pretrained=True)
         self.set_parameter_requires_grad(True)
         num_ftrs = self.model.fc.in_features
