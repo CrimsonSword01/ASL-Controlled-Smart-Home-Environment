@@ -37,6 +37,6 @@ from sock import Socket
 my_socket = Socket()
 
 while my_camera.capture.isOpened():
-    my_camera.capture_image() #erroring out (showing gray screen)
+    my_camera.capture_image() #erroring out (showing gray screen)....
 #loop that detects and sends imgs to classifier
 my_camera.close()
