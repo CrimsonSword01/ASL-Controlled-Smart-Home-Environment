@@ -12,12 +12,17 @@ class UI:
 
 	def __init__(self):
 		self.load_user_interface()
-		self.retrieveLogInfo()
+		self.logInfo = self.retrieveLogInfo()
+		self.writeLogToUI(self.logInfo)
 	
 	def load_user_interface(self):
-		outputString = 'loading the user interface (placeholder)'
-		return outputString
+		print('loading the user interface (placeholder)')
+		
 
 	def retrieveLogInfo(self):
-		logString = 'retrieving log'
+		logString = 'simulation of updated log'
 		return logString
+    
+	def writeLogToUI(self, logInfo):
+		print('updated log: {}'.format(logInfo))
+		print('display log to UI here...')

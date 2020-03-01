@@ -18,10 +18,10 @@ classifier_path = classifier_path + '/model_handler'
 interface_path = str(pathlib.Path('interface').parent.absolute())
 interface_path = interface_path + '/user_interface'
 
-socket_path = str(pathlib.Path('socket').parent.absolute())
-socket_path = socket_path + '/sockets'
+sock_path = str(pathlib.Path('sock').parent.absolute())
+sock_path = sock_path + '/my_sock'
 
-sys.path += [cam_path, classifier_path, interface_path, socket_path]
+sys.path += [cam_path, classifier_path, sock_path, interface_path]
 
 #import the 4 core modules (camera, classifier, UI and sockets)
 from camera import Camera
@@ -33,15 +33,13 @@ my_classifier = Classifier()
 from interface import UI
 my_interface = UI()
 
-from socket import Sockets
-my_socket = Sockets()
+from sock import Socket 
+my_socket = Socket()
 
+while my_camera.capture.isOpened():
+    my_camera.capture_image() #erroring out (showing gray screen)....
 #loop that detects and sends imgs to classifier
-while True: # in place of 1:1? 
-	Img = my_camera.capture_image()
-	if my_camera.gesture_check():
-		Res = my_classifier.classify(Img)
-		#will finish....
+my_camera.close()
 
 
 
