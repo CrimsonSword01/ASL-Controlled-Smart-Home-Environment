@@ -1,0 +1,289 @@
+-- BEGIN OVERALL RESULTS -- 
+*	mod:pytorch
+*	pretrained:true
+*	name:alexnet
+*	number_of_classes:2
+*	train_objs:9
+*	val_objs:3
+*	val_acc:0.833333
+
+*	mod:pytorch
+*	pretrained:true
+*	name:squeezenet
+*	number_of_classes:2
+*	train_objs:9
+*	val_objs:3
+*	val_acc:0.666667
+
+*	mod:pytorch
+*	pretrained:true
+*	name:resnet
+*	number_of_classes:2
+*	train_objs:9
+*	val_objs:3
+*	val_acc:0.500000
+-- BEGIN RESULT --
+*	mod:pytorch
+*	pretrained:true
+*	name:resnet
+*	number_of_classes:2
+*	train_objs:9
+*	val_objs:3
+*	val_acc:0.500000
+Epoch 0/14
+----------
+train Loss: 0.6907 Acc: 0.5000
+val Loss: 0.8736 Acc: 0.3333
+
+Epoch 1/14
+----------
+train Loss: 0.6280 Acc: 0.8125
+val Loss: 0.9033 Acc: 0.1667
+
+Epoch 2/14
+----------
+train Loss: 0.5954 Acc: 0.9375
+val Loss: 0.9883 Acc: 0.5000
+
+Epoch 3/14
+----------
+train Loss: 0.5891 Acc: 0.6875
+val Loss: 1.0153 Acc: 0.5000
+
+Epoch 4/14
+----------
+train Loss: 0.3933 Acc: 0.9375
+val Loss: 0.9857 Acc: 0.5000
+
+Epoch 5/14
+----------
+train Loss: 0.5370 Acc: 0.7500
+val Loss: 0.8824 Acc: 0.1667
+
+Epoch 6/14
+----------
+train Loss: 0.3246 Acc: 1.0000
+val Loss: 0.8249 Acc: 0.1667
+
+Epoch 7/14
+----------
+train Loss: 0.3013 Acc: 1.0000
+val Loss: 0.7967 Acc: 0.1667
+
+Epoch 8/14
+----------
+train Loss: 0.2710 Acc: 1.0000
+val Loss: 0.7553 Acc: 0.1667
+
+Epoch 9/14
+----------
+
+train Loss: 0.3451 Acc: 0.9375
+val Loss: 0.7289 Acc: 0.3333
+
+Epoch 10/14
+----------
+train Loss: 0.3106 Acc: 0.9375
+val Loss: 0.6404 Acc: 0.3333
+
+Epoch 11/14
+----------
+train Loss: 0.2903 Acc: 0.9375
+val Loss: 0.6059 Acc: 0.5000
+
+Epoch 12/14
+----------
+train Loss: 0.5292 Acc: 0.7500
+val Loss: 0.5477 Acc: 0.5000
+
+Epoch 13/14
+----------
+train Loss: 0.2149 Acc: 1.0000
+val Loss: 0.5247 Acc: 0.5000
+
+Epoch 14/14
+----------
+train Loss: 0.2763 Acc: 0.8750
+val Loss: 0.5159 Acc: 0.5000
+
+Training complete in 1m 6s
+Best val Acc: 0.500000
+
+-- END RESULT --
+
+-- BEGIN REUSLT --
+*	mod:pytorch
+*	pretrained:true
+*	name:alexnet
+*	number_of_classes:2
+*	train_objs:9
+*	val_objs:3
+*	val_acc:0.833333
+Epoch 0/14
+----------
+train Loss: 0.8756 Acc: 0.3125
+val Loss: 0.6625 Acc: 0.6667
+
+Epoch 1/14
+----------
+train Loss: 0.6732 Acc: 0.5625
+val Loss: 0.6240 Acc: 0.5000
+
+Epoch 2/14
+----------
+train Loss: 0.3701 Acc: 0.8750
+val Loss: 0.6624 Acc: 0.5000
+
+Epoch 3/14
+----------
+train Loss: 0.3270 Acc: 0.8750
+val Loss: 0.5336 Acc: 0.5000
+
+Epoch 4/14
+----------
+train Loss: 0.0551 Acc: 1.0000
+val Loss: 0.4562 Acc: 0.6667
+
+Epoch 5/14
+----------
+train Loss: 0.0818 Acc: 1.0000
+val Loss: 0.4117 Acc: 0.6667
+
+Epoch 6/14
+----------
+train Loss: 0.0461 Acc: 1.0000
+val Loss: 0.3868 Acc: 0.6667
+
+Epoch 7/14
+----------
+train Loss: 0.1349 Acc: 0.9375
+val Loss: 0.3834 Acc: 0.8333
+
+Epoch 8/14
+----------
+train Loss: 0.0411 Acc: 1.0000
+val Loss: 0.3975 Acc: 0.8333
+
+Epoch 9/14
+----------
+train Loss: 0.0904 Acc: 0.9375
+val Loss: 0.4177 Acc: 0.8333
+
+Epoch 10/14
+----------
+train Loss: 0.0125 Acc: 1.0000
+val Loss: 0.4325 Acc: 0.8333
+
+Epoch 11/14
+----------
+train Loss: 0.0101 Acc: 1.0000
+val Loss: 0.4420 Acc: 0.8333
+
+Epoch 12/14
+----------
+train Loss: 0.0880 Acc: 0.9375
+val Loss: 0.4624 Acc: 0.8333
+
+Epoch 13/14
+----------
+train Loss: 0.0499 Acc: 1.0000
+val Loss: 0.4819 Acc: 0.8333
+
+Epoch 14/14
+----------
+train Loss: 0.0669 Acc: 0.9375
+val Loss: 0.4921 Acc: 0.8333
+
+Training complete in 0m 55s
+Best val Acc: 0.833333
+-- END RESULT --
+
+-- BEGIN RESULT --
+
+*	mod:pytorch
+*	pretrained:true
+*	name:squeezenet
+*	number_of_classes:2
+*	train_objs:9
+*	val_objs:3
+*	val_acc:0.666667
+
+Epoch 0/14
+----------
+train Loss: 0.8309 Acc: 0.5625
+val Loss: 0.6697 Acc: 0.5000
+
+Epoch 1/14
+----------
+train Loss: 0.7864 Acc: 0.3750
+val Loss: 0.6778 Acc: 0.6667
+
+Epoch 2/14
+----------
+train Loss: 0.6325 Acc: 0.6875
+val Loss: 0.6829 Acc: 0.6667
+
+Epoch 3/14
+----------
+train Loss: 0.5865 Acc: 0.7500
+val Loss: 0.6812 Acc: 0.6667
+
+Epoch 4/14
+----------
+train Loss: 0.6113 Acc: 0.6250
+val Loss: 0.6707 Acc: 0.6667
+
+Epoch 5/14
+----------
+train Loss: 0.5050 Acc: 0.9375
+val Loss: 0.6534 Acc: 0.6667
+
+Epoch 6/14
+----------
+train Loss: 0.3992 Acc: 1.0000
+val Loss: 0.6260 Acc: 0.6667
+
+Epoch 7/14
+----------
+train Loss: 0.3891 Acc: 0.9375
+val Loss: 0.5878 Acc: 0.6667
+
+Epoch 8/14
+----------
+train Loss: 0.2910 Acc: 0.9375
+val Loss: 0.5426 Acc: 0.6667
+
+Epoch 9/14
+----------
+train Loss: 0.3368 Acc: 0.8750
+val Loss: 0.5006 Acc: 0.6667
+
+Epoch 10/14
+----------
+train Loss: 0.2080 Acc: 0.9375
+val Loss: 0.4713 Acc: 0.6667
+
+Epoch 11/14
+----------
+train Loss: 0.0825 Acc: 1.0000
+val Loss: 0.4588 Acc: 0.6667
+
+Epoch 12/14
+----------
+train Loss: 0.3185 Acc: 0.8750
+val Loss: 0.4590 Acc: 0.6667
+
+Epoch 13/14
+----------
+train Loss: 0.1402 Acc: 0.9375
+val Loss: 0.4461 Acc: 0.6667
+
+Epoch 14/14
+----------
+train Loss: 0.0995 Acc: 1.0000
+val Loss: 0.4254 Acc: 0.6667
+
+Training complete in 1m 4s
+Best val Acc: 0.666667
+
+-- END RESULT --

@@ -39,10 +39,11 @@ y
 ## Repository
 You can either download a zip file or clone our repo via terminal. If you wish to download the zip go to: "https://github.com/CrimsonSword01/ASL-Controlled-Smart-Home-Environment"
 
-Cloning the Github:
+Cloning the Github and Running it:
 ```bash
 git clone https://github.com/mjp1997/ASL-Controlled-Smart-Home-Environment.git
 cd ASL-Controlled-Smart-Home-Environment/
+python web_base.py
 ```
 
 # Initial Camera and Log
