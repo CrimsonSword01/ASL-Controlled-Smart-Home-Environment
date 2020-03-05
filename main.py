@@ -36,8 +36,12 @@ my_interface = UI()
 from sock import Socket 
 my_socket = Socket()
 
-while my_camera.capture.isOpened():
-    my_camera.capture_image() #erroring out (showing gray screen)....
+while True:
+    frame = my_camera.capture_image() #erroring out (showing gray screen)....
+    my_classifier.classify(frame)
+    k = cv2.waitKey(1)
+    if k % 256 == 27:  # if escape if pressed, close the program
+        my_camera.close()
 #loop that detects and sends imgs to classifier
 my_camera.close()
 

@@ -32,7 +32,7 @@ class Classifier:
     def classify(self,img):
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img_new = Image.fromarray(img)
-        input = self.trans(img_new)
+        input = self.trans(img)
         input = input.view(1, 3, 32, 32)
         output = self.model(input)
         pred= torch.max(output.data, 1)[1].numpy()

@@ -36,12 +36,12 @@ class Camera:
         if time.time() - self.begin_time >= 3:  # if it's been 3 seconds since the last image was taken    
             img_name = self.path + "opencv_frame_{}.png".format(str(time.time()))
             cv2.imwrite(img_name, frame)
-    
-    
+			
     # Closes the camera
     def close(self):
         self.capture.release()
         self.out.release()
+        cv2.destroyAllWindows()
     # Checks to see if a gesture needs to be processed
     def gesture_check(self):
         if time.time() - self.gestures_per_second_time_check > self.gestures_per_second:
@@ -55,14 +55,8 @@ class Camera:
         ret, frame = self.capture.read()  # retrieving the video frame
         # frame = self.set_text_graphics(frame)
         # self.save_image(frame)
-        print(frame)
-		# frame = self.set_text_graphics(frame)
-        # self.save_image(frame)
         cv2.imshow('frame', frame)  # displaying the frame
-
-        print('displaying frame')
         return frame
-
     # Uupdates the FPS if necessary
     def update_fps(self):
         print('update fpss')
