@@ -14,31 +14,27 @@ import cv2
 
 class Classifier:
     def __init__(self):
-        self.alphabet = ['A','B', 'C']
-        self.numbers = ['1','2','3']
-        self.model = models.resnet18(pretrained=True)
-        self.set_parameter_requires_grad(True)
-        num_ftrs = self.model.fc.in_features
-        self.model.fc = nn.Linear(num_ftrs, 2)
-        # self.model.load_state_dict(torch.load('../model_handler/resnet.pt'))
-        self.model.eval()
+        self.labels = ['A','B', 'C','1','2','3']
+        self.model = torch.load('model_handler/model.pt')
         self.trans = transforms.Compose([
-            transforms.Resize(32),
-            transforms.CenterCrop(32),
+            transforms.Resize(224),
+            transforms.Grayscale(num_output_channels=3),
+            transforms.CenterCrop(224),
             transforms.ToTensor(),
-            transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
 
     def classify(self,img):
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img_new = Image.fromarray(img)
-        input = self.trans(img)
-        input = input.view(1, 3, 32, 32)
-        output = self.model(input)
-        pred= torch.max(output.data, 1)[1].numpy()
-        if int(torch.max(output.data[0])) >.10:
-
-            return self.labels[pred.data[0]]
+        input = self.trans(img_new)
+        input = input.unsqueeze(0)
+        output = self.model.eval()(input)
+        output = torch.nn.Softmax()(output.float())
+        max_probability , predicted = torch.max(output, 1)
+        max_probability = max_probability.data.cpu().numpy()[0]
+        if max_probability > .05:
+            print(self.labels[predicted])
+            return self.labels[predicted]
 
         return None
 
