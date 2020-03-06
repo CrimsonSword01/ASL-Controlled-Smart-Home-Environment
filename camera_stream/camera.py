@@ -51,33 +51,27 @@ class Camera:
     # Returns one frame to the SLISH application
     def capture_image(self):
         # Sees if the FPS needs to be updated
-        # self.update_fps()
+        self.update_fps()
         ret, frame = self.capture.read()  # retrieving the video frame
-        # frame = self.set_text_graphics(frame)
+        frame = self.write_text(frame,"FPS :" + str(self.prior_total), 50,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
         # self.save_image(frame)
         cv2.imshow('frame', frame)  # displaying the frame
         return frame
     # Uupdates the FPS if necessary
     def update_fps(self):
-        print('update fpss')
+        self.current_total +=1
+        print('update fps')
         # Sees if its been one seconds since FPS has been updated
         if time.time() - self.last_second_duration > 1:
             if self.last_second_duration != 0:
-    	        self.prior_total = total # Updates the prior seconds total
-    	        self.prior_total = self.last_second_duration # Updates the prior seconds total
+    	        self.prior_total = self.current_total # Updates the prior seconds total
     	        self.current_total = 0 # Sets the new seconds total to 0
             self.last_second_duration = time.time() # Starts the new second
 
     # Writes text to image
     def write_text(self,frame,text,x,y,font,size,color):
-        cv2.putText(frame, text, (x,y), font, size, color)
-
-    # Sets the necessary text and graphics to image
-    def set_text_graphics(self,frame):
-        # frame = self.write_text(frame,"FPS :" + str(self.prior_total), 10,300, cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
-        print('set text graphics')
-        frame = self.write_text(frame,"FPS :" + str(self.prior_total), 10,300, cv2.FONT_HERSHEY_SIMPLEX, 1, (255,255,255))
-        return frame
+        return cv2.putText(frame, text, (x,y), font, size, color)
+        
 
     # Sets the number of gestures per second
     def set_gestures_per_second(self,ges):

@@ -14,8 +14,9 @@ import cv2
 
 class Classifier:
     def __init__(self):
-        self.labels = ['A','B', 'C','1','2','3']
-        self.model = torch.load('model_handler/model.pt')
+        ##self.labels = ['A','B', 'C','1','2','3']
+        self.labels = ['A','B','C']
+        self.model = torch.load('model_handler\\model.pt')
         self.trans = transforms.Compose([
             transforms.Resize(224),
             transforms.Grayscale(num_output_channels=3),
@@ -32,7 +33,7 @@ class Classifier:
         output = torch.nn.Softmax()(output.float())
         max_probability , predicted = torch.max(output, 1)
         max_probability = max_probability.data.cpu().numpy()[0]
-        if max_probability > .05:
+        if max_probability > .20:
             print(self.labels[predicted])
             return self.labels[predicted]
 
@@ -44,12 +45,39 @@ class Classifier:
                 param.requires_grad = False
 
     def test(self, paths):
+        correct = 0
+        total = 0
         for x in paths:
-            img = self.Image.open(x)
+            img = Image.open(x)
             img = self.trans(img)
             img = img.unsqueeze(0)
-            res = model(img)
-            _, indices = torch.sort(res, descending=True)
-            percentage = torch.nn.functional.softmax(res, dim=1)[0] * 100
-            [(labels[idx], percentage[idx].item()) for idx in indices[0][:2]]
+            res = self.model.eval()(img)
+            output = torch.nn.Softmax()(res.float())
+            max_probability , predicted = torch.max(output, 1)
+            max_probability = max_probability.data.cpu().numpy()[0]
+            res = self.labels[predicted]
+            x = x.replace("C:\\Users\\paulr\\Documents\\test\\val_images\\","").split("___")[0]
 
+            if x.split("___")[0] == res:
+                print(res+" == "+x)
+                print(output)
+                correct += 1
+            else:
+                print(res+"!="+x)
+                print(output)
+            total += 1
+            ##_, indices = torch.sort(res, descending=True)
+            ##percentage = torch.nn.functional.softmax(res, dim=1)[0] * 100
+        print("Total="+str(total))
+        print("correct"+str(correct))
+## begin test ##
+files = []
+cls = Classifier()
+path = "C:\\Users\\paulr\\Documents\\test\\val_images"
+
+for r, d, f in os.walk(path):
+    for file in f:
+        if '.jpg' in file:
+            files.append(os.path.join(r, file))
+
+cls.test(files)
