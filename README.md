@@ -43,7 +43,7 @@ Cloning the Github and Running it:
 ```bash
 git clone https://github.com/mjp1997/ASL-Controlled-Smart-Home-Environment.git
 cd ASL-Controlled-Smart-Home-Environment/
-python web_base.py
+python main.py
 ```
 
 # Initial Camera and Log
