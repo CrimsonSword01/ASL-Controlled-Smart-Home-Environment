@@ -14,9 +14,11 @@ import cv2
 
 class Classifier:
     def __init__(self):
-        ##self.labels = ['A','B', 'C','1','2','3']
-        self.labels = ['A','B','C']
-        self.model = torch.load('model_handler\\model.pt')
+        self.labels = ['1','2','3','A','B', 'C']
+        try:
+            self.model = torch.load('model_handler/model.pt')
+        except Exception:
+            self.model = torch.load('model.pt')
         self.trans = transforms.Compose([
             transforms.Resize(224),
             transforms.Grayscale(num_output_channels=3),
@@ -29,14 +31,16 @@ class Classifier:
         img_new = Image.fromarray(img)
         input = self.trans(img_new)
         input = input.unsqueeze(0)
-        output = self.model.eval()(input)
-        output = torch.nn.Softmax()(output.float())
+        cls = self.model.eval()(input)
+        output = torch.nn.Softmax()(cls.float())
         max_probability , predicted = torch.max(output, 1)
         max_probability = max_probability.data.cpu().numpy()[0]
-        if max_probability > .20:
-            print(self.labels[predicted])
-            return self.labels[predicted]
-
+        res = self.labels[predicted]
+        if max_probability > .50:
+            print(res)
+            return res
+        else:
+            print(output)
         return None
 
     def set_parameter_requires_grad(self, feature_extracting):
@@ -56,9 +60,10 @@ class Classifier:
             max_probability , predicted = torch.max(output, 1)
             max_probability = max_probability.data.cpu().numpy()[0]
             res = self.labels[predicted]
-            x = x.replace("C:\\Users\\paulr\\Documents\\test\\val_images\\","").split("___")[0]
+            print(x)
+            x = x.split("--")[1]
 
-            if x.split("___")[0] == res:
+            if x == res:
                 print(res+" == "+x)
                 print(output)
                 correct += 1
@@ -70,14 +75,18 @@ class Classifier:
             ##percentage = torch.nn.functional.softmax(res, dim=1)[0] * 100
         print("Total="+str(total))
         print("correct"+str(correct))
-## begin test ##
-files = []
-cls = Classifier()
-path = "C:\\Users\\paulr\\Documents\\test\\val_images"
 
-for r, d, f in os.walk(path):
-    for file in f:
-        if '.jpg' in file:
-            files.append(os.path.join(r, file))
+if __name__ == "__main__":
+    ## begin test ##
+    files = []
+    cls = Classifier()
+    path = "testing_dataset/"
 
-cls.test(files)
+    for r, d, f in os.walk(path):
+        for file in f:
+            if '.jpg' in file:
+                files.append(os.path.join(r, file))
+            if '.png' in file:
+                files.append(os.path.join(r, file))
+
+    cls.test(files)
