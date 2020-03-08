@@ -1,4 +1,12 @@
+If device attached to particular socket is turned On, then it will turn Off by giving command for particular socket (and vice versa).
+
 Sign Instructions
-A1:
+A1: 
 A2:
 A3:
+B1:
+B2:
+B3:
+C1:
+C2:
+C3:
