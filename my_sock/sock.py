@@ -2,7 +2,7 @@ import time
 import cv2
 import numpy as np
 import traceback
-from status_log import *
+# from status_log import *
 import keyboard
 import pathlib
 from sys import platform

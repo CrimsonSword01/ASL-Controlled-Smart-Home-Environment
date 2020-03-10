@@ -5,7 +5,7 @@ import time
 import cv2
 import numpy as np
 import traceback
-from status_log import *
+# from status_log import *
 import keyboard
 import pathlib
 import pathlib
@@ -15,6 +15,7 @@ import sys
 class Camera:
 
     def __init__(self):
+        print('camera')
         self.capture = self.getCamera()
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
         self.fourcc = cv2.VideoWriter_fourcc(*'XVID')
