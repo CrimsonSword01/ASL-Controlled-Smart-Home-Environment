@@ -56,12 +56,10 @@ class Camera:
         ret, frame = self.capture.read()  # retrieving the video frame
         frame = self.write_text(frame,"FPS :" + str(self.prior_total), 50,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
         # self.save_image(frame)
-        cv2.imshow('frame', frame)  # displaying the frame
-        return frame
+        return True,frame
     # Uupdates the FPS if necessary
     def update_fps(self):
-        self.current_total +=1
-        print('update fps')
+        self.current_total += 1
         # Sees if its been one seconds since FPS has been updated
         if time.time() - self.last_second_duration > 1:
             if self.last_second_duration != 0:

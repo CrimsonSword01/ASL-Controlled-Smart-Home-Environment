@@ -36,12 +36,10 @@ class Classifier:
         max_probability , predicted = torch.max(output, 1)
         max_probability = max_probability.data.cpu().numpy()[0]
         res = self.labels[predicted]
-        if max_probability > .50:
-            print(res)
+        if max_probability > .7:
             return res
         else:
-            print(output)
-        return None
+            return None
 
     def set_parameter_requires_grad(self, feature_extracting):
         if feature_extracting:
