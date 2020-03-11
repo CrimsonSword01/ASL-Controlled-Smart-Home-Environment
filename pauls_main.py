@@ -1,4 +1,5 @@
 import time
+import webbrowser
 import cv2
 import numpy as np
 import traceback
@@ -30,15 +31,44 @@ class Slish:
         self.window = tkinter.Tk()
         self.window.geometry("1000x800")
         self.window.title("Slish")
+        self.window.config(background='#c9e4ff')
         self.vid = Camera()
         self.classifier = Classifier()
         self.pred_queue = deque([])
+
+        self.header_frame= tkinter.Frame(self.window,bg='#c9e4ff')
+        self.header_frame.pack(fill='x')
+        self.logo = ImageTk.PhotoImage(Image.open('pic.png'))
+        self.label = tkinter.Label(self.header_frame, image=self.logo)
+        self.label.image= self.logo
+        self.label.pack(padx=5, pady=5)
+        # function that opens the help documentation link
+        def open_help(): 
+            webbrowser.open('https://github.com/mjp1997/ASL-Controlled-Smart-Home-Environment/blob/master/help.txt')
+        # button that calls open_help()
+        self.btn =ttk.Button(self.header_frame, text='HELP', command=open_help)
+        self.btn.pack(padx=1, pady=1, side='bottom')
+
         # Create a canvas that can fit the above video source size
-        self.canvas = tkinter.Canvas(self.window, width = 640, height = 480)
-        self.canvas.pack()
+        self.canvas = tkinter.Canvas(self.window, width = 640, height = 400)
+        self.canvas.pack(padx=10, pady=10, side='top')
+        self.window.fileName
+        #space for log
+        self.log_frame= tkinter.Frame(self.window, padx=5, pady=5, borderwidth=2)
+        self.log_frame.pack(side='left', fill='both')
+        #fill in code 
+        self.log=tkinter.Text(self.log_frame)
+        self.log.insert(tkinter.INSERT,"log file to be pulled later")
+        self.log.config(state='disabled',width=640)
+        self.log.pack(fill='x')
+
+        
+
         # After it is called once, the update method will be automatically called every delay milliseconds
         self.delay = 1
         self.update()
+
+
         self.window.mainloop()
         
  
