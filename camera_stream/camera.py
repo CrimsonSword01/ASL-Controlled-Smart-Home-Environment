@@ -11,6 +11,11 @@ import pathlib
 import pathlib
 from sys import platform
 import sys
+import time
+from datetime import datetime
+current_time = datetime.now()
+
+
 # The camera class allows streaming and image capturing from a usb/integrated camera on the system.
 class Camera:
 
@@ -66,6 +71,27 @@ class Camera:
     	        self.prior_total = self.current_total # Updates the prior seconds total
     	        self.current_total = 0 # Sets the new seconds total to 0
             self.last_second_duration = time.time() # Starts the new second
+    
+    def logStatus(self, status):
+        current_time = str(datetime.now())
+        if status == True:  # if program is being opened, document that it's being opened
+            print('writing to open')
+            file = open('logHistory.txt', 'a')
+            file.write('=========================================\n')
+            file.write('program opened at: ' + current_time + '\n')
+            file.close()
+            return True
+        elif status == 'closing':  # if program is being closed, document that it's being closed
+            file = open('logHistory.txt', 'a')
+            file.write('program closed at: ' + current_time + ', ' + str(numImgs) +' images recorded'+ '\n')
+            file.close()
+        elif status == 'clear':
+            file = open('logHistory.txt', 'w')
+            file.write('program cleared at: ' + current_time + '\n')
+            file.close()
+        else:
+            print(status)
+            print('invalid input')
 
     # Writes text to image
     def write_text(self,frame,text,x,y,font,size,color):
@@ -81,6 +107,4 @@ class Camera:
         if platform == "linux" or platform == "linux2":
             return cv2.VideoCapture(0)  # create video object
         else:
-            print('test')
-            print('displaying camera')
             return cv2.VideoCapture(0)  # create video object

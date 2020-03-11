@@ -37,7 +37,7 @@ class Slish:
         self.canvas = tkinter.Canvas(self.window, width = 640, height = 480)
         self.canvas.pack()
         # After it is called once, the update method will be automatically called every delay milliseconds
-        self.delay = 15
+        self.delay = 1
         self.update()
         self.window.mainloop()
         

@@ -16,16 +16,16 @@ class Sockets:
 		    "B": "PortNumYYYYY"
 		}
 
-	# def validCmdCheck(self, cmd)
-	# 	cmd in self.commandsDict.values() == true:
-	# 		self.portAvail = isPortFree(commandsDict[cmd])
-	# 	    self.activateSocket(commandsDict[cmd], self.portAvail)
+	def validCmdCheck(self, cmd)
+		cmd in self.commandsDict.values() == true:
+			self.portAvail = isPortFree(commandsDict[cmd])
+		    self.activateSocket(commandsDict[cmd], self.portAvail)
     
-    # def isPortFree(self, portNum):
-	# 	#if port is free return true, else false
-	# 	return True 
+    def isPortFree(self, portNum):
+		#if port is free return true, else false
+		return True 
 
-	# def activateSocket(self, portNum):
-	# 	placeholderOutputMsg = 'Connecting to port: ' + portNum
-	# 	return placeholderOutputMsg
+	def activateSocket(self, portNum):
+		placeholderOutputMsg = 'Connecting to port: ' + portNum
+		return placeholderOutputMsg
 
