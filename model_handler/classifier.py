@@ -12,13 +12,21 @@ import cv2
 # onOrOffFan = 0
 # onOrOffLights = 0
 
+## Classifier class that can classify ASL alphabet gestures
 class Classifier:
+    ## __init__ function for class sets up class variables.
     def __init__(self):
+        ## these are the potential labels for objects
         self.labels = ['1','2','3','A','B', 'C']
+        ## This try/except statement is if you are running the file itself to run the test method or importing it. The model.pt will be different location based on the context of who calls it. 
         try:
+            ## Loading model
             self.model = torch.load('model_handler/model.pt')
         except Exception:
+            ## Loading model
             self.model = torch.load('model.pt')
+        ## Creates a transformer object.
+        ## This transformer does the following, resizes the image and crops to the resize. Grayscales it.  transforms it to a tensor object and normalizes the pixel values
         self.trans = transforms.Compose([
             transforms.Resize(224),
             transforms.Grayscale(num_output_channels=3),
@@ -27,25 +35,30 @@ class Classifier:
             transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
         ])
 
+    ## This function takes a frame from cv2 and attempts to classify it.
     def classify(self,img):
         img_new = Image.fromarray(img)
+        ## Transforms the img file
         input = self.trans(img_new)
+        ## This ensures the img is the right shape for the classification
         input = input.unsqueeze(0)
+        ## classifies the img
         cls = self.model.eval()(input)
+        ## Finds the output values
         output = torch.nn.Softmax()(cls.float())
+        ## Finds the highest predicted label
         max_probability , predicted = torch.max(output, 1)
+        ## Removes the probability from the tensor object
         max_probability = max_probability.data.cpu().numpy()[0]
+        ## Finds the label as predicted is the index value of the predicted
         res = self.labels[predicted]
+        ## If the probability is over the threshold
         if max_probability > .7:
             return res
         else:
-            return None
+           return None
 
-    def set_parameter_requires_grad(self, feature_extracting):
-        if feature_extracting:
-            for param in self.model.parameters():
-                param.requires_grad = False
-
+    ## This is a testing method to find the classifications for all images in a set of folders.
     def test(self, paths):
         correct = 0
         total = 0
@@ -72,8 +85,9 @@ class Classifier:
             ##_, indices = torch.sort(res, descending=True)
             ##percentage = torch.nn.functional.softmax(res, dim=1)[0] * 100
         print("Total="+str(total))
-        print("correct"+str(correct))
+        print("correct="+str(correct))
 
+## If the .py is ran directly this will run and attempt to classify everything image in the test folder.
 if __name__ == "__main__":
     ## begin test ##
     files = []

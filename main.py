@@ -29,17 +29,28 @@ from camera_stream.camera import Camera
 
 class Slish:
     def __init__(self):
-		#create tkinter window object
+	#create tkinter window object
+        self.log_info("program opened at: {0} ".format(datetime.now()))
+        ## Creating a TKINTER window
         self.window = tkinter.Tk()
+        ## Changing the shape of the window
         self.window.geometry("1000x800")
         self.window.title("Slish")
         self.window.config(background='#c9e4ff')
 
 		#create objects from the various class modules
+        ## Creating camera object
         self.vid = Camera()
+        ## Creating a classifier object
         self.classifier = Classifier()
 
+        ## Creating variables used to keep track of predictions
+        self.last_pred = None;
+        self.frames_to_display_pred = 6
+        self.show_pred = False
         self.pred_queue = deque([])
+        self.sequence_of_gestures = []
+        self.recognized_sequence = False
         self.camera_status = self.vid.logStatus(True)
         
 		#create frame 
@@ -60,43 +71,38 @@ class Slish:
         self.label = tkinter.Label(self.header_frame, image=self.logo)
         self.label.image= self.logo
         self.label.pack(padx=5, pady=5)
-
-		#display the last time SLISH was operated within the gui log
-        self.loadLogHistory()
-		
-		#update log with current use time 
-        self.displayProgramAction(self.camera_status, None)
-		#update log when user closes SLISH GUI
+	#display the last time SLISH was operated within the gui lo
+	#update log with current use time 
+        self.displayProgramAction(self.camera_status)
+	#update log when user closes SLISH GUI
+        self.displayProgramAction(self.camera_status)
         self.window.protocol("WM_DELETE_WINDOW", self.displayProgramClosing)
-
-		#delay to prevent the code from blocking
+	#delay to prevent the code from blocking
         self.delay = 5
         self.update()
         self.window.mainloop()
-
         #function that loads the SLISH use history into the log
-    def loadLogHistory(self):
-        file = open('logHistory.txt', 'r')
-        file = file.readlines()
-        print('entering')
-        self.displayProgramAction(False, file[len(file) -5])
-        self.displayProgramAction(False, file[len(file) -4])
-        self.displayProgramAction(False, file[len(file) -3])
-        self.displayProgramAction(False, file[len(file) -2])
-
-
-#button allowing the user to access help documentation within the github repo
+        #button allowing the user to access help documentation within the github repo
+        # self.logo = ImageTk.PhotoImage(Image.open('pic.png'))
+        # self.label = tkinter.Label(self.header_frame, image=self.logo)
+        # self.label.image= self.logo
+        # self.label.pack(padx=5, pady=5)
+        # function that opens the help documentation link
+        
     def open_help(self): 
         webbrowser.open('https://github.com/mjp1997/ASL-Controlled-Smart-Home-Environment/blob/master/help.txt')
         # button that calls open_help()
 
-#Display the action being executed (will be finished once model is optimized)
-    def displayProgramAction(self, cam_is_open, history):
+
+
+    def displayProgramAction(self, cam_is_open):
         if cam_is_open:
-            current_time = datetime.now()
-            self.log.insert(tkinter.INSERT, "program opened at: {0} ".format(current_time))
-            self.log.config(state='disabled',width=640)
-            self.log.pack(fill='x')
+            with open('logHistory.txt','r') as file_data:
+                history = list(file_data)
+                for x in history:
+                    self.log.insert(tkinter.INSERT, x)
+                self.log.config(state='disabled',width=640)
+                self.log.pack(fill='x')
         else:
             print(history)
             self.log.insert(tkinter.INSERT, "{0}".format(history))
@@ -105,40 +111,89 @@ class Slish:
         current_time = datetime.now()
         print('test 5')
         file = open('logHistory.txt', 'a')
-        file.write('=========================================\n')
+        file.write('======\n')
         file.write("program closed at: {0} ".format(current_time) + '\n')
         file.close()
-        self.log.insert(tkinter.INSERT, "==================================")
+        self.log.insert(tkinter.INSERT, "======")
         self.log.insert(tkinter.INSERT, "program closed at: {0} ".format(current_time))
         self.window.destroy()
 
 #retrieve video frame, send to classifier and then sent to queue
     def update(self):
+
+
+        #@ Success means that a valid image came back as the image will be an array and will not equal None
         success, frame = self.vid.capture_image()
         if success:
+            ## IF we need to display the pred
+            if self.show_pred and self.frames_to_display_pred >= 0:
+                ## We are decreasing the number of frames we need to display this in
+                self.frames_to_display_pred -= 1
+                ## Adding text to the frame
+                frame = self.vid.write_text(frame,self.last_pred, 400,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
+                ## If we need to show the gestures recognized
+                if self.recognized_sequence and len(self.sequence_of_gestures) == 2:
+                    frame = self.vid.write_text(frame,self.sequence_of_gestures[0]+':'+self.sequence_of_gestures[1], 500,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
+                    self.log_info("Gesture recognized ("+self.sequence_of_gestures[0]+") at: {0} ".format(datetime.now()))
+
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
             self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
         pred = self.classifier.classify(frame)
         test = self.processPred(pred)
         self.window.after(self.delay, self.update)
+
 		
 #frames are classified and the classification is sent to a queue > 60% = valid cmd
+
+
+    ## This method takes a prediction and pushes it to hte queue
     def processPred(self,pred):
+        ## If the queue is greater than 6 then its full
         if len(self.pred_queue) >= 6:
+            ## res is the highest percentage item in the queue and the if statement will run if that percentage is over .6
             res = Counter(self.pred_queue).most_common(1)
             if res[0][1]/6 > .6 and res[0][0] != None:
-               self.processQueue(res[0][0]) 
+                ## This will push the gesture to the gesture list as a gesture has been recognized
+                self.processQueue(res[0][0])
+            ## The most common item in the pred queue is None clear and reset the queue variables
+            elif res[0][0] == None:
+                self.last_pred = None;
+                self.frames_to_display_pred = 6
+                self.show_pred = False
+                self.pred_queue = deque([])
+                self.sequence_of_gestures = []
+                self.recognized_sequence = False
+            ## The gesture isnt recognized so we pop and push a new prediction
             else:
                 self.pred_queue.popleft()
                 self.pred_queue.append(pred)
+        ## The queue isnt full so we push the prediction
         else:
             self.pred_queue.append(pred)
 
+
     #clear queue once the image has been detected        
+
+    ## Processing the queue means that we have 2 items in the gesture queue so we want to see if they map to something
     def processQueue(self, label):
         print(self.pred_queue)
+        ## The pred queue needs to be reste
         self.pred_queue.clear()
-        print("OH MY GOSH IT WORKED")
+        self.last_pred = label
+        ## We need to show the prediction for 6 frames
+        self.show_pred = True
+        self.frames_to_display_pred = 6
+        ## If the gestures list is more than 2 we need to clear it
+        if len(self.sequence_of_gestures) >=2:
+            self.sequence_of_gestures.clear()
+        ## We will push the gesture and if there are 2 items in the list then we will need to process it and find the mapping.
+        self.sequence_of_gestures.append(label)
+        if len(self.sequence_of_gestures) <= 1:
+            self.recognized_sequence = True
 
+    def log_info(self,text):
+        with open('logHistory.txt', 'a') as file:
+            file.write(text+'\n')
+      
 #beginning of program
 Slish()
