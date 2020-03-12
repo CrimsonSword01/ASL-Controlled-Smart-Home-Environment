@@ -29,15 +29,20 @@ from camera_stream.camera import Camera
 
 class Slish:
     def __init__(self):
+		#create tkinter window object
         self.window = tkinter.Tk()
         self.window.geometry("1000x800")
         self.window.title("Slish")
         self.window.config(background='#c9e4ff')
+
+		#create objects from the various class modules
         self.vid = Camera()
         self.classifier = Classifier()
+
         self.pred_queue = deque([])
         self.camera_status = self.vid.logStatus(True)
-
+        
+		#create frame 
         self.header_frame= tkinter.Frame(self.window,bg='#c9e4ff')
         self.header_frame.pack(fill='x')
         self.btn =ttk.Button(self.header_frame, text='HELP', command=self.open_help)
@@ -46,23 +51,30 @@ class Slish:
         # Create a canvas that can fit the above video source size
         self.canvas = tkinter.Canvas(self.window, width = 640, height = 400)
         self.canvas.pack(padx=10, pady=10, side='top')
-        # self.window.fileName
-        #space for log
+
+        #create tkinter log/logo
         self.log_frame= tkinter.Frame(self.window, padx=5, pady=5, borderwidth=2)
         self.log_frame.pack(side='left', fill='both')
-        #fill in code 
         self.log=tkinter.Text(self.log_frame)
+        self.logo = ImageTk.PhotoImage(Image.open('pic.png'))
+        self.label = tkinter.Label(self.header_frame, image=self.logo)
+        self.label.image= self.logo
+        self.label.pack(padx=5, pady=5)
+
+		#display the last time SLISH was operated within the gui log
         self.loadLogHistory()
+		
+		#update log with current use time 
         self.displayProgramAction(self.camera_status, None)
+		#update log when user closes SLISH GUI
         self.window.protocol("WM_DELETE_WINDOW", self.displayProgramClosing)
+
+		#delay to prevent the code from blocking
         self.delay = 5
         self.update()
         self.window.mainloop()
-        # self.logo = ImageTk.PhotoImage(Image.open('pic.png'))
-        # self.label = tkinter.Label(self.header_frame, image=self.logo)
-        # self.label.image= self.logo
-        # self.label.pack(padx=5, pady=5)
-        # function that opens the help documentation link
+
+        #function that loads the SLISH use history into the log
     def loadLogHistory(self):
         file = open('logHistory.txt', 'r')
         file = file.readlines()
@@ -73,11 +85,12 @@ class Slish:
         self.displayProgramAction(False, file[len(file) -2])
 
 
-
+#button allowing the user to access help documentation within the github repo
     def open_help(self): 
         webbrowser.open('https://github.com/mjp1997/ASL-Controlled-Smart-Home-Environment/blob/master/help.txt')
         # button that calls open_help()
 
+#Display the action being executed (will be finished once model is optimized)
     def displayProgramAction(self, cam_is_open, history):
         if cam_is_open:
             current_time = datetime.now()
@@ -87,7 +100,7 @@ class Slish:
         else:
             print(history)
             self.log.insert(tkinter.INSERT, "{0}".format(history))
-        # After it is called once, the update method will be automatically called every delay milliseconds
+
     def displayProgramClosing(self):
         current_time = datetime.now()
         print('test 5')
@@ -98,8 +111,9 @@ class Slish:
         self.log.insert(tkinter.INSERT, "==================================")
         self.log.insert(tkinter.INSERT, "program closed at: {0} ".format(current_time))
         self.window.destroy()
+
+#retrieve video frame, send to classifier and then sent to queue
     def update(self):
-        # we need success
         success, frame = self.vid.capture_image()
         if success:
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
@@ -107,7 +121,8 @@ class Slish:
         pred = self.classifier.classify(frame)
         test = self.processPred(pred)
         self.window.after(self.delay, self.update)
-
+		
+#frames are classified and the classification is sent to a queue > 60% = valid cmd
     def processPred(self,pred):
         if len(self.pred_queue) >= 6:
             res = Counter(self.pred_queue).most_common(1)
@@ -118,7 +133,8 @@ class Slish:
                 self.pred_queue.append(pred)
         else:
             self.pred_queue.append(pred)
-            
+
+    #clear queue once the image has been detected        
     def processQueue(self, label):
         print(self.pred_queue)
         self.pred_queue.clear()

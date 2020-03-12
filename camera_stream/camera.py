@@ -36,7 +36,6 @@ class Camera:
         self.current_total = 0 # Used to keep track of the current second's number of frames
         self.begin_time = time.time()
 
-        self.capturing_video = True
     # Checks to see if frame needs to be saved and saves items
     def save_image(self,frame):
         if time.time() - self.begin_time >= 3:  # if it's been 3 seconds since the last image was taken    
@@ -48,6 +47,7 @@ class Camera:
         self.capture.release()
         self.out.release()
         cv2.destroyAllWindows()
+
     # Checks to see if a gesture needs to be processed
     def gesture_check(self):
         if time.time() - self.gestures_per_second_time_check > self.gestures_per_second:
@@ -72,6 +72,7 @@ class Camera:
     	        self.current_total = 0 # Sets the new seconds total to 0
             self.last_second_duration = time.time() # Starts the new second
     
+	#log status function
     def logStatus(self, status):
         current_time = str(datetime.now())
         if status == True:  # if program is being opened, document that it's being opened
@@ -101,7 +102,8 @@ class Camera:
     # Sets the number of gestures per second
     def set_gestures_per_second(self,ges):
         return (60/ges)/1000
-        
+
+	#retrieve camera feed    
     def getCamera(self):
         ## Checks to see what operating system is being ran and knows if its a linux so the camera is created correctly
         if platform == "linux" or platform == "linux2":
