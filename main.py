@@ -125,7 +125,6 @@ class Slish:
         #@ Success means that a valid image came back as the image will be an array and will not equal None
         success, frame = self.vid.capture_image()
         cropped_img = frame[100:380, 0:640]
-        cv2.imshow('sdlkfj',cropped_img)
         if success:
             ## IF we need to display the pred
             if self.show_pred and self.frames_to_display_pred >= 0:
@@ -140,7 +139,7 @@ class Slish:
 
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
             self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
-        pred = self.classifier.classify(frame)
+        pred = self.classifier.classify(cropped_img)
         test = self.processPred(pred)
         self.window.after(self.delay, self.update)
 
