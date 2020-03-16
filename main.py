@@ -124,6 +124,8 @@ class Slish:
 
         #@ Success means that a valid image came back as the image will be an array and will not equal None
         success, frame = self.vid.capture_image()
+        cropped_img = frame[100:380, 0:640]
+        cv2.imshow('sdlkfj',cropped_img)
         if success:
             ## IF we need to display the pred
             if self.show_pred and self.frames_to_display_pred >= 0:
