@@ -59,7 +59,6 @@ class Camera:
         # Sees if the FPS needs to be updated
         self.update_fps()
         ret, frame = self.capture.read()  # retrieving the video frame
-        frame = self.write_text(frame,"FPS :" + str(self.prior_total), 50,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
         # self.save_image(frame)
         return True,frame
     # Uupdates the FPS if necessary
@@ -110,3 +109,7 @@ class Camera:
             return cv2.VideoCapture(0)  # create video object
         else:
             return cv2.VideoCapture(0)  # create video object
+
+    # returns FPS
+    def getFPS(self):
+        return self.prior_total
