@@ -21,10 +21,14 @@ class Classifier:
         ## This try/except statement is if you are running the file itself to run the test method or importing it. The model.pt will be different location based on the context of who calls it. 
         try:
             ## Loading model
-            self.model = torch.load('model_handler/model.pt')
+            self.model = torch.hub.load('pytorch/vision:v0.5.0', 'alexnet', pretrained=True)
+            self.model.load_state_dict(torch.load('model_handler/model.pt'))
+            self.model.eval()
         except Exception:
             ## Loading model
-            self.model = torch.load('model.pt')
+            self.model = torch.hub.load('pytorch/vision:v0.5.0', 'alexnet', pretrained=True)
+            self.model.load_state_dict(torch.load('model_handler/model.pt'))
+            self.model.eval()
         ## Creates a transformer object.
         ## This transformer does the following, resizes the image and crops to the resize. Grayscales it.  transforms it to a tensor object and normalizes the pixel values
         self.trans = transforms.Compose([
@@ -58,6 +62,12 @@ class Classifier:
         else:
            return None
 
+
+    def set_parameter_requires_grad(self, feature_extracting):
+        if feature_extracting:
+            for param in self.model.parameters():
+                param.requires_grad = False
+                
     ## This is a testing method to find the classifications for all images in a set of folders.
     def test(self, paths):
         correct = 0
