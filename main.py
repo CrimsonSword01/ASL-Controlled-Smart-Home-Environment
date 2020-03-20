@@ -26,6 +26,8 @@ from datetime import datetime
 from my_sock.sock import Socket
 from model_handler.classifier import Classifier
 from camera_stream.camera import Camera
+from camera_stream.motion_detection import Frame_Comparison
+
 
 class Slish:
     def __init__(self):
@@ -41,9 +43,11 @@ class Slish:
 		#create objects from the various class modules
         ## Creating camera object
         self.vid = Camera()
-        ## Creating a classifier object
+        self.success, self.background_image = self.vid.capture_image()
+        self.background_image = cv2.cvtColor(self.background_image, cv2.COLOR_BGR2GRAY)
+		## Creating a classifier object
         self.classifier = Classifier()
-
+        self.checkformotion = Frame_Comparison()
         ## Creating variables used to keep track of predictions
         self.last_pred = None;
         self.frames_to_display_pred = 6
@@ -120,10 +124,16 @@ class Slish:
 
 #retrieve video frame, send to classifier and then sent to queue
     def update(self):
-
-
+        cv2.imshow("test", self.background_image)
         #@ Success means that a valid image came back as the image will be an array and will not equal None
         success, frame = self.vid.capture_image()
+        changedPixels = self.checkformotion.compareImgs(self.background_image, frame)
+        totalPixels = self.checkformotion.getNumPixels(self.background_image)
+        print(changedPixels/totalPixels)
+        if changedPixels/totalPixels < .10:
+            sleep(20)
+            self.update()
+
         pred = self.classifier.classify(frame)
         test = self.processPred(pred)
         frame = self.vid.write_text(frame,"FPS :" + str(self.vid.getFPS()), 50,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
