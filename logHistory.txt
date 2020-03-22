@@ -72,3 +72,706 @@ program opened at: 2020-03-11 22:46:28.151960
 =========================================
 program closed at: 2020-03-11 22:46:44.197880 
 program opened at: 2020-03-20 01:14:59.470452 
+program opened at: 2020-03-20 15:40:23.435592 
+=========================================
+program opened at: 2020-03-20 15:40:27.577153
+Gesture recognized (C) at: 2020-03-20 15:40:34.355996 
+Gesture recognized (C) at: 2020-03-20 15:40:34.462710 
+Gesture recognized (C) at: 2020-03-20 15:40:34.574411 
+Gesture recognized (C) at: 2020-03-20 15:40:34.669157 
+Gesture recognized (C) at: 2020-03-20 15:40:34.752933 
+Gesture recognized (C) at: 2020-03-20 15:40:34.841695 
+Gesture recognized (C) at: 2020-03-20 15:40:34.934447 
+Gesture recognized (C) at: 2020-03-20 15:40:35.641555 
+Gesture recognized (C) at: 2020-03-20 15:40:35.735305 
+Gesture recognized (C) at: 2020-03-20 15:40:35.825065 
+Gesture recognized (C) at: 2020-03-20 15:40:35.919811 
+Gesture recognized (C) at: 2020-03-20 15:40:36.008574 
+Gesture recognized (C) at: 2020-03-20 15:40:36.095344 
+Gesture recognized (C) at: 2020-03-20 15:40:36.186100 
+Gesture recognized (C) at: 2020-03-20 15:40:36.913154 
+Gesture recognized (C) at: 2020-03-20 15:40:37.004909 
+Gesture recognized (C) at: 2020-03-20 15:40:37.094668 
+Gesture recognized (C) at: 2020-03-20 15:40:37.193404 
+Gesture recognized (C) at: 2020-03-20 15:40:37.287154 
+Gesture recognized (C) at: 2020-03-20 15:40:37.376913 
+Gesture recognized (C) at: 2020-03-20 15:40:37.465676 
+Gesture recognized (C) at: 2020-03-20 15:40:38.175777 
+Gesture recognized (C) at: 2020-03-20 15:40:38.272518 
+Gesture recognized (C) at: 2020-03-20 15:40:38.356294 
+Gesture recognized (C) at: 2020-03-20 15:40:38.446053 
+Gesture recognized (C) at: 2020-03-20 15:40:38.534816 
+Gesture recognized (C) at: 2020-03-20 15:40:38.622582 
+Gesture recognized (C) at: 2020-03-20 15:40:38.709349 
+Gesture recognized (C) at: 2020-03-20 15:40:39.425433 
+Gesture recognized (C) at: 2020-03-20 15:40:39.519184 
+Gesture recognized (C) at: 2020-03-20 15:40:39.610938 
+Gesture recognized (C) at: 2020-03-20 15:40:39.703690 
+Gesture recognized (C) at: 2020-03-20 15:40:39.797438 
+Gesture recognized (C) at: 2020-03-20 15:40:39.884206 
+Gesture recognized (C) at: 2020-03-20 15:40:39.975961 
+Gesture recognized (C) at: 2020-03-20 15:40:40.695037 
+Gesture recognized (C) at: 2020-03-20 15:40:40.788787 
+Gesture recognized (C) at: 2020-03-20 15:40:40.874586 
+Gesture recognized (C) at: 2020-03-20 15:40:40.964317 
+Gesture recognized (C) at: 2020-03-20 15:40:41.053079 
+Gesture recognized (C) at: 2020-03-20 15:40:41.142839 
+Gesture recognized (C) at: 2020-03-20 15:40:41.233596 
+Gesture recognized (C) at: 2020-03-20 15:40:41.951676 
+Gesture recognized (C) at: 2020-03-20 15:40:42.039441 
+Gesture recognized (C) at: 2020-03-20 15:40:42.133190 
+Gesture recognized (C) at: 2020-03-20 15:40:42.218962 
+Gesture recognized (C) at: 2020-03-20 15:40:42.308720 
+Gesture recognized (C) at: 2020-03-20 15:40:42.396486 
+Gesture recognized (C) at: 2020-03-20 15:40:42.489238 
+Gesture recognized (C) at: 2020-03-20 15:40:43.281119 
+Gesture recognized (C) at: 2020-03-20 15:40:43.509509 
+Gesture recognized (C) at: 2020-03-20 15:40:43.726927 
+Gesture recognized (C) at: 2020-03-20 15:40:43.875529 
+Gesture recognized (C) at: 2020-03-20 15:40:43.968281 
+Gesture recognized (C) at: 2020-03-20 15:40:44.058041 
+Gesture recognized (C) at: 2020-03-20 15:40:44.152790 
+Gesture recognized (C) at: 2020-03-20 15:40:44.873859 
+Gesture recognized (C) at: 2020-03-20 15:40:44.963622 
+Gesture recognized (C) at: 2020-03-20 15:40:45.052382 
+Gesture recognized (C) at: 2020-03-20 15:40:45.143138 
+Gesture recognized (C) at: 2020-03-20 15:40:45.236892 
+Gesture recognized (C) at: 2020-03-20 15:40:45.331635 
+Gesture recognized (C) at: 2020-03-20 15:40:45.418402 
+Gesture recognized (C) at: 2020-03-20 15:40:46.132491 
+Gesture recognized (C) at: 2020-03-20 15:40:46.233222 
+Gesture recognized (C) at: 2020-03-20 15:40:46.322982 
+Gesture recognized (C) at: 2020-03-20 15:40:46.410747 
+Gesture recognized (C) at: 2020-03-20 15:40:46.506491 
+Gesture recognized (C) at: 2020-03-20 15:40:46.597248 
+Gesture recognized (C) at: 2020-03-20 15:40:46.682022 
+Gesture recognized (C) at: 2020-03-20 15:40:47.408079 
+Gesture recognized (C) at: 2020-03-20 15:40:47.501829 
+Gesture recognized (C) at: 2020-03-20 15:40:47.590592 
+Gesture recognized (C) at: 2020-03-20 15:40:47.682346 
+Gesture recognized (C) at: 2020-03-20 15:40:47.768117 
+Gesture recognized (C) at: 2020-03-20 15:40:47.859871 
+Gesture recognized (C) at: 2020-03-20 15:40:47.945641 
+Gesture recognized (C) at: 2020-03-20 15:40:48.648760 
+Gesture recognized (C) at: 2020-03-20 15:40:48.740515 
+Gesture recognized (C) at: 2020-03-20 15:40:48.825288 
+Gesture recognized (C) at: 2020-03-20 15:40:48.928014 
+Gesture recognized (C) at: 2020-03-20 15:40:49.040713 
+Gesture recognized (C) at: 2020-03-20 15:40:49.140446 
+Gesture recognized (C) at: 2020-03-20 15:40:49.245166 
+Gesture recognized (C) at: 2020-03-20 15:40:50.022087 
+Gesture recognized (C) at: 2020-03-20 15:40:50.112844 
+Gesture recognized (C) at: 2020-03-20 15:40:50.203601 
+Gesture recognized (C) at: 2020-03-20 15:40:50.297351 
+Gesture recognized (C) at: 2020-03-20 15:40:50.389106 
+Gesture recognized (C) at: 2020-03-20 15:40:50.480864 
+Gesture recognized (C) at: 2020-03-20 15:40:50.567627 
+Gesture recognized (C) at: 2020-03-20 15:40:51.306658 
+Gesture recognized (C) at: 2020-03-20 15:40:51.404390 
+Gesture recognized (C) at: 2020-03-20 15:40:51.492154 
+Gesture recognized (C) at: 2020-03-20 15:40:51.586901 
+Gesture recognized (C) at: 2020-03-20 15:40:51.677658 
+Gesture recognized (C) at: 2020-03-20 15:40:51.765423 
+Gesture recognized (C) at: 2020-03-20 15:40:51.854186 
+Gesture recognized (C) at: 2020-03-20 15:40:52.592212 
+Gesture recognized (C) at: 2020-03-20 15:40:52.685961 
+Gesture recognized (C) at: 2020-03-20 15:40:52.778713 
+Gesture recognized (C) at: 2020-03-20 15:40:52.878447 
+Gesture recognized (C) at: 2020-03-20 15:40:52.976185 
+Gesture recognized (C) at: 2020-03-20 15:40:53.070942 
+Gesture recognized (C) at: 2020-03-20 15:40:53.160692 
+Gesture recognized (C) at: 2020-03-20 15:40:53.992466 
+Gesture recognized (C) at: 2020-03-20 15:40:54.097186 
+Gesture recognized (C) at: 2020-03-20 15:40:54.200909 
+Gesture recognized (C) at: 2020-03-20 15:40:54.314604 
+======
+program closed at: 2020-03-20 15:40:54.470188 
+program opened at: 2020-03-20 15:42:55.716346 
+=========================================
+program opened at: 2020-03-20 15:42:58.776476
+Gesture recognized (C) at: 2020-03-20 15:43:00.333311 
+Gesture recognized (C) at: 2020-03-20 15:43:00.429054 
+Gesture recognized (C) at: 2020-03-20 15:43:00.529786 
+Gesture recognized (C) at: 2020-03-20 15:43:00.625530 
+Gesture recognized (C) at: 2020-03-20 15:43:00.724265 
+Gesture recognized (C) at: 2020-03-20 15:43:00.819011 
+Gesture recognized (C) at: 2020-03-20 15:43:00.912761 
+Gesture recognized (C) at: 2020-03-20 15:43:01.718605 
+Gesture recognized (C) at: 2020-03-20 15:43:01.811356 
+Gesture recognized (C) at: 2020-03-20 15:43:01.910092 
+Gesture recognized (C) at: 2020-03-20 15:43:02.012818 
+Gesture recognized (C) at: 2020-03-20 15:43:02.108563 
+Gesture recognized (C) at: 2020-03-20 15:43:02.211287 
+Gesture recognized (C) at: 2020-03-20 15:43:02.313016 
+Gesture recognized (C) at: 2020-03-20 15:43:03.125841 
+Gesture recognized (C) at: 2020-03-20 15:43:03.227569 
+Gesture recognized (C) at: 2020-03-20 15:43:03.339269 
+Gesture recognized (C) at: 2020-03-20 15:43:03.441994 
+Gesture recognized (C) at: 2020-03-20 15:43:03.551701 
+Gesture recognized (C) at: 2020-03-20 15:43:03.654427 
+Gesture recognized (C) at: 2020-03-20 15:43:03.755157 
+Gesture recognized (C) at: 2020-03-20 15:43:04.540062 
+Gesture recognized (C) at: 2020-03-20 15:43:04.637796 
+Gesture recognized (C) at: 2020-03-20 15:43:04.731545 
+Gesture recognized (C) at: 2020-03-20 15:43:04.830281 
+Gesture recognized (C) at: 2020-03-20 15:43:04.926025 
+Gesture recognized (C) at: 2020-03-20 15:43:05.024760 
+Gesture recognized (C) at: 2020-03-20 15:43:05.121503 
+Gesture recognized (C) at: 2020-03-20 15:43:05.897427 
+Gesture recognized (C) at: 2020-03-20 15:43:06.035059 
+Gesture recognized (C) at: 2020-03-20 15:43:06.150750 
+Gesture recognized (C) at: 2020-03-20 15:43:06.249484 
+Gesture recognized (C) at: 2020-03-20 15:43:06.336252 
+Gesture recognized (C) at: 2020-03-20 15:43:06.430999 
+Gesture recognized (C) at: 2020-03-20 15:43:06.533724 
+Gesture recognized (C) at: 2020-03-20 15:43:07.252802 
+Gesture recognized (C) at: 2020-03-20 15:43:07.346551 
+Gesture recognized (C) at: 2020-03-20 15:43:07.444289 
+Gesture recognized (C) at: 2020-03-20 15:43:07.538038 
+Gesture recognized (C) at: 2020-03-20 15:43:07.626800 
+Gesture recognized (C) at: 2020-03-20 15:43:07.735509 
+Gesture recognized (C) at: 2020-03-20 15:43:07.847212 
+Gesture recognized (C) at: 2020-03-20 15:43:08.620143 
+Gesture recognized (C) at: 2020-03-20 15:43:08.713892 
+Gesture recognized (C) at: 2020-03-20 15:43:08.808639 
+Gesture recognized (C) at: 2020-03-20 15:43:08.908372 
+Gesture recognized (C) at: 2020-03-20 15:43:09.016092 
+Gesture recognized (C) at: 2020-03-20 15:43:09.107838 
+Gesture recognized (C) at: 2020-03-20 15:43:09.196601 
+Gesture recognized (C) at: 2020-03-20 15:43:09.946595 
+Gesture recognized (C) at: 2020-03-20 15:43:10.048322 
+Gesture recognized (C) at: 2020-03-20 15:43:10.139080 
+Gesture recognized (C) at: 2020-03-20 15:43:10.238813 
+Gesture recognized (C) at: 2020-03-20 15:43:10.334557 
+Gesture recognized (C) at: 2020-03-20 15:43:10.431299 
+Gesture recognized (C) at: 2020-03-20 15:43:10.539009 
+Gesture recognized (C) at: 2020-03-20 15:43:11.281025 
+Gesture recognized (C) at: 2020-03-20 15:43:11.373776 
+Gesture recognized (C) at: 2020-03-20 15:43:11.468523 
+Gesture recognized (C) at: 2020-03-20 15:43:11.575238 
+Gesture recognized (C) at: 2020-03-20 15:43:11.665995 
+Gesture recognized (C) at: 2020-03-20 15:43:11.754757 
+Gesture recognized (C) at: 2020-03-20 15:43:11.841526 
+Gesture recognized (C) at: 2020-03-20 15:43:12.572570 
+Gesture recognized (C) at: 2020-03-20 15:43:12.662330 
+Gesture recognized (C) at: 2020-03-20 15:43:12.752089 
+Gesture recognized (C) at: 2020-03-20 15:43:12.849828 
+Gesture recognized (C) at: 2020-03-20 15:43:12.937599 
+Gesture recognized (C) at: 2020-03-20 15:43:13.029349 
+Gesture recognized (C) at: 2020-03-20 15:43:13.121103 
+Gesture recognized (C) at: 2020-03-20 15:43:13.861123 
+Gesture recognized (C) at: 2020-03-20 15:43:13.952877 
+Gesture recognized (C) at: 2020-03-20 15:43:14.050616 
+Gesture recognized (C) at: 2020-03-20 15:43:14.143368 
+Gesture recognized (C) at: 2020-03-20 15:43:14.234125 
+Gesture recognized (C) at: 2020-03-20 15:43:14.320894 
+Gesture recognized (C) at: 2020-03-20 15:43:14.407661 
+Gesture recognized (C) at: 2020-03-20 15:43:15.154662 
+Gesture recognized (C) at: 2020-03-20 15:43:15.251403 
+Gesture recognized (C) at: 2020-03-20 15:43:15.341164 
+Gesture recognized (C) at: 2020-03-20 15:43:15.434914 
+Gesture recognized (C) at: 2020-03-20 15:43:15.525670 
+Gesture recognized (C) at: 2020-03-20 15:43:15.620417 
+Gesture recognized (C) at: 2020-03-20 15:43:15.710178 
+Gesture recognized (C) at: 2020-03-20 15:43:16.445210 
+Gesture recognized (C) at: 2020-03-20 15:43:16.532976 
+Gesture recognized (C) at: 2020-03-20 15:43:16.627723 
+Gesture recognized (C) at: 2020-03-20 15:43:16.721471 
+Gesture recognized (C) at: 2020-03-20 15:43:16.811232 
+Gesture recognized (C) at: 2020-03-20 15:43:16.903983 
+Gesture recognized (C) at: 2020-03-20 15:43:16.992746 
+Gesture recognized (C) at: 2020-03-20 15:43:17.769668 
+Gesture recognized (C) at: 2020-03-20 15:43:17.861422 
+Gesture recognized (C) at: 2020-03-20 15:43:17.947192 
+Gesture recognized (C) at: 2020-03-20 15:43:18.044931 
+Gesture recognized (C) at: 2020-03-20 15:43:18.136685 
+Gesture recognized (C) at: 2020-03-20 15:43:18.225449 
+Gesture recognized (C) at: 2020-03-20 15:43:18.321192 
+Gesture recognized (C) at: 2020-03-20 15:43:19.081160 
+Gesture recognized (C) at: 2020-03-20 15:43:19.171916 
+Gesture recognized (C) at: 2020-03-20 15:43:19.262674 
+Gesture recognized (C) at: 2020-03-20 15:43:19.355426 
+Gesture recognized (C) at: 2020-03-20 15:43:19.451169 
+Gesture recognized (C) at: 2020-03-20 15:43:19.538935 
+Gesture recognized (C) at: 2020-03-20 15:43:19.638669 
+Gesture recognized (C) at: 2020-03-20 15:43:20.406613 
+Gesture recognized (C) at: 2020-03-20 15:43:20.517317 
+Gesture recognized (C) at: 2020-03-20 15:43:20.630016 
+Gesture recognized (C) at: 2020-03-20 15:43:20.742714 
+Gesture recognized (C) at: 2020-03-20 15:43:20.828484 
+Gesture recognized (C) at: 2020-03-20 15:43:20.923232 
+Gesture recognized (C) at: 2020-03-20 15:43:21.020970 
+Gesture recognized (C) at: 2020-03-20 15:43:21.757998 
+Gesture recognized (C) at: 2020-03-20 15:43:21.850751 
+Gesture recognized (C) at: 2020-03-20 15:43:21.941507 
+Gesture recognized (C) at: 2020-03-20 15:43:22.036255 
+Gesture recognized (C) at: 2020-03-20 15:43:22.129007 
+Gesture recognized (C) at: 2020-03-20 15:43:22.221758 
+Gesture recognized (C) at: 2020-03-20 15:43:22.315510 
+Gesture recognized (C) at: 2020-03-20 15:43:23.071486 
+Gesture recognized (C) at: 2020-03-20 15:43:23.162242 
+Gesture recognized (C) at: 2020-03-20 15:43:23.259980 
+Gesture recognized (C) at: 2020-03-20 15:43:23.379664 
+Gesture recognized (C) at: 2020-03-20 15:43:23.484381 
+Gesture recognized (C) at: 2020-03-20 15:43:23.590098 
+Gesture recognized (C) at: 2020-03-20 15:43:23.698822 
+Gesture recognized (C) at: 2020-03-20 15:43:24.560504 
+Gesture recognized (C) at: 2020-03-20 15:43:24.667217 
+Gesture recognized (C) at: 2020-03-20 15:43:24.779055 
+Gesture recognized (C) at: 2020-03-20 15:43:24.887763 
+Gesture recognized (C) at: 2020-03-20 15:43:24.996772 
+Gesture recognized (C) at: 2020-03-20 15:43:25.103485 
+Gesture recognized (C) at: 2020-03-20 15:43:25.215186 
+Gesture recognized (C) at: 2020-03-20 15:43:25.965181 
+Gesture recognized (C) at: 2020-03-20 15:43:26.066908 
+Gesture recognized (C) at: 2020-03-20 15:43:26.166641 
+Gesture recognized (C) at: 2020-03-20 15:43:26.263382 
+Gesture recognized (C) at: 2020-03-20 15:43:26.352144 
+Gesture recognized (C) at: 2020-03-20 15:43:26.445894 
+Gesture recognized (C) at: 2020-03-20 15:43:26.538646 
+Gesture recognized (C) at: 2020-03-20 15:43:27.283655 
+Gesture recognized (C) at: 2020-03-20 15:43:27.373412 
+Gesture recognized (C) at: 2020-03-20 15:43:27.477135 
+Gesture recognized (C) at: 2020-03-20 15:43:27.568889 
+Gesture recognized (C) at: 2020-03-20 15:43:27.659647 
+Gesture recognized (C) at: 2020-03-20 15:43:27.755390 
+Gesture recognized (C) at: 2020-03-20 15:43:27.850137 
+Gesture recognized (C) at: 2020-03-20 15:43:28.597140 
+Gesture recognized (C) at: 2020-03-20 15:43:28.688894 
+Gesture recognized (C) at: 2020-03-20 15:43:28.784638 
+Gesture recognized (C) at: 2020-03-20 15:43:28.883374 
+Gesture recognized (C) at: 2020-03-20 15:43:28.981114 
+Gesture recognized (C) at: 2020-03-20 15:43:29.079848 
+Gesture recognized (C) at: 2020-03-20 15:43:29.170606 
+Gesture recognized (C) at: 2020-03-20 15:43:29.918604 
+Gesture recognized (C) at: 2020-03-20 15:43:30.008364 
+Gesture recognized (C) at: 2020-03-20 15:43:30.098125 
+Gesture recognized (C) at: 2020-03-20 15:43:30.186886 
+Gesture recognized (C) at: 2020-03-20 15:43:30.280637 
+Gesture recognized (C) at: 2020-03-20 15:43:30.379379 
+Gesture recognized (C) at: 2020-03-20 15:43:30.484091 
+Gesture recognized (C) at: 2020-03-20 15:43:31.243061 
+Gesture recognized (C) at: 2020-03-20 15:43:31.338805 
+Gesture recognized (C) at: 2020-03-20 15:43:31.427568 
+Gesture recognized (C) at: 2020-03-20 15:43:31.522314 
+Gesture recognized (C) at: 2020-03-20 15:43:31.617061 
+Gesture recognized (C) at: 2020-03-20 15:43:31.707818 
+Gesture recognized (C) at: 2020-03-20 15:43:31.796581 
+Gesture recognized (C) at: 2020-03-20 15:43:32.560537 
+Gesture recognized (C) at: 2020-03-20 15:43:32.658275 
+Gesture recognized (C) at: 2020-03-20 15:43:32.756014 
+Gesture recognized (C) at: 2020-03-20 15:43:32.850761 
+Gesture recognized (C) at: 2020-03-20 15:43:32.951491 
+Gesture recognized (C) at: 2020-03-20 15:43:33.047235 
+Gesture recognized (C) at: 2020-03-20 15:43:33.137993 
+Gesture recognized (C) at: 2020-03-20 15:43:33.883996 
+Gesture recognized (C) at: 2020-03-20 15:43:33.979741 
+Gesture recognized (C) at: 2020-03-20 15:43:34.079473 
+Gesture recognized (C) at: 2020-03-20 15:43:34.175217 
+Gesture recognized (C) at: 2020-03-20 15:43:34.271958 
+Gesture recognized (C) at: 2020-03-20 15:43:34.366710 
+Gesture recognized (C) at: 2020-03-20 15:43:34.459458 
+Gesture recognized (C) at: 2020-03-20 15:43:35.206458 
+Gesture recognized (C) at: 2020-03-20 15:43:35.302203 
+Gesture recognized (C) at: 2020-03-20 15:43:35.388970 
+Gesture recognized (C) at: 2020-03-20 15:43:35.481722 
+Gesture recognized (C) at: 2020-03-20 15:43:35.569487 
+Gesture recognized (C) at: 2020-03-20 15:43:35.657252 
+Gesture recognized (C) at: 2020-03-20 15:43:35.746016 
+Gesture recognized (C) at: 2020-03-20 15:43:36.495012 
+Gesture recognized (C) at: 2020-03-20 15:43:36.581779 
+Gesture recognized (C) at: 2020-03-20 15:43:36.673534 
+Gesture recognized (C) at: 2020-03-20 15:43:36.769278 
+Gesture recognized (C) at: 2020-03-20 15:43:36.861032 
+Gesture recognized (C) at: 2020-03-20 15:43:36.951790 
+Gesture recognized (C) at: 2020-03-20 15:43:37.046536 
+Gesture recognized (C) at: 2020-03-20 15:43:37.782567 
+Gesture recognized (C) at: 2020-03-20 15:43:37.875319 
+Gesture recognized (C) at: 2020-03-20 15:43:37.969070 
+Gesture recognized (C) at: 2020-03-20 15:43:38.065810 
+Gesture recognized (C) at: 2020-03-20 15:43:38.158562 
+Gesture recognized (C) at: 2020-03-20 15:43:38.250316 
+Gesture recognized (C) at: 2020-03-20 15:43:38.339081 
+Gesture recognized (C) at: 2020-03-20 15:43:39.083088 
+Gesture recognized (C) at: 2020-03-20 15:43:39.176838 
+Gesture recognized (C) at: 2020-03-20 15:43:39.268593 
+Gesture recognized (C) at: 2020-03-20 15:43:39.367360 
+Gesture recognized (C) at: 2020-03-20 15:43:39.464070 
+Gesture recognized (C) at: 2020-03-20 15:43:39.555824 
+Gesture recognized (C) at: 2020-03-20 15:43:39.649573 
+Gesture recognized (C) at: 2020-03-20 15:43:40.405551 
+Gesture recognized (C) at: 2020-03-20 15:43:40.500297 
+Gesture recognized (C) at: 2020-03-20 15:43:40.599034 
+Gesture recognized (C) at: 2020-03-20 15:43:40.694779 
+Gesture recognized (C) at: 2020-03-20 15:43:40.785534 
+Gesture recognized (C) at: 2020-03-20 15:43:40.875294 
+Gesture recognized (C) at: 2020-03-20 15:43:40.972035 
+Gesture recognized (C) at: 2020-03-20 15:43:41.745965 
+Gesture recognized (C) at: 2020-03-20 15:43:41.833731 
+Gesture recognized (C) at: 2020-03-20 15:43:41.927480 
+Gesture recognized (C) at: 2020-03-20 15:43:42.023223 
+Gesture recognized (C) at: 2020-03-20 15:43:42.117970 
+Gesture recognized (C) at: 2020-03-20 15:43:42.215709 
+Gesture recognized (C) at: 2020-03-20 15:43:42.307463 
+Gesture recognized (C) at: 2020-03-20 15:43:43.049478 
+Gesture recognized (C) at: 2020-03-20 15:43:43.141233 
+Gesture recognized (C) at: 2020-03-20 15:43:43.232987 
+Gesture recognized (C) at: 2020-03-20 15:43:43.321750 
+Gesture recognized (C) at: 2020-03-20 15:43:43.418491 
+Gesture recognized (C) at: 2020-03-20 15:43:43.510246 
+Gesture recognized (C) at: 2020-03-20 15:43:43.601004 
+Gesture recognized (C) at: 2020-03-20 15:43:44.332047 
+Gesture recognized (C) at: 2020-03-20 15:43:44.422804 
+Gesture recognized (C) at: 2020-03-20 15:43:44.516554 
+Gesture recognized (C) at: 2020-03-20 15:43:44.619279 
+Gesture recognized (C) at: 2020-03-20 15:43:44.710037 
+Gesture recognized (C) at: 2020-03-20 15:43:44.806779 
+Gesture recognized (C) at: 2020-03-20 15:43:44.903519 
+Gesture recognized (C) at: 2020-03-20 15:43:45.647528 
+Gesture recognized (C) at: 2020-03-20 15:43:45.736291 
+Gesture recognized (C) at: 2020-03-20 15:43:45.831038 
+Gesture recognized (C) at: 2020-03-20 15:43:45.919800 
+Gesture recognized (C) at: 2020-03-20 15:43:46.017538 
+Gesture recognized (C) at: 2020-03-20 15:43:46.114281 
+Gesture recognized (C) at: 2020-03-20 15:43:46.210025 
+Gesture recognized (C) at: 2020-03-20 15:43:46.937079 
+Gesture recognized (C) at: 2020-03-20 15:43:47.029830 
+Gesture recognized (C) at: 2020-03-20 15:43:47.118593 
+Gesture recognized (C) at: 2020-03-20 15:43:47.215336 
+Gesture recognized (C) at: 2020-03-20 15:43:47.312077 
+Gesture recognized (C) at: 2020-03-20 15:43:47.399841 
+Gesture recognized (C) at: 2020-03-20 15:43:47.494588 
+Gesture recognized (C) at: 2020-03-20 15:43:48.271509 
+Gesture recognized (C) at: 2020-03-20 15:43:48.364262 
+Gesture recognized (C) at: 2020-03-20 15:43:48.462997 
+Gesture recognized (C) at: 2020-03-20 15:43:48.551759 
+Gesture recognized (C) at: 2020-03-20 15:43:48.645508 
+Gesture recognized (C) at: 2020-03-20 15:43:48.739258 
+Gesture recognized (C) at: 2020-03-20 15:43:48.831013 
+Gesture recognized (C) at: 2020-03-20 15:43:49.582003 
+Gesture recognized (C) at: 2020-03-20 15:43:49.674756 
+Gesture recognized (C) at: 2020-03-20 15:43:49.769502 
+Gesture recognized (C) at: 2020-03-20 15:43:49.869235 
+Gesture recognized (C) at: 2020-03-20 15:43:49.966974 
+Gesture recognized (C) at: 2020-03-20 15:43:50.062719 
+Gesture recognized (C) at: 2020-03-20 15:43:50.153474 
+Gesture recognized (C) at: 2020-03-20 15:43:50.950345 
+Gesture recognized (C) at: 2020-03-20 15:43:51.052071 
+Gesture recognized (C) at: 2020-03-20 15:43:51.139836 
+Gesture recognized (C) at: 2020-03-20 15:43:51.242562 
+Gesture recognized (C) at: 2020-03-20 15:43:51.341297 
+Gesture recognized (C) at: 2020-03-20 15:43:51.437042 
+Gesture recognized (C) at: 2020-03-20 15:43:51.536774 
+Gesture recognized (C) at: 2020-03-20 15:43:52.303723 
+Gesture recognized (C) at: 2020-03-20 15:43:52.400465 
+Gesture recognized (C) at: 2020-03-20 15:43:52.491221 
+Gesture recognized (C) at: 2020-03-20 15:43:52.581978 
+Gesture recognized (C) at: 2020-03-20 15:43:52.675727 
+Gesture recognized (C) at: 2020-03-20 15:43:52.763493 
+Gesture recognized (C) at: 2020-03-20 15:43:52.857242 
+Gesture recognized (C) at: 2020-03-20 15:43:53.649124 
+Gesture recognized (C) at: 2020-03-20 15:43:53.752846 
+Gesture recognized (C) at: 2020-03-20 15:43:53.854575 
+Gesture recognized (C) at: 2020-03-20 15:43:53.967273 
+Gesture recognized (C) at: 2020-03-20 15:43:54.079971 
+Gesture recognized (C) at: 2020-03-20 15:43:54.185688 
+Gesture recognized (C) at: 2020-03-20 15:43:54.295396 
+Gesture recognized (C) at: 2020-03-20 15:43:55.155096 
+Gesture recognized (C) at: 2020-03-20 15:43:55.262807 
+Gesture recognized (C) at: 2020-03-20 15:43:55.354561 
+Gesture recognized (C) at: 2020-03-20 15:43:55.443324 
+Gesture recognized (C) at: 2020-03-20 15:43:55.537074 
+Gesture recognized (C) at: 2020-03-20 15:43:55.629826 
+Gesture recognized (C) at: 2020-03-20 15:43:55.716593 
+Gesture recognized (C) at: 2020-03-20 15:43:57.800021 
+Gesture recognized (C) at: 2020-03-20 15:43:57.893773 
+Gesture recognized (C) at: 2020-03-20 15:43:57.982532 
+Gesture recognized (C) at: 2020-03-20 15:43:58.082265 
+Gesture recognized (C) at: 2020-03-20 15:43:58.175017 
+Gesture recognized (C) at: 2020-03-20 15:43:58.270763 
+Gesture recognized (C) at: 2020-03-20 15:43:58.366504 
+Gesture recognized (C) at: 2020-03-20 15:43:59.260115 
+Gesture recognized (C) at: 2020-03-20 15:43:59.399752 
+Gesture recognized (C) at: 2020-03-20 15:43:59.604195 
+Gesture recognized (C) at: 2020-03-20 15:43:59.738835 
+Gesture recognized (C) at: 2020-03-20 15:43:59.875469 
+Gesture recognized (C) at: 2020-03-20 15:44:00.006120 
+Gesture recognized (C) at: 2020-03-20 15:44:00.195612 
+Gesture recognized (C) at: 2020-03-20 15:44:01.001464 
+Gesture recognized (C) at: 2020-03-20 15:44:01.107173 
+Gesture recognized (C) at: 2020-03-20 15:44:01.207903 
+Gesture recognized (C) at: 2020-03-20 15:44:01.303648 
+Gesture recognized (C) at: 2020-03-20 15:44:01.398394 
+Gesture recognized (C) at: 2020-03-20 15:44:01.490149 
+Gesture recognized (C) at: 2020-03-20 15:44:01.586891 
+Gesture recognized (C) at: 2020-03-20 15:44:02.386751 
+Gesture recognized (C) at: 2020-03-20 15:44:02.490472 
+Gesture recognized (C) at: 2020-03-20 15:44:02.594196 
+Gesture recognized (C) at: 2020-03-20 15:44:02.693929 
+Gesture recognized (C) at: 2020-03-20 15:44:02.791667 
+Gesture recognized (C) at: 2020-03-20 15:44:02.889405 
+Gesture recognized (C) at: 2020-03-20 15:44:02.991133 
+Gesture recognized (C) at: 2020-03-20 15:44:03.798972 
+Gesture recognized (C) at: 2020-03-20 15:44:03.885740 
+Gesture recognized (C) at: 2020-03-20 15:44:03.986471 
+Gesture recognized (C) at: 2020-03-20 15:44:04.092188 
+Gesture recognized (C) at: 2020-03-20 15:44:04.191921 
+Gesture recognized (C) at: 2020-03-20 15:44:04.291654 
+Gesture recognized (C) at: 2020-03-20 15:44:04.395377 
+Gesture recognized (C) at: 2020-03-20 15:44:05.170305 
+Gesture recognized (C) at: 2020-03-20 15:44:05.263056 
+Gesture recognized (C) at: 2020-03-20 15:44:05.383735 
+Gesture recognized (C) at: 2020-03-20 15:44:05.512390 
+Gesture recognized (C) at: 2020-03-20 15:44:05.634063 
+Gesture recognized (C) at: 2020-03-20 15:44:05.751749 
+Gesture recognized (C) at: 2020-03-20 15:44:05.895366 
+Gesture recognized (C) at: 2020-03-20 15:44:06.760051 
+Gesture recognized (C) at: 2020-03-20 15:44:06.859784 
+Gesture recognized (C) at: 2020-03-20 15:44:06.949549 
+Gesture recognized (C) at: 2020-03-20 15:44:07.057257 
+Gesture recognized (C) at: 2020-03-20 15:44:07.151005 
+Gesture recognized (C) at: 2020-03-20 15:44:07.242760 
+Gesture recognized (C) at: 2020-03-20 15:44:07.342493 
+Gesture recognized (C) at: 2020-03-20 15:44:08.115426 
+Gesture recognized (C) at: 2020-03-20 15:44:08.208178 
+Gesture recognized (C) at: 2020-03-20 15:44:08.297938 
+Gesture recognized (C) at: 2020-03-20 15:44:08.407645 
+Gesture recognized (C) at: 2020-03-20 15:44:08.497404 
+Gesture recognized (C) at: 2020-03-20 15:44:08.590155 
+Gesture recognized (C) at: 2020-03-20 15:44:08.687894 
+Gesture recognized (C) at: 2020-03-20 15:44:09.421930 
+Gesture recognized (C) at: 2020-03-20 15:44:09.513685 
+Gesture recognized (C) at: 2020-03-20 15:44:09.606437 
+Gesture recognized (C) at: 2020-03-20 15:44:09.699189 
+Gesture recognized (C) at: 2020-03-20 15:44:09.797925 
+Gesture recognized (C) at: 2020-03-20 15:44:09.894667 
+Gesture recognized (C) at: 2020-03-20 15:44:09.983430 
+Gesture recognized (C) at: 2020-03-20 15:44:10.727438 
+Gesture recognized (C) at: 2020-03-20 15:44:10.817199 
+Gesture recognized (C) at: 2020-03-20 15:44:10.912943 
+Gesture recognized (C) at: 2020-03-20 15:44:11.011678 
+Gesture recognized (C) at: 2020-03-20 15:44:11.131358 
+Gesture recognized (C) at: 2020-03-20 15:44:11.253034 
+Gesture recognized (C) at: 2020-03-20 15:44:11.382685 
+Gesture recognized (C) at: 2020-03-20 15:44:12.318184 
+Gesture recognized (C) at: 2020-03-20 15:44:12.430883 
+Gesture recognized (C) at: 2020-03-20 15:44:12.528621 
+Gesture recognized (C) at: 2020-03-20 15:44:12.643315 
+Gesture recognized (C) at: 2020-03-20 15:44:12.750029 
+Gesture recognized (C) at: 2020-03-20 15:44:12.877700 
+Gesture recognized (C) at: 2020-03-20 15:44:12.986396 
+Gesture recognized (C) at: 2020-03-20 15:44:13.754342 
+Gesture recognized (C) at: 2020-03-20 15:44:13.857066 
+Gesture recognized (C) at: 2020-03-20 15:44:13.950816 
+Gesture recognized (C) at: 2020-03-20 15:44:14.045562 
+Gesture recognized (C) at: 2020-03-20 15:44:14.137316 
+Gesture recognized (C) at: 2020-03-20 15:44:14.231066 
+Gesture recognized (C) at: 2020-03-20 15:44:14.334789 
+Gesture recognized (C) at: 2020-03-20 15:44:15.139635 
+Gesture recognized (C) at: 2020-03-20 15:44:15.238372 
+Gesture recognized (C) at: 2020-03-20 15:44:15.336110 
+Gesture recognized (C) at: 2020-03-20 15:44:15.434847 
+Gesture recognized (C) at: 2020-03-20 15:44:15.534579 
+Gesture recognized (C) at: 2020-03-20 15:44:15.627332 
+Gesture recognized (C) at: 2020-03-20 15:44:15.723076 
+Gesture recognized (C) at: 2020-03-20 15:44:16.486034 
+Gesture recognized (C) at: 2020-03-20 15:44:16.586764 
+Gesture recognized (C) at: 2020-03-20 15:44:16.690487 
+Gesture recognized (C) at: 2020-03-20 15:44:16.791217 
+Gesture recognized (C) at: 2020-03-20 15:44:16.891948 
+Gesture recognized (C) at: 2020-03-20 15:44:16.984700 
+Gesture recognized (C) at: 2020-03-20 15:44:17.082439 
+Gesture recognized (C) at: 2020-03-20 15:44:17.831435 
+Gesture recognized (C) at: 2020-03-20 15:44:17.929173 
+Gesture recognized (C) at: 2020-03-20 15:44:18.022923 
+Gesture recognized (C) at: 2020-03-20 15:44:18.120661 
+Gesture recognized (C) at: 2020-03-20 15:44:18.216405 
+Gesture recognized (C) at: 2020-03-20 15:44:18.306165 
+Gesture recognized (C) at: 2020-03-20 15:44:18.395925 
+Gesture recognized (C) at: 2020-03-20 15:44:19.158884 
+Gesture recognized (C) at: 2020-03-20 15:44:19.247646 
+======
+program closed at: 2020-03-20 15:44:19.463122 
+program opened at: 2020-03-20 15:56:56.287536 
+=========================================
+program opened at: 2020-03-20 15:56:59.227843
+Gesture recognized (C) at: 2020-03-20 15:57:00.670983 
+program opened at: 2020-03-20 15:57:41.487715 
+=========================================
+program opened at: 2020-03-20 15:57:44.044497
+Gesture recognized (C) at: 2020-03-20 15:57:45.446749 
+Gesture recognized (C) at: 2020-03-20 15:57:45.542490 
+Gesture recognized (C) at: 2020-03-20 15:57:45.641225 
+Gesture recognized (C) at: 2020-03-20 15:57:45.733977 
+Gesture recognized (C) at: 2020-03-20 15:57:45.825732 
+Gesture recognized (C) at: 2020-03-20 15:57:45.912499 
+Gesture recognized (C) at: 2020-03-20 15:57:46.003256 
+Gesture recognized (C) at: 2020-03-20 15:57:46.952718 
+Gesture recognized (C) at: 2020-03-20 15:57:47.073394 
+Gesture recognized (C) at: 2020-03-20 15:57:47.173127 
+Gesture recognized (C) at: 2020-03-20 15:57:47.262887 
+Gesture recognized (C) at: 2020-03-20 15:57:47.349658 
+Gesture recognized (C) at: 2020-03-20 15:57:47.455373 
+Gesture recognized (C) at: 2020-03-20 15:57:47.546130 
+Gesture recognized (C) at: 2020-03-20 15:57:48.432759 
+Gesture recognized (C) at: 2020-03-20 15:57:48.553436 
+Gesture recognized (C) at: 2020-03-20 15:57:48.664139 
+Gesture recognized (C) at: 2020-03-20 15:57:48.783820 
+Gesture recognized (C) at: 2020-03-20 15:57:48.902501 
+Gesture recognized (C) at: 2020-03-20 15:57:49.016197 
+Gesture recognized (C) at: 2020-03-20 15:57:49.130891 
+Gesture recognized (C) at: 2020-03-20 15:57:49.959674 
+Gesture recognized (C) at: 2020-03-20 15:57:50.078355 
+Gesture recognized (C) at: 2020-03-20 15:57:50.176094 
+Gesture recognized (C) at: 2020-03-20 15:57:50.282808 
+Gesture recognized (C) at: 2020-03-20 15:57:50.369579 
+Gesture recognized (C) at: 2020-03-20 15:57:50.468312 
+Gesture recognized (C) at: 2020-03-20 15:57:50.558073 
+Gesture recognized (C) at: 2020-03-20 15:57:51.285127 
+Gesture recognized (C) at: 2020-03-20 15:57:51.384861 
+Gesture recognized (C) at: 2020-03-20 15:57:51.475618 
+Gesture recognized (C) at: 2020-03-20 15:57:51.570367 
+Gesture recognized (C) at: 2020-03-20 15:57:51.655137 
+Gesture recognized (C) at: 2020-03-20 15:57:51.750881 
+Gesture recognized (C) at: 2020-03-20 15:57:51.841639 
+Gesture recognized (C) at: 2020-03-20 15:57:52.553735 
+Gesture recognized (C) at: 2020-03-20 15:57:52.647483 
+Gesture recognized (C) at: 2020-03-20 15:57:52.742231 
+Gesture recognized (C) at: 2020-03-20 15:57:52.837973 
+Gesture recognized (C) at: 2020-03-20 15:57:52.926736 
+Gesture recognized (C) at: 2020-03-20 15:57:53.024475 
+Gesture recognized (C) at: 2020-03-20 15:57:53.125206 
+Gesture recognized (C) at: 2020-03-20 15:57:53.970943 
+Gesture recognized (C) at: 2020-03-20 15:57:54.084640 
+Gesture recognized (C) at: 2020-03-20 15:57:54.187364 
+Gesture recognized (C) at: 2020-03-20 15:57:54.288094 
+Gesture recognized (C) at: 2020-03-20 15:57:54.406778 
+Gesture recognized (C) at: 2020-03-20 15:57:54.523465 
+Gesture recognized (C) at: 2020-03-20 15:57:54.631177 
+======
+program closed at: 2020-03-20 15:57:54.860564 
+program opened at: 2020-03-20 16:12:32.885734 
+program opened at: 2020-03-20 16:26:35.453440 
+program opened at: 2020-03-20 16:31:56.764050 
+program opened at: 2020-03-20 16:34:00.401281 
+program opened at: 2020-03-20 16:35:13.244635 
+=========================================
+program opened at: 2020-03-20 16:35:16.172109
+Gesture recognized (C) at: 2020-03-20 16:35:17.529478 
+Gesture recognized (C) at: 2020-03-20 16:35:17.624225 
+Gesture recognized (C) at: 2020-03-20 16:35:17.718971 
+Gesture recognized (C) at: 2020-03-20 16:35:17.811722 
+Gesture recognized (C) at: 2020-03-20 16:35:17.904474 
+Gesture recognized (C) at: 2020-03-20 16:35:17.996229 
+Gesture recognized (C) at: 2020-03-20 16:35:18.082997 
+Gesture recognized (C) at: 2020-03-20 16:35:18.788111 
+Gesture recognized (C) at: 2020-03-20 16:35:18.878871 
+Gesture recognized (C) at: 2020-03-20 16:35:18.975610 
+Gesture recognized (C) at: 2020-03-20 16:35:19.076340 
+Gesture recognized (C) at: 2020-03-20 16:35:19.180062 
+Gesture recognized (C) at: 2020-03-20 16:35:19.286780 
+Gesture recognized (C) at: 2020-03-20 16:35:19.381523 
+Gesture recognized (C) at: 2020-03-20 16:35:20.105587 
+Gesture recognized (C) at: 2020-03-20 16:35:20.195347 
+Gesture recognized (C) at: 2020-03-20 16:35:20.288098 
+Gesture recognized (C) at: 2020-03-20 16:35:20.381848 
+Gesture recognized (C) at: 2020-03-20 16:35:20.472605 
+Gesture recognized (C) at: 2020-03-20 16:35:20.568350 
+Gesture recognized (C) at: 2020-03-20 16:35:20.655116 
+Gesture recognized (C) at: 2020-03-20 16:35:21.373195 
+Gesture recognized (C) at: 2020-03-20 16:35:21.470934 
+Gesture recognized (C) at: 2020-03-20 16:35:21.562689 
+Gesture recognized (C) at: 2020-03-20 16:35:21.648459 
+Gesture recognized (C) at: 2020-03-20 16:35:21.738219 
+Gesture recognized (C) at: 2020-03-20 16:35:21.822992 
+Gesture recognized (C) at: 2020-03-20 16:35:21.918737 
+Gesture recognized (C) at: 2020-03-20 16:35:22.687679 
+Gesture recognized (C) at: 2020-03-20 16:35:22.780431 
+======
+program closed at: 2020-03-20 16:35:22.972916 
+program opened at: 2020-03-20 17:07:25.040033 
+=========================================
+program opened at: 2020-03-20 17:07:29.761846
+======
+program closed at: 2020-03-20 17:07:40.018645 
+program opened at: 2020-03-20 17:07:43.210980 
+=========================================
+program opened at: 2020-03-20 17:07:45.724246
+======
+program closed at: 2020-03-20 17:07:54.960566 
+program opened at: 2020-03-22 12:03:45.213445 
+=========================================
+program opened at: 2020-03-22 12:03:48.652029
+program opened at: 2020-03-22 12:04:36.692363 
+=========================================
+program opened at: 2020-03-22 12:04:39.938476
+program opened at: 2020-03-22 12:05:17.191210 
+=========================================
+program opened at: 2020-03-22 12:05:20.424346
+program opened at: 2020-03-22 12:07:50.841142 
+=========================================
+program opened at: 2020-03-22 12:07:54.089698
+program opened at: 2020-03-22 12:15:21.307848 
+=========================================
+program opened at: 2020-03-22 12:15:24.682743
+program opened at: 2020-03-22 12:18:04.708445 
+=========================================
+program opened at: 2020-03-22 12:18:07.982372
+program opened at: 2020-03-22 12:31:07.198010 
+=========================================
+program opened at: 2020-03-22 12:31:12.933862
+program opened at: 2020-03-22 12:32:24.694369 
+=========================================
+program opened at: 2020-03-22 12:32:27.945167
+program opened at: 2020-03-22 12:37:18.802376 
+=========================================
+program opened at: 2020-03-22 12:37:22.116842
+program opened at: 2020-03-22 12:38:26.414102 
+=========================================
+program opened at: 2020-03-22 12:38:29.693829
+program opened at: 2020-03-22 12:41:02.798464 
+=========================================
+program opened at: 2020-03-22 12:41:06.077412
+program opened at: 2020-03-22 12:42:09.549573 
+=========================================
+program opened at: 2020-03-22 12:42:13.031714
+program opened at: 2020-03-22 12:44:59.876763 
+=========================================
+program opened at: 2020-03-22 12:45:03.189461
+======
+program closed at: 2020-03-22 12:45:11.061687 
+program opened at: 2020-03-22 12:46:37.790650 
+=========================================
+program opened at: 2020-03-22 12:46:41.518120
+======
+program closed at: 2020-03-22 12:47:05.629937 
+program opened at: 2020-03-22 12:49:27.130241 
+=========================================
+program opened at: 2020-03-22 12:49:30.400608
+======
+program closed at: 2020-03-22 12:50:21.454417 
+program opened at: 2020-03-22 12:53:55.221589 
+=========================================
+program opened at: 2020-03-22 12:53:58.717361
+======
+program closed at: 2020-03-22 12:54:32.046837 
+program opened at: 2020-03-22 12:54:37.865198 
+=========================================
+program opened at: 2020-03-22 12:54:40.898800
+======
+program closed at: 2020-03-22 12:55:03.361228 
+program opened at: 2020-03-22 12:56:29.275682 
+=========================================
+program opened at: 2020-03-22 12:56:32.760213
+======
+program closed at: 2020-03-22 12:56:47.756575 
+program opened at: 2020-03-22 13:00:49.299900 
+=========================================
+program opened at: 2020-03-22 13:00:52.583344
+======
+program closed at: 2020-03-22 13:01:12.489279 
+program opened at: 2020-03-22 13:02:08.331442 
+=========================================
+program opened at: 2020-03-22 13:02:12.380759
+======
+program closed at: 2020-03-22 13:02:44.070287 

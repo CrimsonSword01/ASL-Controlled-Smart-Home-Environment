@@ -82,12 +82,13 @@ class Slish:
         self.displayProgramAction(self.camera_status)
         self.window.protocol("WM_DELETE_WINDOW", self.displayProgramClosing)
 	#delay to prevent the code from blocking
+        self.recently_executed = False
         self.delay = 5
         self.update()
         self.window.mainloop()
         #function that loads the SLISH use history into the log
         #button allowing the user to access help documentation within the github repo
-        # self.logo = ImageTk.PhotoImage(Image.open('pic.png'))
+        # self.logo = ImageTk0.PhotoImage(Image.open('pic.png'))
         # self.label = tkinter.Label(self.header_frame, image=self.logo)
         # self.label.image= self.logo
         # self.label.pack(padx=5, pady=5)
@@ -96,8 +97,6 @@ class Slish:
     def open_help(self): 
         webbrowser.open('https://github.com/mjp1997/ASL-Controlled-Smart-Home-Environment/blob/master/help.txt')
         # button that calls open_help()
-
-
 
     def displayProgramAction(self, cam_is_open):
         if cam_is_open:
@@ -124,38 +123,47 @@ class Slish:
 
 #retrieve video frame, send to classifier and then sent to queue
     def update(self):
-        cv2.imshow("test", self.background_image)
         #@ Success means that a valid image came back as the image will be an array and will not equal None
         success, frame = self.vid.capture_image()
         changedPixels = self.checkformotion.compareImgs(self.background_image, frame)
         totalPixels = self.checkformotion.getNumPixels(self.background_image)
-        print(changedPixels/totalPixels)
+        # print(changedPixels)
+        # print(changedPixels/totalPixels)
         if changedPixels/totalPixels < .10:
             sleep(20)
-            self.update()
-
-        pred = self.classifier.classify(frame)
-        test = self.processPred(pred)
-        frame = self.vid.write_text(frame,"FPS :" + str(self.vid.getFPS()), 50,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
-        if success:
-            ## IF we need to display the pred
-            if self.show_pred and self.frames_to_display_pred >= 0:
-                ## We are decreasing the number of frames we need to display this in
-                self.frames_to_display_pred -= 1
-                ## Adding text to the frame
-                frame = self.vid.write_text(frame,self.last_pred, 400,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
-                ## If we need to show the gestures recognized
-                if self.recognized_sequence and len(self.sequence_of_gestures) == 2:
-                    frame = self.vid.write_text(frame,self.sequence_of_gestures[0]+':'+self.sequence_of_gestures[1], 500,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
-                    self.log_info("Gesture recognized ("+self.sequence_of_gestures[0]+") at: {0} ".format(datetime.now()))
-
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
             self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
-        self.window.after(self.delay, self.update)
+            self.window.after(self.delay, self.update)
+
+        if self.recent_image():
+            self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
+            self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
+            print('frame recently classified (< 5 secs), not classifying current frame')
+            self.window.after(self.delay, self.update)
+        else:
+            print('no cmds recently executed, continuing to classify')
+            pred = self.classifier.classify(frame)
+            test = self.processPred(pred)
+            frame = self.vid.write_text(frame,"FPS :" + str(self.vid.getFPS()), 50,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
+            if success:
+                ## IF we need to display the pred
+                if self.show_pred and self.frames_to_display_pred >= 0:
+                    ## We are decreasing the number of frames we need to display this in
+                    self.frames_to_display_pred -= 1
+                    ## Adding text to the frame
+                    frame = self.vid.write_text(frame,self.last_pred, 400,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
+                    ## If we need to show the gestures recognized
+                    if self.recognized_sequence and len(self.sequence_of_gestures) == 2:
+                        frame = self.vid.write_text(frame,self.sequence_of_gestures[0]+':'+self.sequence_of_gestures[1], 500,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
+                        self.log.insert(tkinter.INSERT, self.sequence_of_gestures[0]) 
+					    # +") at: {0} ".format(datetime.now()))
+
+                self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
+                self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
+            self.window.after(self.delay, self.update)
 
 		
 #frames are classified and the classification is sent to a queue > 60% = valid cmd
-
 
     ## This method takes a prediction and pushes it to hte queue
     def processPred(self,pred):
@@ -164,6 +172,8 @@ class Slish:
             ## res is the highest percentage item in the queue and the if statement will run if that percentage is over .6
             res = Counter(self.pred_queue).most_common(1)
             if res[0][1]/6 > .6 and res[0][0] != None:
+                self.recently_executed = True
+                self.cmd_execution_time = time.time()
                 ## This will push the gesture to the gesture list as a gesture has been recognized
                 self.processQueue(res[0][0])
             ## The most common item in the pred queue is None clear and reset the queue variables
@@ -201,6 +211,16 @@ class Slish:
         self.sequence_of_gestures.append(label)
         if len(self.sequence_of_gestures) <= 1:
             self.recognized_sequence = True
+    
+    def recent_image(self):
+        if(self.recently_executed and time.time() - self.cmd_execution_time < 5):
+            return True
+        else:
+            print('img not recently detected')
+            self.recently_executed = False
+            self.cmd_execution_time = 0
+            return False
+
 
     def log_info(self,text):
         with open('logHistory.txt', 'a') as file:
