@@ -57,7 +57,11 @@ class Slish:
         self.recognized_sequence = False
         self.camera_status = self.vid.logStatus(True)
         
-		#create frame 
+        ## Variables for timing the functions
+        self.timing_list = set()
+        self.time = {}
+
+	#create frame 
         self.header_frame= tkinter.Frame(self.window,bg='#c9e4ff')
         self.header_frame.pack(fill='x')
         self.btn =ttk.Button(self.header_frame, text='HELP', command=self.open_help)
@@ -226,5 +230,19 @@ class Slish:
         with open('logHistory.txt', 'a') as file:
             file.write(text+'\n')
       
+
+    def add_start(self,string):
+        self.time[string+"start"] = time.time()
+        self.timing_list.add(string)
+
+    def add_stop(self,string):
+        self.time[string+"stop"] = time.time()
+        self.timing_list.add(string)
+
+    def get_times(self):
+        for x in self.timing_list:
+            print(str(x)+" = "+str(self.time[str(x)+"stop"]-self.time[str(x)+"start"]))
+
+
 #beginning of program
 Slish()

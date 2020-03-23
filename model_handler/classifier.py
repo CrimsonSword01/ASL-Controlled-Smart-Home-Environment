@@ -27,7 +27,7 @@ class Classifier:
         except Exception:
             ## Loading model
             self.model = torch.hub.load('pytorch/vision:v0.5.0', 'alexnet', pretrained=True)
-            self.model.load_state_dict(torch.load('model_handler/model.pt'))
+            self.model.load_state_dict(torch.load('model.pt'))
             self.model.eval()
         ## Creates a transformer object.
         ## This transformer does the following, resizes the image and crops to the resize. Grayscales it.  transforms it to a tensor object and normalizes the pixel values
