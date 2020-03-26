@@ -129,12 +129,14 @@ class Slish:
     def update(self):
         #@ Success means that a valid image came back as the image will be an array and will not equal None
         success, frame = self.vid.capture_image()
-        changedPixels = self.checkformotion.compareImgs(self.background_image, frame)
+        frame_analysis = self.checkformotion.processCurrentFrame(frame)
+        changedPixels = self.checkformotion.checkPixelDiff(frame_analysis, self.background_image)
         totalPixels = self.checkformotion.getNumPixels(self.background_image)
         # print(changedPixels)
-        # print(changedPixels/totalPixels)
+        print(changedPixels/totalPixels)
         if changedPixels/totalPixels < .10:
-            sleep(20)
+            # time.sleep(20)
+            print('test test')
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
             self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
             self.window.after(self.delay, self.update)
@@ -218,6 +220,7 @@ class Slish:
     
     def recent_image(self):
         if(self.recently_executed and time.time() - self.cmd_execution_time < 5):
+            # print(time.time() - self.cmd_execution_time)
             return True
         else:
             print('img not recently detected')

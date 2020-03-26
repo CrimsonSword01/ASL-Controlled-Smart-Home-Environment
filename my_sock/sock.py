@@ -7,8 +7,8 @@ import keyboard             # I dont think we need these for the class
 import pathlib              # I dont think we need these for the class 
 from sys import platform    # I dont think we need these for the class
 import sys                  # I dont think we need these for the class
-import pyHS100 import Discover as ds
-from pyHS100 import SmartPlug, SmartBulb
+# import pyHS100 import Discover as ds
+# from pyHS100 import SmartPlug, SmartBulb
 
 class Socket:
     def __init__(self,name):
@@ -44,11 +44,3 @@ class Socket:
             print("You have input the wrong status")
 
     #confused what is going on here
-    def isPortFree(self, portNum):
-		#if port is free return true, else false
-        return True 
-
-    #confused what is going on here
-    def activateSocket(self, portNum):
-        placeholderOutputMsg = 'Connecting to port: ' + portNum
-        return placeholderOutputMsg
