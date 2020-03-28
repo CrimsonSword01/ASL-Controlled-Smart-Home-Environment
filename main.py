@@ -129,14 +129,14 @@ class Slish:
     def update(self):
         #@ Success means that a valid image came back as the image will be an array and will not equal None
         success, frame = self.vid.capture_image()
-        frame_analysis = self.checkformotion.processCurrentFrame(frame)
-        changedPixels = self.checkformotion.checkPixelDiff(frame_analysis, self.background_image)
+        self.modif_frame = self.checkformotion.processCurrentFrame(frame)
+        self.frame_difference = self.checkformotion.subtractFrames(self.modif_frame, self.background_image)
+        changedPixels = self.checkformotion.checkPixelDiff(self.frame_difference)
         totalPixels = self.checkformotion.getNumPixels(self.background_image)
-        # print(changedPixels)
+        
+        self.checkformotion.boundingBox(self.frame_difference)
         print(changedPixels/totalPixels)
         if changedPixels/totalPixels < .10:
-            # time.sleep(20)
-            print('test test')
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
             self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
             self.window.after(self.delay, self.update)
