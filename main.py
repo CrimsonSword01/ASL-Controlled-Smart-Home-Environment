@@ -128,12 +128,15 @@ class Slish:
 #retrieve video frame, send to classifier and then sent to queue
     def update(self):
         #@ Success means that a valid image came back as the image will be an array and will not equal None
+        self.add_start('get_image')
         success, frame = self.vid.capture_image()
+        self.add_stop('get_image')
+        self.add_start('check_for_motion')
         self.modif_frame = self.checkformotion.processCurrentFrame(frame)
         self.frame_difference = self.checkformotion.subtractFrames(self.modif_frame, self.background_image)
         changedPixels = self.checkformotion.checkPixelDiff(self.frame_difference)
         totalPixels = self.checkformotion.getNumPixels(self.background_image)
-        
+        self.add_stop('check_for_motion')
         self.checkformotion.boundingBox(self.frame_difference)
         print(changedPixels/totalPixels)
         if changedPixels/totalPixels < .10:
@@ -142,15 +145,25 @@ class Slish:
             self.window.after(self.delay, self.update)
 
         if self.recent_image():
+            self.add_start('convert_image_to_PIL')
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
+            self.add_stop('convert_image_to_PIL')
+            self.add_start('display_image_to_GUI')
             self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
+            self.add_stop('display_image_to_GUI')
             print('frame recently classified (< 5 secs), not classifying current frame')
             self.window.after(self.delay, self.update)
         else:
             print('no cmds recently executed, continuing to classify')
+            self.add_start('classify_image')
             pred = self.classifier.classify(frame)
+            self.add_stop('classify_image')
+            self.add_start('process_prediction')
             test = self.processPred(pred)
+            self.add_stop('process_prediction')
+            self.add_start('write_to_image')
             frame = self.vid.write_text(frame,"FPS :" + str(self.vid.getFPS()), 50,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
+            self.add_stop('write_to_image')
             if success:
                 ## IF we need to display the pred
                 if self.show_pred and self.frames_to_display_pred >= 0:
@@ -161,13 +174,15 @@ class Slish:
                     ## If we need to show the gestures recognized
                     if self.recognized_sequence and len(self.sequence_of_gestures) == 2:
                         frame = self.vid.write_text(frame,self.sequence_of_gestures[0]+':'+self.sequence_of_gestures[1], 500,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
-                        self.log.insert(tkinter.INSERT, self.sequence_of_gestures[0]) 
+                        self.add_start('write_to_log')
+                        self.log.insert(tkinter.INSERT, self.sequence_of_gestures[0])
+                        self.add_stop('write_to_log')
 					    # +") at: {0} ".format(datetime.now()))
 
                 self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
                 self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
             self.window.after(self.delay, self.update)
-
+            self.get_times()
 		
 #frames are classified and the classification is sent to a queue > 60% = valid cmd
 

@@ -113,3 +113,52 @@ class Camera:
     # returns FPS
     def getFPS(self):
         return self.prior_total
+
+
+if __name__ == "__main__":
+    sb = 'MOG2'
+    if sb == 'MOG2':
+        backSub = cv2.createBackgroundSubtractorMOG2()
+    else:
+        backSub = cv2.createBackgroundSubtractorKNN()
+    capture = Camera()
+    while True:
+        ret, frame = capture.capture.read()
+        if frame is None:
+            break
+        fgMask = backSub.apply(frame)
+        
+
+        
+        cv2.rectangle(frame, (10, 2), (100,20), (255,255,255), -1)
+        cv2.putText(frame, str(capture.capture.get(cv2.CAP_PROP_POS_FRAMES)), (15, 15),cv2.FONT_HERSHEY_SIMPLEX, 0.5 , (0,0,0))
+        cv2.imshow('Frame', frame)
+        cv2.imshow('FG Mask', fgMask)
+        keyboard = cv2.waitKey(30)
+        if keyboard == 'q' or keyboard == 27:
+            break
+
+def get_background():
+    cap = Camera()
+    first_iter = True
+    result = None
+    frame = None
+    while True:
+        ret, frame = cap.capture.read()
+        if frame is None:
+            break
+        if first_iter:
+            avg = np.float32(frame)
+            first_iter = False
+        cv2.accumulateWeighted(frame, avg, 0.005)
+        result = cv2.convertScaleAbs(avg)
+        cv2.imshow("result", result)
+        key = cv2.waitKey(20)
+        if key == 27: # exit on ESC
+            break
+        
+    cv2.imwrite("result", result)
+    cv2.imwrite("unmodified", frame)
+    # When everything done, release the capture
+    cap.release()
+    cv2.destroyAllWindows()
