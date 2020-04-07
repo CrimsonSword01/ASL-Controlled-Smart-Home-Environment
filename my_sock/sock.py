@@ -7,24 +7,31 @@ import keyboard             # I dont think we need these for the class
 import pathlib              # I dont think we need these for the class 
 from sys import platform    # I dont think we need these for the class
 import sys                  # I dont think we need these for the class
-# import pyHS100 import Discover as ds
-# from pyHS100 import SmartPlug, SmartBulb
+from pyHS100 import Discover as ds
+from pyHS100 import SmartPlug, SmartBulb
 
 class Socket:
     def __init__(self,name):
+        print("\n\n\nCREATING PLUG\n\n\n")
+        dev_ip = None
         for dev in ds.discover().values():
             if dev.alias.lower() == name: # <--- need the hard code the name of the plug to find IP
                 dev_ip = dev.host
                 break
         #checking if we are finding the IP address
-        print(dev.host)
-        self.plug = SmartPlug(dev.host)
-
+        self.plug = SmartPlug(dev_ip)
     #confused what is going on here
     def validCmdCheck(self, cmd):
         cmd in self.commandsDict.values()
         self.portAvail = isPortFree(commandsDict[cmd])
         self.activateSocket(commandsDict[cmd], self.portAvail)
+
+    def turn_on(self):
+        self.plug.turn_on()
+        print("TURNED ON")
+    def turn_off(self):
+        self.plug.turn_off()
+        print("TURNED off")
 
     def status(self):
         #asking the user if they want the plug to turn or off

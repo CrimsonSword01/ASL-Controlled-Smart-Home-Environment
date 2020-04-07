@@ -181,7 +181,7 @@ class Slish:
                         self.log.insert(tkinter.INSERT, self.sequence_of_gestures[0])
                         self.add_stop('write_to_log')
 					    # +") at: {0} ".format(datetime.now()))
-
+ 
                 self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
                 self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
             self.window.after(self.delay, self.update)
