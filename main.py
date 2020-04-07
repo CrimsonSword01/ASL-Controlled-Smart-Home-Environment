@@ -43,7 +43,7 @@ class Slish:
 		#create objects from the various class modules
         ## Creating camera object
         self.vid = Camera()
-        self.success, self.background_image = self.vid.capture_image()
+        self.success, self.background_image,_ = self.vid.capture_image()
         self.background_image = cv2.cvtColor(self.background_image, cv2.COLOR_BGR2GRAY)
 		## Creating a classifier object
         self.classifier = Classifier()
@@ -60,6 +60,9 @@ class Slish:
         ## Variables for timing the functions
         self.timing_list = set()
         self.time = {}
+
+        ## Create mappings for plugs
+        self.plug_mappings = {'C':'SLISH'}
 
 	#create frame 
         self.header_frame= tkinter.Frame(self.window,bg='#c9e4ff')
@@ -129,7 +132,7 @@ class Slish:
     def update(self):
         #@ Success means that a valid image came back as the image will be an array and will not equal None
         self.add_start('get_image')
-        success, frame = self.vid.capture_image()
+        success, frame, no_background = self.vid.capture_image()
         self.add_stop('get_image')
         self.add_start('check_for_motion')
         self.modif_frame = self.checkformotion.processCurrentFrame(frame)
@@ -185,7 +188,7 @@ class Slish:
             self.get_times()
 		
 #frames are classified and the classification is sent to a queue > 60% = valid cmd
-
+    
     ## This method takes a prediction and pushes it to hte queue
     def processPred(self,pred):
         ## If the queue is greater than 6 then its full
@@ -227,6 +230,14 @@ class Slish:
         self.frames_to_display_pred = 6
         ## If the gestures list is more than 2 we need to clear it
         if len(self.sequence_of_gestures) >=2:
+            if self.sequence_of_gestures[0] in self.plug_mappings.keys():
+                ges = list(self.plug_mappings.keys())[0]
+                plug = Socket(self.plug_mappings[ges])
+                second = self.sequence_of_gestures[1]
+                if second == '1':
+                    plug.turn_on()
+                if second == '2':
+                    plug.turn_off()
             self.sequence_of_gestures.clear()
         ## We will push the gesture and if there are 2 items in the list then we will need to process it and find the mapping.
         self.sequence_of_gestures.append(label)
@@ -234,7 +245,7 @@ class Slish:
             self.recognized_sequence = True
     
     def recent_image(self):
-        if(self.recently_executed and time.time() - self.cmd_execution_time < 5):
+        if(self.recently_executed and time.time() - self.cmd_execution_time < 1):
             # print(time.time() - self.cmd_execution_time)
             return True
         else:

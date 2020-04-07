@@ -13,6 +13,7 @@ from sys import platform
 import sys
 import time
 from datetime import datetime
+from PIL import Image
 current_time = datetime.now()
 
 
@@ -26,7 +27,7 @@ class Camera:
         self.fourcc = cv2.VideoWriter_fourcc(*'XVID')
         self.out = cv2.VideoWriter('output.avid', self.fourcc, 20.0,
                       (640, 480))  # size of screen
-
+        self.backSub = cv2.createBackgroundSubtractorMOG2()
         self.img_count = 0 # keep track of number of images saved
         self.gestures_per_second = self.set_gestures_per_second(1) # number of a gestures a second to be processed
         self.path = '../image_gathering/'  # folder files are being saved to
@@ -60,7 +61,12 @@ class Camera:
         self.update_fps()
         ret, frame = self.capture.read()  # retrieving the video frame
         # self.save_image(frame)
-        return True,frame
+
+        mask = self.backSub.apply(frame)
+        mask = cv2.merge((mask,mask,mask))
+        dst = cv2.bitwise_and(mask,frame)
+        
+        return True,frame,dst
     # Uupdates the FPS if necessary
     def update_fps(self):
         self.current_total += 1
@@ -115,6 +121,19 @@ class Camera:
         return self.prior_total
 
 
+
+if __name__ == "__main__":
+    image = Image.open('Frame.png')
+    mask = Image.open('fgMask.png')
+    image = np.array(image)
+    mask = np.array(mask)
+    print(image.shape)
+    print(mask.shape)
+    print(type(mask))
+    print(type(image))
+    mask = cv2.merge((mask,mask,mask))
+    result = cv2.bitwise_and(mask,image)
+
 if __name__ == "__main__":
     sb = 'MOG2'
     if sb == 'MOG2':
@@ -126,14 +145,15 @@ if __name__ == "__main__":
         ret, frame = capture.capture.read()
         if frame is None:
             break
-        fgMask = backSub.apply(frame)
+        mask = backSub.apply(frame)
         
+        mask = cv2.merge((mask,mask,mask))
 
-        
-        cv2.rectangle(frame, (10, 2), (100,20), (255,255,255), -1)
-        cv2.putText(frame, str(capture.capture.get(cv2.CAP_PROP_POS_FRAMES)), (15, 15),cv2.FONT_HERSHEY_SIMPLEX, 0.5 , (0,0,0))
-        cv2.imshow('Frame', frame)
-        cv2.imshow('FG Mask', fgMask)
+
+        dst = cv2.bitwise_and(mask,frame)
+        cv2.imshow('Frame.png', frame)
+        cv2.imshow('FGMask.png', mask)
+        cv2.imshow('image',dst)
         keyboard = cv2.waitKey(30)
         if keyboard == 'q' or keyboard == 27:
             break
