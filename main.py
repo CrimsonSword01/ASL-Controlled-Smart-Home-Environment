@@ -147,6 +147,7 @@ class Slish:
         
 		#if an image was recently classified, simply update and don't classify
         if self.recent_image():
+            self.add_start('convert_image_to_PIL')
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
             # self.add_stop('convert_image_to_PIL')
             # self.add_start('display_image_to_GUI')
