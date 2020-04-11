@@ -25,13 +25,16 @@ class Frame_Comparison():
         self.img_disparity = cv2.absdiff(background, self.current_frame)
         return self.img_disparity
     
-    def boundingBox(self, img_disparity):
+    def boundingBox(self, img_disparity, frame):
         self.change_threshold = self.setChangeThreshold(self.img_disparity)
         contour_count = self.getContours(self.change_threshold)
         for contour in contour_count:
-            print(cv2.contourArea(contour))
+            # print(cv2.contourArea(contour))
             # <----- critera for valid bounding box contours ------>
-			# if cv2.contourArea(contour) < 200:
+            if cv2.contourArea(contour) < 600:
+                continue
+            (x, y, w, h) = cv2.boundingRect(contour)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 			# 	return dissimilar_pixels
 		# return self.dissimilar_pixels
 

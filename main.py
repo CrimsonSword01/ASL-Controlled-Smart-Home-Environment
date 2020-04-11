@@ -43,13 +43,14 @@ class Slish:
 		#create objects from the various class modules
         ## Creating camera object
         self.vid = Camera()
-        self.success, self.background_image = self.vid.capture_image()
+        self.success, self.background_image,_ = self.vid.capture_image()
         self.background_image = cv2.cvtColor(self.background_image, cv2.COLOR_BGR2GRAY)
 		## Creating a classifier object
         self.classifier = Classifier()
         self.checkformotion = Frame_Comparison()
         ## Creating variables used to keep track of predictions
         self.last_pred = None;
+        self.recent_img = False
         self.frames_to_display_pred = 6
         self.show_pred = False
         self.pred_queue = deque([])
@@ -60,6 +61,9 @@ class Slish:
         ## Variables for timing the functions
         self.timing_list = set()
         self.time = {}
+
+        ## Create mappings for plugs
+        self.plug_mappings = {'C':'SLISH'}
 
 	#create frame 
         self.header_frame= tkinter.Frame(self.window,bg='#c9e4ff')
@@ -90,13 +94,7 @@ class Slish:
         self.delay = 5
         self.update()
         self.window.mainloop()
-        #function that loads the SLISH use history into the log
-        #button allowing the user to access help documentation within the github repo
-        # self.logo = ImageTk0.PhotoImage(Image.open('pic.png'))
-        # self.label = tkinter.Label(self.header_frame, image=self.logo)
-        # self.label.image= self.logo
-        # self.label.pack(padx=5, pady=5)
-        # function that opens the help documentation link
+
         
     def open_help(self): 
         webbrowser.open('https://github.com/mjp1997/ASL-Controlled-Smart-Home-Environment/blob/master/help.txt')
@@ -111,49 +109,65 @@ class Slish:
                 self.log.config(state='disabled',width=640)
                 self.log.pack(fill='x')
         else:
-            print(history)
             self.log.insert(tkinter.INSERT, "{0}".format(history))
 
     def displayProgramClosing(self):
         current_time = datetime.now()
-        print('test 5')
         file = open('logHistory.txt', 'a')
-        file.write('======\n')
+        file.write('=========================================\n')
         file.write("program closed at: {0} ".format(current_time) + '\n')
         file.close()
-        self.log.insert(tkinter.INSERT, "======")
+        self.log.insert(tkinter.INSERT, "=========================================\n'")
         self.log.insert(tkinter.INSERT, "program closed at: {0} ".format(current_time))
         self.window.destroy()
 
 #retrieve video frame, send to classifier and then sent to queue
     def update(self):
         #@ Success means that a valid image came back as the image will be an array and will not equal None
-        success, frame = self.vid.capture_image()
+        # self.add_start('get_image')
+        success, frame, no_background = self.vid.capture_image()
+        # self.add_stop('get_image')
+        # self.add_start('check_for_motion')
         self.modif_frame = self.checkformotion.processCurrentFrame(frame)
         self.frame_difference = self.checkformotion.subtractFrames(self.modif_frame, self.background_image)
-        changedPixels = self.checkformotion.checkPixelDiff(self.frame_difference)
-        totalPixels = self.checkformotion.getNumPixels(self.background_image)
         
-        self.checkformotion.boundingBox(self.frame_difference)
-        print(changedPixels/totalPixels)
+		#quantify # of pixels that've changed
+        changedPixels = self.checkformotion.checkPixelDiff(self.frame_difference)
+        
+		#quantiy total # of pixels
+        totalPixels = self.checkformotion.getNumPixels(self.background_image)
+		#add bounding box over detected motion
+        # testframe = self.checkformotion.boundingBox(self.frame_difference, frame)
+        # if  less than 10% of pixels have changed between the two frames, it's conluded no motion was detected
         if changedPixels/totalPixels < .10:
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
             self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
+			#update frame in GuI without attempting to classify the frame
             self.window.after(self.delay, self.update)
-
+        
+		#if an image was recently classified, simply update and don't classify
         if self.recent_image():
             self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
+            # self.add_stop('convert_image_to_PIL')
+            # self.add_start('display_image_to_GUI')
             self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
-            print('frame recently classified (< 5 secs), not classifying current frame')
+            # self.add_stop('display_image_to_GUI')
+            # print('frame recently classified (< 5 secs), not classifying current frame')
             self.window.after(self.delay, self.update)
         else:
             print('no cmds recently executed, continuing to classify')
+            # self.add_start('classify_image')
             pred = self.classifier.classify(frame)
-            test = self.processPred(pred)
+            # self.add_stop('classify_image')
+            # self.add_start('process_prediction')
+            self.processPred(pred)
+            # self.add_stop('process_prediction')
+            # self.add_start('write_to_image')
             frame = self.vid.write_text(frame,"FPS :" + str(self.vid.getFPS()), 50,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
+            # self.add_stop('write_to_image')
             if success:
                 ## IF we need to display the pred
-                if self.show_pred and self.frames_to_display_pred >= 0:
+                if self.show_pred and self.frames_to_display_pred >= 0: # <== Don't think the right side is necessary
                     ## We are decreasing the number of frames we need to display this in
                     self.frames_to_display_pred -= 1
                     ## Adding text to the frame
@@ -161,27 +175,30 @@ class Slish:
                     ## If we need to show the gestures recognized
                     if self.recognized_sequence and len(self.sequence_of_gestures) == 2:
                         frame = self.vid.write_text(frame,self.sequence_of_gestures[0]+':'+self.sequence_of_gestures[1], 500,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
+                        # frame = self.checkformotion.boundingBox(self.frame_difference, frame)
                         self.log.insert(tkinter.INSERT, self.sequence_of_gestures[0]) 
-					    # +") at: {0} ".format(datetime.now()))
-
+ 
                 self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
                 self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
             self.window.after(self.delay, self.update)
-
+            self.get_times()
 		
 #frames are classified and the classification is sent to a queue > 60% = valid cmd
-
+    
     ## This method takes a prediction and pushes it to hte queue
     def processPred(self,pred):
         ## If the queue is greater than 6 then its full
-        if len(self.pred_queue) >= 6:
+        if len(self.pred_queue) == 6:
             ## res is the highest percentage item in the queue and the if statement will run if that percentage is over .6
             res = Counter(self.pred_queue).most_common(1)
             if res[0][1]/6 > .6 and res[0][0] != None:
                 self.recently_executed = True
                 self.cmd_execution_time = time.time()
                 ## This will push the gesture to the gesture list as a gesture has been recognized
+                # self.add_start("process_queue")
                 self.processQueue(res[0][0])
+                # self.add_stop("process_queue")
+                # self.get_times()
             ## The most common item in the pred queue is None clear and reset the queue variables
             elif res[0][0] == None:
                 self.last_pred = None;
@@ -198,32 +215,39 @@ class Slish:
         else:
             self.pred_queue.append(pred)
 
-
     #clear queue once the image has been detected        
 
     ## Processing the queue means that we have 2 items in the gesture queue so we want to see if they map to something
     def processQueue(self, label):
-        print(self.pred_queue)
-        ## The pred queue needs to be reste
-        self.pred_queue.clear()
+        ## The pred queue needs to be reset
+        self.pred_queue *= 0 #clear pred_queue
         self.last_pred = label
         ## We need to show the prediction for 6 frames
         self.show_pred = True
         self.frames_to_display_pred = 6
+        self.recognized_sequence = True  #if it's being processed isn't it recognized?
+
         ## If the gestures list is more than 2 we need to clear it
         if len(self.sequence_of_gestures) >=2:
-            self.sequence_of_gestures.clear()
+            if self.sequence_of_gestures[0] in self.plug_mappings.keys():
+                ges = list(self.plug_mappings.keys())[0]
+                plug = Socket(self.plug_mappings[ges])
+                second = self.sequence_of_gestures[1]
+                if second == '1':
+                    plug.turn_on()
+                if second == '2':
+                    plug.turn_off()
+            self.sequence_of_gestures *= 0
         ## We will push the gesture and if there are 2 items in the list then we will need to process it and find the mapping.
         self.sequence_of_gestures.append(label)
-        if len(self.sequence_of_gestures) <= 1:
-            self.recognized_sequence = True
+
+
     
     def recent_image(self):
-        if(self.recently_executed and time.time() - self.cmd_execution_time < 5):
-            # print(time.time() - self.cmd_execution_time)
+		#if there was a recently executed command and it's been less than 5 secs
+        if(self.recently_executed and time.time() - self.cmd_execution_time < 1):
             return True
         else:
-            print('img not recently detected')
             self.recently_executed = False
             self.cmd_execution_time = 0
             return False
