@@ -68,6 +68,8 @@ class Slish:
 	#create frame 
         self.header_frame= tkinter.Frame(self.window,bg='#c9e4ff')
         self.header_frame.pack(fill='x')
+        self.text_display= tkinter.Frame(self.window,bg='#c9e4ff')
+        self.text_display.pack(fill='x')
         self.btn =ttk.Button(self.header_frame, text='HELP', command=self.open_help)
         self.btn.pack(padx=1, pady=1, side='bottom')
 
@@ -83,6 +85,45 @@ class Slish:
         self.label = tkinter.Label(self.header_frame, image=self.logo)
         self.label.image= self.logo
         self.label.pack(padx=5, pady=5)
+        
+        self.fps_text_label = Label(self.text_display)
+        self.fps_text_label.pack(side=tkinter.LEFT)
+        self.fps_text_label.config(text="FPS :") 
+        self.fps_text = Label(self.text_display)
+        self.fps_text.pack(side=tkinter.LEFT)
+        self.fps_text.config(text="None")
+        
+        self.last_gesture_label = Label(self.text_display)
+        self.last_gesture_label.pack(side=tkinter.LEFT)
+        self.last_gesture_label.config(text="Gesture :") 
+        self.last_gesture = Label(self.text_display)
+        self.last_gesture.pack(side=tkinter.LEFT)
+        self.last_gesture.config(text="None") 
+
+        self.last_sequence_of_gestures_label = Label(self.text_display)
+        self.last_sequence_of_gestures_label.pack(side=tkinter.LEFT)
+        self.last_sequence_of_gestures_label.config(text="Sequence of Gestures:")
+        self.last_sequence_of_gestures = Label(self.text_display)
+        self.last_sequence_of_gestures.pack(side=tkinter.LEFT)
+        self.last_sequence_of_gestures.config(text="None")
+
+        self.last_command_label = Label(self.text_display)
+        self.last_command_label.pack(side=tkinter.LEFT)
+        self.last_command_label.config(text="Command:")
+        self.last_command = Label(self.text_display)
+        self.last_command.pack(side=tkinter.LEFT)
+        self.last_command.config(text="None")
+
+        self.display_image_bool = IntVar()
+        self.display_image = Checkbutton(self.text_display, text="Display camera feed",variable=self.display_image_bool)
+        self.display_image.pack(side=tkinter.LEFT)
+
+        self.display_classified_image_bool = IntVar()
+        self.display_classified_image = Checkbutton(self.text_display, text="Display camera feed",variable=self.display_classified_image_bool)
+        self.display_classified_image.pack(side=tkinter.LEFT)
+    
+
+        
 	#display the last time SLISH was operated within the gui lo
 	#update log with current use time 
         self.displayProgramAction(self.camera_status)
@@ -140,18 +181,18 @@ class Slish:
         # testframe = self.checkformotion.boundingBox(self.frame_difference, frame)
         # if  less than 10% of pixels have changed between the two frames, it's conluded no motion was detected
         if changedPixels/totalPixels < .10:
-            self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
-            self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
-			#update frame in GuI without attempting to classify the frame
+            # self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
+            # self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
+	    # update frame in GuI without attempting to classify the frame
             self.window.after(self.delay, self.update)
         
-		#if an image was recently classified, simply update and don't classify
+	#if an image was recently classified, simply update and don't classify
         if self.recent_image():
-            self.add_start('convert_image_to_PIL')
-            self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
+            # self.add_start('convert_image_to_PIL')
+            # self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
             # self.add_stop('convert_image_to_PIL')
             # self.add_start('display_image_to_GUI')
-            self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
+            # self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
             # self.add_stop('display_image_to_GUI')
             # print('frame recently classified (< 5 secs), not classifying current frame')
             self.window.after(self.delay, self.update)
@@ -164,7 +205,7 @@ class Slish:
             self.processPred(pred)
             # self.add_stop('process_prediction')
             # self.add_start('write_to_image')
-            frame = self.vid.write_text(frame,"FPS :" + str(self.vid.getFPS()), 50,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
+            # frame = self.vid.write_text(frame,"FPS :" + str(self.vid.getFPS()), 50,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
             # self.add_stop('write_to_image')
             if success:
                 ## IF we need to display the pred
@@ -179,11 +220,21 @@ class Slish:
                         # frame = self.checkformotion.boundingBox(self.frame_difference, frame)
                         self.log.insert(tkinter.INSERT, self.sequence_of_gestures[0]) 
  
-                self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
-                self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
+                ##self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
+                ##self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
+            #self.get_times()
+
+            ## Display images if needed
+            if self.display_image_bool.get() == 1:
+                cv2.imshow("Camera Image",frame)
+            if self.display_classified_image_bool.get() == 1:
+                cv2.imshow("Classified Image",no_background)
+
+            ## Update text fields
+            self.fps_text.config(text=self.vid.getFPS())
             self.window.after(self.delay, self.update)
-            self.get_times()
-		
+
+            
 #frames are classified and the classification is sent to a queue > 60% = valid cmd
     
     ## This method takes a prediction and pushes it to hte queue
