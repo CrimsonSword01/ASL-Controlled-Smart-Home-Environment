@@ -1,6 +1,6 @@
-# ASL-Controlled-Smart-Home-Environment
+# Sign Language Integration for Smart Homes (SLISH)
 
-ASL (American Sign Language) controlled smart home environment, specifically catered to those with hearing and/or verbal impairments.
+SLISH will be specifically catered to those with hearing and/or verbal impairments.
 Program will be operable on a Raspberry Pi.
 
 # Download
@@ -11,9 +11,9 @@ Anaconda in order to run our program. You will then need to download the opencv 
 ## Anaconda
 
 Go to the Ancadonda website: "https://www.anaconda.com/distribution/"
-When you click the download button it should bring you down so that you can choose your system type Windows | macOS | Linux
+When you click the download button the site should bring you down so that you can choose your system type: Windows | macOS | Linux
 Then go under Python 3.7 and choose which installer version you need (32x vs 64x)
-Go through the Anaconda Installer and choose all default options 
+Go through the Anaconda Installer and choose all default options. 
 
 ## Anaconda Packages
 
@@ -28,12 +28,14 @@ conda activate ASL
 ```
 On the side of your prompt it should now say (ASL) instead of (base) on the new line
 
-Downloading Packages:
+Downloading Packages (Please Download Packages in the order they are in below):
 ```bash
-conda install opencv
-y
 conda install pytorch torchvision cpuonly -c pytorch
-y
+conda install opencv
+pip install keyboard
+pip install pyHS100
+pip install pyparsing
+pip install imutils
 ```
 
 ## Repository
