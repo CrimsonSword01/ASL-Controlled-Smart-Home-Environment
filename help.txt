@@ -1,4 +1,6 @@
-If device attached to particular socket is turned On, then it will turn Off by giving command for particular socket (and vice versa).
+If the smart device (or just regular device) attached to particular socket is turned On, then it will turn Off the device by giving the command for particular socket it is attached to (and vice versa).
+
+For the particulars of our project, we only have access to one socket so we will only be using one sequence for demonstration purposes. Our program, however; does have access to 8 other sequences if the user has more than one plug.  
 
 Sign Instructions
 A1: 
@@ -9,4 +11,4 @@ B2:
 B3:
 C1:
 C2:
-C3:
+C3: Turn SLISH Plug On/Off (Dependant on prior state it was in)
