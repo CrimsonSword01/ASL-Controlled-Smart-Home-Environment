@@ -54,7 +54,8 @@ class Slish:
         self.frames_to_display_pred = 6
         self.show_pred = False
         self.pred_queue = deque([])
-        self.sequence_of_gestures = []
+        self.sequence_of_gestures = [None,None]
+        self.sequence_of_gestures_backup = [None,None]
         self.recognized_sequence = False
         self.camera_status = self.vid.logStatus(True)
         
@@ -201,9 +202,9 @@ class Slish:
             # print('frame recently classified (< 5 secs), not classifying current frame')
             self.window.after(self.delay, self.update)
         else:
-            print('no cmds recently executed, continuing to classify')
+            # print('no cmds recently executed, continuing to classify')
             # self.add_start('classify_image')
-            pred = self.classifier.classify(frame)
+            pred = self.classifier.classify(no_background)
             # self.add_stop('classify_image')
             # self.add_start('process_prediction')
             self.processPred(pred)
@@ -236,6 +237,9 @@ class Slish:
 
             ## Update text fields
             self.fps_text.config(text=self.vid.getFPS())
+            self.last_command.config(text="WE NEED TO INSERT LAST COMMAND")
+            self.last_sequence_of_gestures.config(text=str(self.sequence_of_gestures_backup[0])+str(self.sequence_of_gestures_backup[1]))
+            self.last_gesture.config(text=self.sequence_of_gestures_backup[-1])
             self.window.after(self.delay, self.update)
 
             
@@ -270,6 +274,7 @@ class Slish:
         ## The queue isnt full so we push the prediction
         else:
             self.pred_queue.append(pred)
+            print(pred)
 
     #clear queue once the image has been detected        
 
@@ -285,6 +290,7 @@ class Slish:
 
         ## If the gestures list is more than 2 we need to clear it
         if len(self.sequence_of_gestures) >=2:
+            self.sequence_of_gestures_backup = self.sequence_gestures
             if self.sequence_of_gestures[0] in self.plug_mappings.keys():
                 ges = list(self.plug_mappings.keys())[0]
                 plug = Socket(self.plug_mappings[ges])
