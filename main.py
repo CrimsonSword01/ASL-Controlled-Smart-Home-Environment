@@ -66,64 +66,68 @@ class Slish:
         self.plug_mappings = {'C':'SLISH'}
 
 	#create frame 
-        self.header_frame= tkinter.Frame(self.window,bg='#c9e4ff')
+        self.header_frame= tkinter.Frame(self.window, bg='#c9e4ff')
         self.header_frame.pack(fill='x')
-        self.text_display= tkinter.Frame(self.window,bg='#c9e4ff')
-        self.text_display.pack(fill='x')
+        self.middle_frame= tkinter.Frame(self.window)
+        self.middle_frame.pack()
+        self.stream_display= tkinter.Frame(self.middle_frame)
+        self.stream_display.pack(fill='both')
+        self.text_display= tkinter.Frame(self.middle_frame)
+        self.text_display.pack(fill='both')
         self.btn =ttk.Button(self.header_frame, text='HELP', command=self.open_help)
-        self.btn.pack(padx=1, pady=1, side='bottom')
+        self.btn.pack(padx=10, pady=10, side='bottom')
 
         # Create a canvas that can fit the above video source size
-        self.canvas = tkinter.Canvas(self.window, width = 640, height = 400)
-        self.canvas.pack(padx=10, pady=10, side='top')
+        """ self.canvas = tkinter.Canvas(self.window, width = 640, height = 400)
+        self.canvas.pack(padx=10, pady=10, side='top') """
 
         #create tkinter log/logo
         self.log_frame= tkinter.Frame(self.window, padx=5, pady=5, borderwidth=2)
-        self.log_frame.pack(side='left', fill='both')
+        self.log_frame.pack(side='bottom', fill='both')
         self.log=tkinter.Text(self.log_frame)
+        self.S = tkinter.Scrollbar(self.log_frame)
+        self.S.config(command=self.log.yview)
+        self.S.pack(side=tkinter.RIGHT, fill=tkinter.Y)
         self.logo = ImageTk.PhotoImage(Image.open('pic.png'))
         self.label = tkinter.Label(self.header_frame, image=self.logo)
         self.label.image= self.logo
         self.label.pack(padx=5, pady=5)
         
-        self.fps_text_label = Label(self.text_display)
-        self.fps_text_label.pack(side=tkinter.LEFT)
-        self.fps_text_label.config(text="FPS :") 
-        self.fps_text = Label(self.text_display)
-        self.fps_text.pack(side=tkinter.LEFT)
-        self.fps_text.config(text="None")
+        self.fps_text_label = tkinter.Label(self.text_display,text="FPS ->", padx=10, pady=10, bg='#c9e4ff')
+        self.fps_text_label.grid(row=0, column=0, padx=10, pady=10, sticky='nsew')
+        self.fps_text = tkinter.Label(self.text_display,text="None", padx=10, pady=10)
+        self.fps_text.grid(row=0, column=1, padx=1, pady=1)
         
-        self.last_gesture_label = Label(self.text_display)
-        self.last_gesture_label.pack(side=tkinter.LEFT)
-        self.last_gesture_label.config(text="Gesture :") 
-        self.last_gesture = Label(self.text_display)
-        self.last_gesture.pack(side=tkinter.LEFT)
-        self.last_gesture.config(text="None") 
+        self.last_gesture_label = tkinter.Label(self.text_display,text="Gesture ->", padx=10, pady=10, bg='#c9e4ff')
+        self.last_gesture_label.grid(row=0, column=2, padx=10, pady=10,sticky='nsew')
+        self.last_gesture = tkinter.Label(self.text_display,text="None", padx=10, pady=10)
+        self.last_gesture.grid(row=0, column=3, padx=1, pady=1)
 
-        self.last_sequence_of_gestures_label = Label(self.text_display)
-        self.last_sequence_of_gestures_label.pack(side=tkinter.LEFT)
-        self.last_sequence_of_gestures_label.config(text="Sequence of Gestures:")
-        self.last_sequence_of_gestures = Label(self.text_display)
-        self.last_sequence_of_gestures.pack(side=tkinter.LEFT)
-        self.last_sequence_of_gestures.config(text="None")
+        self.last_sequence_of_gestures_label = tkinter.Label(self.text_display, text="Sequence of Gestures ->", padx=10, pady=10, bg='#c9e4ff')
+        self.last_sequence_of_gestures_label.grid(row=1, column=0, padx=10, pady=10,sticky='nsew')
+        self.last_sequence_of_gestures = tkinter.Label(self.text_display, text="None", padx=10, pady=10)
+        self.last_sequence_of_gestures.grid(row=1, column=1, padx=1, pady=1)
 
-        self.last_command_label = Label(self.text_display)
-        self.last_command_label.pack(side=tkinter.LEFT)
-        self.last_command_label.config(text="Command:")
-        self.last_command = Label(self.text_display)
-        self.last_command.pack(side=tkinter.LEFT)
-        self.last_command.config(text="None")
+        self.last_command_label = tkinter.Label(self.text_display,text="Command ->", padx=10, pady=10, bg='#c9e4ff')
+        self.last_command_label.grid(row=1, column=2, padx=10, pady=10,sticky='nsew')
+        self.last_command = tkinter.Label(self.text_display, text="None", padx=10, pady=10)
+        self.last_command.grid(row=1, column=3, padx=1, pady=1)
 
-        self.display_image_bool = IntVar()
-        self.display_image = Checkbutton(self.text_display, text="Display camera feed",variable=self.display_image_bool)
-        self.display_image.pack(side=tkinter.LEFT)
 
-        self.display_classified_image_bool = IntVar()
-        self.display_classified_image = Checkbutton(self.text_display, text="Display camera feed",variable=self.display_classified_image_bool)
-        self.display_classified_image.pack(side=tkinter.LEFT)
-    
+        self.display_image_bool = tkinter.IntVar()
+        self.display_image = tkinter.Checkbutton(self.stream_display, text="Display Camera Feed",variable=self.display_image_bool, padx=10, pady=10, bg='#568c96')
+        self.display_image.grid(row=0, column=0, padx=10, pady=10)
 
+        self.display_classified_image_bool = tkinter.IntVar()
+        self.display_classified_image = tkinter.Checkbutton(self.stream_display, text="Display Classified Feed",variable=self.display_classified_image_bool, padx=10, pady=10, bg='#568c96')
+        self.display_classified_image.grid(row=0, column=1, padx=10, pady=10)
         
+        self.stream_display.grid_columnconfigure(0, weight=1)
+        self.stream_display.grid_columnconfigure(1, weight=1)
+        
+        
+
+
 	#display the last time SLISH was operated within the gui lo
 	#update log with current use time 
         self.displayProgramAction(self.camera_status)
