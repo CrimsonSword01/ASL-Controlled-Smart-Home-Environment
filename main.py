@@ -193,7 +193,8 @@ class Slish:
         if self.recent_image():
             self.window.after(self.delay, self.update)
         else:
-            pred = self.classifier.classify(no_background)
+            ##pred = self.classifier.classify(no_background)
+            pred = self.classifier.classify(frame)
             self.processPred(pred)
             if success:
                 ## IF we need to display the pred
