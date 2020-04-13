@@ -125,9 +125,7 @@ class Slish:
         
         self.stream_display.grid_columnconfigure(0, weight=1)
         self.stream_display.grid_columnconfigure(1, weight=1)
-        
-        
-
+        self.sequence_of_gestures_backup = []        
 
 	#display the last time SLISH was operated within the gui lo
 	#update log with current use time 
@@ -193,25 +191,10 @@ class Slish:
         
 	#if an image was recently classified, simply update and don't classify
         if self.recent_image():
-            # self.add_start('convert_image_to_PIL')
-            # self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
-            # self.add_stop('convert_image_to_PIL')
-            # self.add_start('display_image_to_GUI')
-            # self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
-            # self.add_stop('display_image_to_GUI')
-            # print('frame recently classified (< 5 secs), not classifying current frame')
             self.window.after(self.delay, self.update)
         else:
-            # print('no cmds recently executed, continuing to classify')
-            # self.add_start('classify_image')
             pred = self.classifier.classify(no_background)
-            # self.add_stop('classify_image')
-            # self.add_start('process_prediction')
             self.processPred(pred)
-            # self.add_stop('process_prediction')
-            # self.add_start('write_to_image')
-            # frame = self.vid.write_text(frame,"FPS :" + str(self.vid.getFPS()), 50,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
-            # self.add_stop('write_to_image')
             if success:
                 ## IF we need to display the pred
                 if self.show_pred and self.frames_to_display_pred >= 0: # <== Don't think the right side is necessary
@@ -235,9 +218,11 @@ class Slish:
             if self.display_classified_image_bool.get() == 1:
                 cv2.imshow("Classified Image",no_background)
 
-            ## Update text fields
+            #Update text fields
+            print(self.sequence_of_gestures_backup)
             self.fps_text.config(text=self.vid.getFPS())
             self.last_command.config(text="WE NEED TO INSERT LAST COMMAND")
+            print(self.sequence_of_gestures_backup)
             self.last_sequence_of_gestures.config(text=str(self.sequence_of_gestures_backup[0])+str(self.sequence_of_gestures_backup[1]))
             self.last_gesture.config(text=self.sequence_of_gestures_backup[-1])
             self.window.after(self.delay, self.update)
@@ -275,6 +260,9 @@ class Slish:
         else:
             self.pred_queue.append(pred)
             print(pred)
+            if len(self.sequence_of_gestures_backup) == 0:
+                self.sequence_of_gestures_backup = [None,None]
+            
 
     #clear queue once the image has been detected        
 
@@ -290,7 +278,7 @@ class Slish:
 
         ## If the gestures list is more than 2 we need to clear it
         if len(self.sequence_of_gestures) >=2:
-            self.sequence_of_gestures_backup = self.sequence_gestures
+            self.sequence_of_gestures_backup =list(self.sequence_of_gestures)
             if self.sequence_of_gestures[0] in self.plug_mappings.keys():
                 ges = list(self.plug_mappings.keys())[0]
                 plug = Socket(self.plug_mappings[ges])

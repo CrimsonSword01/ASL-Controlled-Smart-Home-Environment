@@ -55,6 +55,10 @@ Press `Esc` to exit the camera (Note: If `Esc` doesn't work then press `Ctrl + C
 Controls for Log:
 Press `C` to Clear the Log
 
+# Model and Data Sets
+
+The model and data sets are to large to be put onto Github. If you would like access to these files, please contact us and we can send them to you.
+
 # Developers
 
 Paul Durham, Allison Dorsett, Joseph Proctor, Benjamin Jinkerson, Mitchell Perez, Omnia Awad
