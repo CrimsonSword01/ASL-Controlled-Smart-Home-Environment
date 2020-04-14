@@ -4,7 +4,15 @@ the command for particular socket it is attached to (and vice versa).
 For the particulars of our project, we only have access to one socket so we will only be using one sequence for demonstration purposes. 
 Our program, however; does have access to 8 other sequences if the user has more than one plug.
 
-Sign Instructions
+Examples of what signs look like (for Non-ASL Users)
+A: https://www.yescoloring.com/images/A_american_sign_language_at_coloringpageskidsboys.gif
+B: https://www.yescoloring.com/images/B_american_sign_language_at_coloringpageskidsboys.gif
+C: https://www.yescoloring.com/images/C_american_sign_language_at_coloringpageskidsboys.gif
+1: https://www.yescoloring.com/images/american_sign_language_number_1_at_coloringpageskidsboys.gif
+2: https://www.yescoloring.com/images/american_sign_language_number_2_at_coloringpageskidsboys.gif
+3: https://www.yescoloring.com/images/american_sign_language_number_3_at_coloringpageskidsboys.gif
+
+Sign Instructions Sequence for Plug Activation
 A1: 
 A2:
 A3:
