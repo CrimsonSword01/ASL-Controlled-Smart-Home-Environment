@@ -4,6 +4,15 @@ the command for particular socket it is attached to (and vice versa).
 For the particulars of our project, we only have access to one socket so we will only be using one sequence for demonstration purposes. 
 Our program, however; does have access to 8 other sequences if the user has more than one plug.
 
+Explanations & Acronyms
+Display Camera Feed - Is just a regular camera pop-up box
+Display Classified Feed - Is what the camera looks like with the background remover deleting the background (does this via motion 
+  detection)
+FPS - Frames Per Second
+Gesture - The most recent gesture (letter/number) it has recognized
+Sequence of gestures - The letter and number combo you are executing
+Command - Whether you are turning the device On or Off
+
 Examples of what signs look like (for Non-ASL Users)
 A: https://www.yescoloring.com/images/A_american_sign_language_at_coloringpageskidsboys.gif
 B: https://www.yescoloring.com/images/B_american_sign_language_at_coloringpageskidsboys.gif
