@@ -83,8 +83,14 @@ class Slish:
         self.canvas.pack(padx=10, pady=10, side='top') """
 
         #create tkinter log/logo
-        self.log_frame= tkinter.Frame(self.window, padx=5, pady=5, borderwidth=2)
+        self.log_frame= tkinter.Frame(self.window, padx=5, pady=5, borderwidth=2, bg='#c9e4ff')
         self.log_frame.pack(side='bottom', fill='both')
+        self.logBtn_frame=tkinter.Frame(self.log_frame,padx=5,pady=5,borderwidth=2, bg='#c9e4ff')
+        self.logBtn_frame.pack(side='top', fill='y')
+        self.btn2 =ttk.Button(self.logBtn_frame, text='Clear Log', command = self.clear_log)
+        self.btn2.grid(row=0,column=0,padx=2, pady=2)
+        self.btn3 =ttk.Button(self.logBtn_frame, text = 'Save Log', command = self.save) 
+        self.btn3.grid(row=0,column=1, pady = 2, padx = 2)
         self.log=tkinter.Text(self.log_frame)
         self.S = tkinter.Scrollbar(self.log_frame)
         self.S.config(command=self.log.yview)
@@ -143,6 +149,16 @@ class Slish:
     def open_help(self): 
         webbrowser.open('https://github.com/mjp1997/ASL-Controlled-Smart-Home-Environment/blob/master/help.txt')
         # button that calls open_help()
+
+    def clear_log(self):
+        f = open('logHistory.txt', 'r+')
+        f.truncate(0)
+
+    def save(self): 
+        new_file = open("LogHistoryCopy.txt", "w")
+        with open("LogHistory.txt", "r") as f:
+            new_file.write(f.read())
+        new_file.close()
 
     def displayProgramAction(self, cam_is_open):
         if cam_is_open:
