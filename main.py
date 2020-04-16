@@ -31,23 +31,28 @@ from camera_stream.motion_detection import Frame_Comparison
 
 class Slish:
     def __init__(self):
-	#create tkinter window object
+	## Create tkinter window object
         self.log_info("program opened at: {0} ".format(datetime.now()))
+        
         ## Creating a TKINTER window
         self.window = tkinter.Tk()
+        
         ## Changing the shape of the window
         self.window.geometry("1000x800")
         self.window.title("Slish")
         self.window.config(background='#c9e4ff')
 
-		#create objects from the various class modules
         ## Creating camera object
         self.vid = Camera()
         self.success, self.background_image,_ = self.vid.capture_image()
         self.background_image = cv2.cvtColor(self.background_image, cv2.COLOR_BGR2GRAY)
-		## Creating a classifier object
+
+	## Creating a classifier object
         self.classifier = Classifier()
+
+        ## Creating a motion detection object
         self.checkformotion = Frame_Comparison()
+        
         ## Creating variables used to keep track of predictions
         self.last_pred = None;
         self.recent_img = False
@@ -66,7 +71,7 @@ class Slish:
         ## Create mappings for plugs
         self.plug_mappings = {'C':'SLISH'}
 
-	#create frame 
+	## Ccreate tkinter Frame and widgets
         self.header_frame= tkinter.Frame(self.window, bg='#c9e4ff')
         self.header_frame.pack(fill='x')
         self.middle_frame= tkinter.Frame(self.window)
@@ -78,11 +83,7 @@ class Slish:
         self.btn =ttk.Button(self.header_frame, text='HELP', command=self.open_help)
         self.btn.pack(padx=10, pady=10, side='bottom')
 
-        # Create a canvas that can fit the above video source size
-        """ self.canvas = tkinter.Canvas(self.window, width = 640, height = 400)
-        self.canvas.pack(padx=10, pady=10, side='top') """
-
-        #create tkinter log/logo
+        ## Create tkinter log/logo
         self.log_frame= tkinter.Frame(self.window, padx=5, pady=5, borderwidth=2, bg='#c9e4ff')
         self.log_frame.pack(side='bottom', fill='both')
         self.logBtn_frame=tkinter.Frame(self.log_frame,padx=5,pady=5,borderwidth=2, bg='#c9e4ff')
@@ -120,46 +121,46 @@ class Slish:
         self.last_command = tkinter.Label(self.text_display, text="None", padx=10, pady=10)
         self.last_command.grid(row=1, column=3, padx=1, pady=1)
 
-
+        ## Creating text output fields
         self.display_image_bool = tkinter.IntVar()
         self.display_image = tkinter.Checkbutton(self.stream_display, text="Display Camera Feed",variable=self.display_image_bool, padx=10, pady=10, bg='#568c96')
         self.display_image.grid(row=0, column=0, padx=10, pady=10)
-
         self.display_classified_image_bool = tkinter.IntVar()
         self.display_classified_image = tkinter.Checkbutton(self.stream_display, text="Display Classified Feed",variable=self.display_classified_image_bool, padx=10, pady=10, bg='#568c96')
         self.display_classified_image.grid(row=0, column=1, padx=10, pady=10)
-        
         self.stream_display.grid_columnconfigure(0, weight=1)
         self.stream_display.grid_columnconfigure(1, weight=1)
         self.sequence_of_gestures_backup = []        
 
-	#display the last time SLISH was operated within the gui lo
-	#update log with current use time 
+        ## Updating the log with entries
         self.displayProgramAction(self.camera_status)
-	#update log when user closes SLISH GUI
         self.displayProgramAction(self.camera_status)
         self.window.protocol("WM_DELETE_WINDOW", self.displayProgramClosing)
-	#delay to prevent the code from blocking
         self.recently_executed = False
+
+        ## Begin main loop
         self.delay = 5
         self.update()
         self.window.mainloop()
 
-        
+    ## Function to open help document on github    
     def open_help(self): 
         webbrowser.open('https://github.com/mjp1997/ASL-Controlled-Smart-Home-Environment/blob/master/help.txt')
         # button that calls open_help()
 
+    ## Clears the log history
     def clear_log(self):
         f = open('logHistory.txt', 'r+')
         f.truncate(0)
 
+    ## Saves the logHistory as a copy
     def save(self): 
         new_file = open("LogHistoryCopy.txt", "w")
         with open("LogHistory.txt", "r") as f:
             new_file.write(f.read())
         new_file.close()
 
+    ## Reads the log history from the text file named logHistory.txt
     def displayProgramAction(self, cam_is_open):
         if cam_is_open:
             with open('logHistory.txt','r') as file_data:
@@ -171,6 +172,7 @@ class Slish:
         else:
             self.log.insert(tkinter.INSERT, "{0}".format(history))
 
+    ## Writes log history to the log widget
     def displayProgramClosing(self):
         current_time = datetime.now()
         file = open('logHistory.txt', 'a')
@@ -181,62 +183,45 @@ class Slish:
         self.log.insert(tkinter.INSERT, "program closed at: {0} ".format(current_time))
         self.window.destroy()
 
-#retrieve video frame, send to classifier and then sent to queue
+    ## The update function that is called each iteration
     def update(self):
         #@ Success means that a valid image came back as the image will be an array and will not equal None
-        # self.add_start('get_image')
         success, frame, no_background = self.vid.capture_image()
-        # self.add_stop('get_image')
-        # self.add_start('check_for_motion')
         self.modif_frame = self.checkformotion.processCurrentFrame(frame)
         self.frame_difference = self.checkformotion.subtractFrames(self.modif_frame, self.background_image)
         
-		#quantify # of pixels that've changed
+	## Quantify the number of pixels that have changed
         changedPixels = self.checkformotion.checkPixelDiff(self.frame_difference)
         
-		#quantiy total # of pixels
+	## Quanity the total number of pixels
         totalPixels = self.checkformotion.getNumPixels(self.background_image)
-		#add bounding box over detected motion
-        # testframe = self.checkformotion.boundingBox(self.frame_difference, frame)
-        # if  less than 10% of pixels have changed between the two frames, it's conluded no motion was detected
+
+        ## Wasn't enough movement
         if changedPixels/totalPixels < .10:
-            # self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
-            # self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
-	    # update frame in GuI without attempting to classify the frame
             self.window.after(self.delay, self.update)
-        
-	#if an image was recently classified, simply update and don't classify
+        ## Program will continue past this section if the threshold is met        
+
+        ## If there has been a recent classified image and doesnt need to run
         if self.recent_image():
             self.window.after(self.delay, self.update)
+
+        ## We need to reclassify an image
         else:
             ##pred = self.classifier.classify(no_background)
-            pred = self.classifier.classify(frame)
-            self.processPred(pred)
-            if success:
-                ## IF we need to display the pred
-                if self.show_pred and self.frames_to_display_pred >= 0: # <== Don't think the right side is necessary
-                    ## We are decreasing the number of frames we need to display this in
-                    self.frames_to_display_pred -= 1
-                    ## Adding text to the frame
-                    frame = self.vid.write_text(frame,self.last_pred, 400,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
-                    ## If we need to show the gestures recognized
-                    if self.recognized_sequence and len(self.sequence_of_gestures) == 2:
-                        frame = self.vid.write_text(frame,self.sequence_of_gestures[0]+':'+self.sequence_of_gestures[1], 500,50, cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255))
-                        # frame = self.checkformotion.boundingBox(self.frame_difference, frame)
-                        self.log.insert(tkinter.INSERT, self.sequence_of_gestures[0]) 
- 
-                ##self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame))
-                ##self.canvas.create_image(0, 0, image = self.photo, anchor = tkinter.NW)
-            #self.get_times()
 
-            ## Display images if needed
+            ## Classify the frame from the camera
+            pred = self.classifier.classify(frame)
+
+            ## We process the prediction queue
+            self.processPred(pred)
+
+            ## Display images if needed based on checkbuttons
             if self.display_image_bool.get() == 1:
                 cv2.imshow("Camera Image",frame)
             if self.display_classified_image_bool.get() == 1:
-                cv2.imshow("Classified Image",no_background)
+                cv2.imshw("Classified Image",no_background)
 
-            #Update text fields
-            print(self.sequence_of_gestures_backup)
+            ## Update text fields
             self.fps_text.config(text=self.vid.getFPS())
             self.last_command.config(text="WE NEED TO INSERT LAST COMMAND")
             print(self.sequence_of_gestures_backup)
@@ -247,20 +232,21 @@ class Slish:
             
 #frames are classified and the classification is sent to a queue > 60% = valid cmd
     
-    ## This method takes a prediction and pushes it to hte queue
+    ## This method takes a prediction and pushes it to the queue
     def processPred(self,pred):
-        ## If the queue is greater than 6 then its full
+        ## If the queue is 6 then its full
         if len(self.pred_queue) == 6:
             ## res is the highest percentage item in the queue and the if statement will run if that percentage is over .6
             res = Counter(self.pred_queue).most_common(1)
+
+            ## If res percentage is .6 and it is not None
             if res[0][1]/6 > .6 and res[0][0] != None:
                 self.recently_executed = True
                 self.cmd_execution_time = time.time()
+                
                 ## This will push the gesture to the gesture list as a gesture has been recognized
-                # self.add_start("process_queue")
                 self.processQueue(res[0][0])
-                # self.add_stop("process_queue")
-                # self.get_times()
+                
             ## The most common item in the pred queue is None clear and reset the queue variables
             elif res[0][0] == None:
                 self.last_pred = None;
@@ -269,25 +255,24 @@ class Slish:
                 self.pred_queue = deque([])
                 self.sequence_of_gestures = []
                 self.recognized_sequence = False
+                
             ## The gesture isnt recognized so we pop and push a new prediction
             else:
                 self.pred_queue.popleft()
                 self.pred_queue.append(pred)
+                
         ## The queue isnt full so we push the prediction
         else:
             self.pred_queue.append(pred)
-            print(pred)
             if len(self.sequence_of_gestures_backup) == 0:
                 self.sequence_of_gestures_backup = [None,None]
             
-
-    #clear queue once the image has been detected        
-
     ## Processing the queue means that we have 2 items in the gesture queue so we want to see if they map to something
     def processQueue(self, label):
         ## The pred queue needs to be reset
         self.pred_queue *= 0 #clear pred_queue
         self.last_pred = label
+        
         ## We need to show the prediction for 6 frames
         self.show_pred = True
         self.frames_to_display_pred = 6
@@ -305,13 +290,13 @@ class Slish:
                 if second == '2':
                     plug.turn_off()
             self.sequence_of_gestures *= 0
+            
         ## We will push the gesture and if there are 2 items in the list then we will need to process it and find the mapping.
         self.sequence_of_gestures.append(label)
 
 
-    
+    ## Chcecks to see if we have classified a recent image
     def recent_image(self):
-		#if there was a recently executed command and it's been less than 5 secs
         if(self.recently_executed and time.time() - self.cmd_execution_time < 1):
             return True
         else:
@@ -325,14 +310,17 @@ class Slish:
             file.write(text+'\n')
       
 
+    ## Used to time functions
     def add_start(self,string):
         self.time[string+"start"] = time.time()
         self.timing_list.add(string)
 
+    ## Used to time functions
     def add_stop(self,string):
         self.time[string+"stop"] = time.time()
         self.timing_list.add(string)
 
+    ## Used to time functions
     def get_times(self):
         for x in self.timing_list:
             print(str(x)+" = "+str(self.time[str(x)+"stop"]-self.time[str(x)+"start"]))
