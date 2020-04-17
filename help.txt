@@ -24,10 +24,10 @@ C: https://www.yescoloring.com/images/C_american_sign_language_at_coloringpagesk
 3: https://www.yescoloring.com/images/american_sign_language_number_3_at_coloringpageskidsboys.gif
 
 
-
 GUI Explanation (for Acronyms and Buttons):
 Display Camera Feed - Once clicked, a pop-up will appear displaying what is shown through either your USB Camera or Internal Camera
-Display Classified Feed - Once clicked, a pop-up will appear diapplaying what is shown through the camera with the background remover     functioning. The background remover deletes the background from the frame (does this via motion detection)
+Display Classified Feed - Once clicked, a pop-up will appear diapplaying what is shown through the camera with the background remover
+      functioning. The background remover deletes the background from the frame (does this via motion detection)
 FPS - Frames Per Second
 Gesture - The most recent gesture (letter/number) it has recognized
 Sequence of gestures - The letter and number comboniation you are trying to execute
