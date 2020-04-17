@@ -1,19 +1,21 @@
-If the smart device (or just regular device) attached to particular socket is turned On, then it will turn Off the device by giving 
-the command for particular socket it is attached to (and vice versa).
+Explanation of Program:
+SLISH is designed to act like a smart home by turning Smart Plugs On or Off. Instead of voice command however, our system turns plugs 
+On or Off by using American Sign Language (ASL) letters and numbers.
 
-For the particulars of our project, we only have access to one socket so we will only be using one sequence for demonstration purposes. 
-Our program, however; does have access to 8 other sequences if the user has more than one plug.
+The way you give a command to our system is by giving it a sequence of two gestures, it will be a letter and then a number. Our system
+only has access to the letters A, B, and C and the numbers 1, 2, and 3. Because of this, the maximum plugs our system can handle is 
+three. 
+      - The letter is used to signify which plug is which. Once you give your first command our system will try to locate a plug within
+      your household and connect to it. Whichever letter you chose is now which plug it is  (i.e. if you did the gesture A the plug it 
+      connects to is now "Plug A"). If you have more than one plug you must do a different letter for it to try to find more plugs.
+      - The numbers are used to turn the plugs On or Off. The number 1 turns the plug On and the number 2 turns the plug Off. The number
+      three currently does not do anything at the moment. 
 
-Explanations & Acronyms
-Display Camera Feed - Is just a regular camera pop-up box
-Display Classified Feed - Is what the camera looks like with the background remover deleting the background (does this via motion 
-  detection)
-FPS - Frames Per Second
-Gesture - The most recent gesture (letter/number) it has recognized
-Sequence of gestures - The letter and number combo you are executing
-Command - Whether you are turning the device On or Off
+For the particulars of our project, we only had access to one plug so we will only be using two sequences (for On and Off of whichever
+letter is chosen) for demonstration purposes. Our program, however; does have the ability to connect to two other plugs. Examples of ASL 
+letters and numbers our system can recognize are provided below.
 
-Examples of what signs look like (for Non-ASL Users)
+Examples of what signs look like (for Non-ASL Users):
 A: https://www.yescoloring.com/images/A_american_sign_language_at_coloringpageskidsboys.gif
 B: https://www.yescoloring.com/images/B_american_sign_language_at_coloringpageskidsboys.gif
 C: https://www.yescoloring.com/images/C_american_sign_language_at_coloringpageskidsboys.gif
@@ -21,13 +23,14 @@ C: https://www.yescoloring.com/images/C_american_sign_language_at_coloringpagesk
 2: https://www.yescoloring.com/images/american_sign_language_number_2_at_coloringpageskidsboys.gif
 3: https://www.yescoloring.com/images/american_sign_language_number_3_at_coloringpageskidsboys.gif
 
-Sign Instructions Sequence for Plug Activation
-A1: 
-A2:
-A3:
-B1:
-B2:
-B3:
-C1:
-C2:
-C3: Turn SLISH Plug On/Off (Dependant on prior state it was in)
+
+
+GUI Explanation (for Acronyms and Buttons):
+Display Camera Feed - Once clicked, a pop-up will appear displaying what is shown through either your USB Camera or Internal Camera
+Display Classified Feed - Once clicked, a pop-up will appear diapplaying what is shown through the camera with the background remover     functioning. The background remover deletes the background from the frame (does this via motion detection)
+FPS - Frames Per Second
+Gesture - The most recent gesture (letter/number) it has recognized
+Sequence of gestures - The letter and number comboniation you are trying to execute
+Command - Whether you are turning the device On or Off
+Save Log/ Delete Log - Save Log button allows you to save the log / Delete Log button allows you to delete the log (for security    
+   reasons)
