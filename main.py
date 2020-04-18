@@ -139,6 +139,7 @@ class Slish:
         self.recently_executed = False
 
         ## Begin main loop
+        self.ten_sec_window = 0
         self.delay = 5
         self.update()
         self.window.mainloop()
@@ -224,7 +225,6 @@ class Slish:
             ## Update text fields
             self.fps_text.config(text=self.vid.getFPS())
             self.last_command.config(text="WE NEED TO INSERT LAST COMMAND")
-            print(self.sequence_of_gestures_backup)
             self.last_sequence_of_gestures.config(text=str(self.sequence_of_gestures_backup[0])+str(self.sequence_of_gestures_backup[1]))
             self.last_gesture.config(text=self.sequence_of_gestures_backup[-1])
             self.window.after(self.delay, self.update)
@@ -236,14 +236,13 @@ class Slish:
     def processPred(self,pred):
         ## If the queue is 6 then its full
         if len(self.pred_queue) == 6:
+            print(self.pred_queue)
             ## res is the highest percentage item in the queue and the if statement will run if that percentage is over .6
             res = Counter(self.pred_queue).most_common(1)
 
             ## If res percentage is .6 and it is not None
-            if res[0][1]/6 > .6 and res[0][0] != None:
-                self.recently_executed = True
-                self.cmd_execution_time = time.time()
-                
+            if res[0][1]/6 > .6 and res[0][0] != None:                    
+                self.cmd_execution_time = time.time()                
                 ## This will push the gesture to the gesture list as a gesture has been recognized
                 self.processQueue(res[0][0])
                 
@@ -253,8 +252,11 @@ class Slish:
                 self.frames_to_display_pred = 6
                 self.show_pred = False
                 self.pred_queue = deque([])
-                self.sequence_of_gestures = []
-                self.recognized_sequence = False
+                #only clear gesture queue if the user's been given 10 secs to provide a valid gesture
+                if len(self.sequence_of_gestures) > 0 and time.time() - self.ten_sec_window > 10: 					
+                    self.sequence_of_gestures = []
+                    self.recognized_sequence = False
+					
                 
             ## The gesture isnt recognized so we pop and push a new prediction
             else:
@@ -272,27 +274,38 @@ class Slish:
         ## The pred queue needs to be reset
         self.pred_queue *= 0 #clear pred_queue
         self.last_pred = label
-        
+        ## We will push the gesture and if there are 2 items in the list then we will need to process it and find the mapping.
+        if self.last_pred.isalpha() and len(self.sequence_of_gestures) == 0: #assures 1st gesture is alphabetic
+            self.sequence_of_gestures.append(label)
+            self.ten_sec_window = time.time()
+            print(self.sequence_of_gestures)
+
+        elif self.last_pred.isnumeric() and len(self.sequence_of_gestures) ==1:#assures 2nd gesture is numeric
+            self.sequence_of_gestures.append(label)
+        else:
+            pass #simply keep looking for more gestures
+
         ## We need to show the prediction for 6 frames
         self.show_pred = True
         self.frames_to_display_pred = 6
         self.recognized_sequence = True  #if it's being processed isn't it recognized?
 
         ## If the gestures list is more than 2 we need to clear it
-        if len(self.sequence_of_gestures) >=2:
+        if len(self.sequence_of_gestures) > 1:
             self.sequence_of_gestures_backup =list(self.sequence_of_gestures)
             if self.sequence_of_gestures[0] in self.plug_mappings.keys():
                 ges = list(self.plug_mappings.keys())[0]
                 plug = Socket(self.plug_mappings[ges])
                 second = self.sequence_of_gestures[1]
                 if second == '1':
-                    plug.turn_on()
+                    print('plug turned on')
                 if second == '2':
-                    plug.turn_off()
+                    print('plug turned off')
             self.sequence_of_gestures *= 0
+            self.recently_executed = True
+
             
-        ## We will push the gesture and if there are 2 items in the list then we will need to process it and find the mapping.
-        self.sequence_of_gestures.append(label)
+
 
 
     ## Chcecks to see if we have classified a recent image
