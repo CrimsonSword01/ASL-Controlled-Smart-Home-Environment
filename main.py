@@ -61,6 +61,7 @@ class Slish:
         self.pred_queue = deque([])
         self.sequence_of_gestures = [None,None]
         self.sequence_of_gestures_backup = [None,None]
+        self.pred_queue_last_gesture = None
         self.recognized_sequence = False
         self.camera_status = self.vid.logStatus(True)
         
@@ -225,8 +226,9 @@ class Slish:
             ## Update text fields
             self.fps_text.config(text=self.vid.getFPS())
             self.last_command.config(text="WE NEED TO INSERT LAST COMMAND")
-            self.last_sequence_of_gestures.config(text=str(self.sequence_of_gestures_backup[0])+str(self.sequence_of_gestures_backup[1]))
-            self.last_gesture.config(text=self.sequence_of_gestures_backup[-1])
+            self.last_sequence_of_gestures.config(text=str(self.sequence_of_gestures_backup[0])+" : "+str(self.sequence_of_gestures_backup[1]))
+            self.last_gesture.config(text=self.pred_queue_last_gesture)
+
             self.window.after(self.delay, self.update)
 
             
@@ -241,7 +243,8 @@ class Slish:
             res = Counter(self.pred_queue).most_common(1)
 
             ## If res percentage is .6 and it is not None
-            if res[0][1]/6 > .6 and res[0][0] != None:                    
+            if res[0][1]/6 > .6 and res[0][0] != None:
+                self.pred_queue_last_gesture = res[0][0]
                 self.cmd_execution_time = time.time()                
                 ## This will push the gesture to the gesture list as a gesture has been recognized
                 self.processQueue(res[0][0])
