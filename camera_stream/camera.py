@@ -21,12 +21,19 @@ current_time = datetime.now()
 class Camera:
 
     def __init__(self):
+        
+        ### EDIT THIS VARIABLE TO CHANGE THE SPEED OF THE BACKGROUND REMOVER
+        self.speed = .0005
+        ### larger number = faster melting
+        ### smaller number it will take longer
+        
         print('camera')
         self.capture = self.getCamera()
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
         self.fourcc = cv2.VideoWriter_fourcc(*'XVID')
         self.out = cv2.VideoWriter('output.avid', self.fourcc, 20.0,
                       (640, 480))  # size of screen
+        self.mask = None
         self.backSub = cv2.createBackgroundSubtractorMOG2()
         self.img_count = 0 # keep track of number of images saved
         self.gestures_per_second = self.set_gestures_per_second(1) # number of a gestures a second to be processed
@@ -62,9 +69,9 @@ class Camera:
         ret, frame = self.capture.read()  # retrieving the video frame
         # self.save_image(frame)
 
-        mask = self.backSub.apply(frame)
-        mask = cv2.merge((mask,mask,mask))
-        dst = cv2.bitwise_and(mask,frame)
+        self.mask = self.backSub.apply(frame,self.mask,self.speed)
+        self.mask = cv2.merge((self.mask,self.mask,self.mask))
+        dst = cv2.bitwise_and(self.mask,frame)
         
         return True,frame,dst
     # Uupdates the FPS if necessary
@@ -120,65 +127,14 @@ class Camera:
     def getFPS(self):
         return self.prior_total
 
-
-
 if __name__ == "__main__":
-    image = Image.open('Frame.png')
-    mask = Image.open('fgMask.png')
-    image = np.array(image)
-    mask = np.array(mask)
-    print(image.shape)
-    print(mask.shape)
-    print(type(mask))
-    print(type(image))
-    mask = cv2.merge((mask,mask,mask))
-    result = cv2.bitwise_and(mask,image)
-
-if __name__ == "__main__":
-    sb = 'MOG2'
-    if sb == 'MOG2':
-        backSub = cv2.createBackgroundSubtractorMOG2()
-    else:
-        backSub = cv2.createBackgroundSubtractorKNN()
-    capture = Camera()
-    while True:
-        ret, frame = capture.capture.read()
-        if frame is None:
-            break
-        mask = backSub.apply(frame)
-        
-        mask = cv2.merge((mask,mask,mask))
-
-
-        dst = cv2.bitwise_and(mask,frame)
-        cv2.imshow('Frame.png', frame)
-        cv2.imshow('FGMask.png', mask)
-        cv2.imshow('image',dst)
-        keyboard = cv2.waitKey(30)
-        if keyboard == 'q' or keyboard == 27:
-            break
-
-def get_background():
     cap = Camera()
-    first_iter = True
-    result = None
-    frame = None
     while True:
-        ret, frame = cap.capture.read()
-        if frame is None:
+        success,frame,nobackground = cap.capture_image()
+        cv2.imshow("frame",frame)
+        cv2.imshow("nobackground",nobackground)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-        if first_iter:
-            avg = np.float32(frame)
-            first_iter = False
-        cv2.accumulateWeighted(frame, avg, 0.005)
-        result = cv2.convertScaleAbs(avg)
-        cv2.imshow("result", result)
-        key = cv2.waitKey(20)
-        if key == 27: # exit on ESC
-            break
-        
-    cv2.imwrite("result", result)
-    cv2.imwrite("unmodified", frame)
-    # When everything done, release the capture
     cap.release()
     cv2.destroyAllWindows()
+
