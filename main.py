@@ -221,7 +221,7 @@ class Slish:
             if self.display_image_bool.get() == 1:
                 cv2.imshow("Camera Image",frame)
             if self.display_classified_image_bool.get() == 1:
-                cv2.imshw("Classified Image",no_background)
+                cv2.imshow("Classified Image",no_background)
 
             ## Update text fields
             self.fps_text.config(text=self.vid.getFPS())
