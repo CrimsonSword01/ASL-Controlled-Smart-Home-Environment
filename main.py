@@ -56,8 +56,6 @@ class Slish:
         ## Creating variables used to keep track of predictions
         self.last_pred = None;
         self.recent_img = False
-        self.frames_to_display_pred = 6
-        self.show_pred = False
         self.pred_queue = deque([])
         self.sequence_of_gestures = [None,None]
         self.sequence_of_gestures_backup = [None,None]
@@ -209,10 +207,8 @@ class Slish:
 
         ## We need to reclassify an image
         else:
-            ##pred = self.classifier.classify(no_background)
-
             ## Classify the frame from the camera
-            pred = self.classifier.classify(frame)
+            pred = self.classifier.classify(no_background)
 
             ## We process the prediction queue
             self.processPred(pred)
@@ -243,7 +239,7 @@ class Slish:
             res = Counter(self.pred_queue).most_common(1)
 
             ## If res percentage is .6 and it is not None
-            if res[0][1]/6 > .6 and res[0][0] != None:
+            if res[0][1]/6 > .66 and res[0][0] != None:
                 self.pred_queue_last_gesture = res[0][0]
                 self.cmd_execution_time = time.time()                
                 ## This will push the gesture to the gesture list as a gesture has been recognized
@@ -252,8 +248,6 @@ class Slish:
             ## The most common item in the pred queue is None clear and reset the queue variables
             elif res[0][0] == None:
                 self.last_pred = None;
-                self.frames_to_display_pred = 6
-                self.show_pred = False
                 self.pred_queue = deque([])
                 #only clear gesture queue if the user's been given 10 secs to provide a valid gesture
                 if len(self.sequence_of_gestures) > 0 and time.time() - self.ten_sec_window > 10: 					
@@ -289,9 +283,7 @@ class Slish:
         else:
             pass #simply keep looking for more gestures
 
-        ## We need to show the prediction for 6 frames
-        self.show_pred = True
-        self.frames_to_display_pred = 6
+
         self.recognized_sequence = True  #if it's being processed isn't it recognized?
 
         ## If the gestures list has 2 gestures, we need to clear it...
