@@ -70,8 +70,8 @@ class Slish:
         self.time = {}
 
         ## Create mappings for plugs
-        self.plug_mappings = {'C':'SLISH'}
-
+        self.plug_mappings = {'A': 'Fan', 'B' : 'Music', 'C':'Lights'}
+        self.selected_appliance = '';
 	## Ccreate tkinter Frame and widgets
         self.header_frame= tkinter.Frame(self.window, bg='#c9e4ff')
         self.header_frame.pack(fill='x')
@@ -225,7 +225,7 @@ class Slish:
 
             ## Update text fields
             self.fps_text.config(text=self.vid.getFPS())
-            self.last_command.config(text="WE NEED TO INSERT LAST COMMAND")
+            # self.last_command.config(text="WE NEED TO INSERT LAST COMMAND")
             self.last_sequence_of_gestures.config(text=str(self.sequence_of_gestures_backup[0])+" : "+str(self.sequence_of_gestures_backup[1]))
             self.last_gesture.config(text=self.pred_queue_last_gesture)
 
@@ -272,12 +272,13 @@ class Slish:
             if len(self.sequence_of_gestures_backup) == 0:
                 self.sequence_of_gestures_backup = [None,None]
             
-    ## Processing the queue means that we have 2 items in the gesture queue so we want to see if they map to something
+    # receives prediction (label) regarding the 6 predictions in the queue
     def processQueue(self, label):
-        ## The pred queue needs to be reset
-        self.pred_queue *= 0 #clear pred_queue
+        ## reset the aforementioned 6 gesture queue
+        self.pred_queue *= 0 
         self.last_pred = label
-        ## We will push the gesture and if there are 2 items in the list then we will need to process it and find the mapping.
+
+        #valid commands = Letter 1st, Number 2nd, following logic assures this
         if self.last_pred.isalpha() and len(self.sequence_of_gestures) == 0: #assures 1st gesture is alphabetic
             self.sequence_of_gestures.append(label)
             self.ten_sec_window = time.time()
@@ -293,17 +294,17 @@ class Slish:
         self.frames_to_display_pred = 6
         self.recognized_sequence = True  #if it's being processed isn't it recognized?
 
-        ## If the gestures list is more than 2 we need to clear it
+        ## If the gestures list has 2 gestures, we need to clear it...
         if len(self.sequence_of_gestures) > 1:
             self.sequence_of_gestures_backup =list(self.sequence_of_gestures)
             if self.sequence_of_gestures[0] in self.plug_mappings.keys():
-                ges = list(self.plug_mappings.keys())[0]
-                plug = Socket(self.plug_mappings[ges])
+                self.selected_appliance =  self.plug_mappings[self.sequence_of_gestures[0]]
                 second = self.sequence_of_gestures[1]
                 if second == '1':
-                    print('plug turned on')
+                    self.last_command.config(text="{} turned on".format(self.selected_appliance))
+                    # print("{} turned on".format(self.selected_appliance))
                 if second == '2':
-                    print('plug turned off')
+                    print("{} turned off".format(self.selected_appliance))
             self.sequence_of_gestures *= 0
             self.recently_executed = True
 
