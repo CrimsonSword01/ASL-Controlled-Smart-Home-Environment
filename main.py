@@ -296,7 +296,7 @@ class Slish:
                     self.last_command.config(text="{} turned on".format(self.selected_appliance))
                     # print("{} turned on".format(self.selected_appliance))
                 if second == '2':
-                    print("{} turned off".format(self.selected_appliance))
+                    self.last_command.config(text="{} turned off".format(self.selected_appliance))
             self.sequence_of_gestures *= 0
             self.recently_executed = True
 
