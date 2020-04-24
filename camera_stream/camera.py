@@ -43,6 +43,9 @@ class Camera:
         self.prior_total = 0 # Used to keep track of the last second's number of frames
         self.current_total = 0 # Used to keep track of the current second's number of frames
         self.begin_time = time.time()
+        self.w = self.capture.get(cv2.CAP_PROP_FRAME_WIDTH)
+        self.h = self.capture.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        print (self.w,self.h)
 
     # Checks to see if frame needs to be saved and saves items
     def save_image(self,frame):
