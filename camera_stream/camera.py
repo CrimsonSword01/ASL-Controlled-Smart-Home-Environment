@@ -1,6 +1,36 @@
-'''
-This module contains the Camera class for the SLISH application
-'''
+"""
+CONTRIBUTORS:
+    Mitchell Perez, Paul Durham
+
+FILE CONTENT DESCRIPTION:
+	The contents of the camera file are essential in retrieving the external camera feed that is to be processed by the 
+	gesture classifier. Through utilization of methods from the cv2 and numpy libraries, the camera file 
+	is responsible for capturing individual camera frames, calculating the frames per second at which the system is running, 
+	and sending these aforementioned frames to the classifier when necessary. Additionally, SLISH is also repsonsible for 
+	handling input to both Unix and Windows based operating systems as well as asserting that the required USB camera is being
+	used to retrieve external input. 
+
+REQUIREMENTS ADDRESSED:
+    FR.5, FR.7, FR.10, FR.12 [edit these, just placeholders rn...]
+LICENSE INFORMATION:[placeholder?]
+    Copyright (c) 2019, CSC 450 Group 1
+    All rights reserved.
+    Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+    following conditions are met:
+        * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+          following disclaimer.
+        * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and
+          the following disclaimer in the documentation and/or other materials provided with the distribution.
+        * Neither the name of the CSC 450 Group 4 nor the names of its contributors may be used to endorse or
+          promote products derived from this software without specific prior written permission.
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
+    OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+    STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+    EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+"""
 import time
 import cv2
 import numpy as np

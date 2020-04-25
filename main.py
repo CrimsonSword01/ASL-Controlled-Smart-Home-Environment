@@ -1,3 +1,47 @@
+"""
+CONTRIBUTORS:
+    Paul Durham, Omnia Awad, Allison Dorsett, Joseph Proctor, Mitchell Perez, 
+
+FILE CONTENT DESCRIPTION:
+	The file main.py leverages functionality from the various components of SLISH in order to produce a working, efficient 
+	software. The user interface design and functionalities are implemented utilizing the tkinter library for its development.
+	As previously mentioned, the methods from every component of SLISH are used logically in order for SLISH to act accordingly
+	based on the recevied input. 
+	
+	Specific methods and logic leveraged from the camera component in this file include the system 
+	"cool down" period and retrieving the external input for use by the rest of the system.
+	
+	The classifier comoponent's methods are used frequently throughout the latter contents of this file.
+    Based on the classifications made by the classifier component, logic in main.py determines whether enough
+	frames have been classified to make an accurate gesture prediction and, if so, whether to execute a command 
+	based on the received input. Specifically, this ensures that at least 6 frames were analyzed before a prediction
+	is made, ensures that commands are only recognized in a format valid to SLISH (letter -> number) and handles
+	invalid or unrecognized input without affecting system performance. 
+
+	Last, methods from the socket class are utilized to control the web sockets that correspond to the command received.
+	The actions that are executed are clearly displayed within the contents of the user interface. 
+
+REQUIREMENTS ADDRESSED:
+    FR.5, FR.7, FR.10, FR.12
+LICENSE INFORMATION:
+    Copyright (c) 2019, CSC 450 Group 1
+    All rights reserved.
+    Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+    following conditions are met:
+        * Redistributions of source code must retain the above copyright notice, this list of conditions and the
+          following disclaimer.
+        * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and
+          the following disclaimer in the documentation and/or other materials provided with the distribution.
+        * Neither the name of the CSC 450 Group 4 nor the names of its contributors may be used to endorse or
+          promote products derived from this software without specific prior written permission.
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
+    OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+    STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+    EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+"""
 import time
 import webbrowser
 import cv2
