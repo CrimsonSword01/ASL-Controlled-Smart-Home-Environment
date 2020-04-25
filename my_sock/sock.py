@@ -1,9 +1,22 @@
+"""
+CONTRIBUTORS:
+    Joseph Proctor
+
+FILE CONTENT DESCRIPTION: 
+    The contents of the socket.py is essential in retreiving the gesture taken from the classifier to turn on/off the WIFI plug.
+    With using pyHS100 we were able to be able to discover the IP address using the naming feature that the app the plug uses.
+    After getting the IP address we look for a gesture being found and with that we can turn on and off the plug 
+    and output the status of the plug.
+
+REQUIREMENTS ADDRESSED:
+    FR.5
+"""
 from pyHS100 import Discover as ds
 from pyHS100 import SmartPlug, SmartBulb
 
 class Socket:
     def __init__(self,name):
-        print("\n\n\nCREATING PLUG\n\n\n")
+        print("\n\n\nCREATING PLUG\n\n\n") # Showing that when a gesture is picked up being able to see that it works
         dev_ip = None
         for dev in ds.discover().values():
             if dev.alias.lower() == name: # <--- need the hard code the name of the plug to find IP
@@ -29,16 +42,13 @@ class Socket:
         #this would be changed to tell the user at the start of the program 
         self.state = input("Is the plug suppose to be on or off")
         #hopefully i dont have to comment on this
-        #also this would be changes with the multipul other commands that we will have for this project
-        if state.lower() == "on":
+        #also this would be changes with the multipule other commands that we will have for this project
+        if self.state.lower() == "on":
             self.plug.turn_on()
             print("current status of "+ self.plug.state)
-        #hopefully i dont have to comment on this x2
-        elif state.lower() == "off":
+        elif self.state.lower() == "off":
             self.plug.turn_off()
             print("current status of "+ self.plug.state)
         #hopefully i dont have to comment on this x3
         else:
             print("You have input the wrong status")
-
-    #confused what is going on here
