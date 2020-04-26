@@ -112,8 +112,7 @@ class Slish:
         self.time = {}
 
         ## Create mappings for plugs
-        self.plug_mappings = {'A': 'Fan', 'B' : 'Music', 'C':'Lights'}
-        self.selected_appliance = '';
+        self.socket = Socket()
 	## Ccreate tkinter Frame and widgets
         self.header_frame= tkinter.Frame(self.window, bg='#c9e4ff')
         self.header_frame.pack(fill='x')
@@ -265,7 +264,6 @@ class Slish:
 
             ## Update text fields
             self.fps_text.config(text=self.vid.getFPS())
-            # self.last_command.config(text="WE NEED TO INSERT LAST COMMAND")
             self.last_sequence_of_gestures.config(text=str(self.sequence_of_gestures_backup[0])+" : "+str(self.sequence_of_gestures_backup[1]))
             self.last_gesture.config(text=self.pred_queue_last_gesture)
 
@@ -328,17 +326,16 @@ class Slish:
             pass #simply keep looking for more gestures
 
 
-        self.recognized_sequence = True  #if it's being processed isn't it recognized?
+        self.recognized_sequence = True  #SLISH has recognized a valid alphabetic -> numeric sequence
 
         ## If the gestures list has 2 gestures, we need to clear it...
         if len(self.sequence_of_gestures) > 1:
             self.sequence_of_gestures_backup =list(self.sequence_of_gestures)
-            if self.sequence_of_gestures[0] in self.plug_mappings.keys():
-                self.selected_appliance =  self.plug_mappings[self.sequence_of_gestures[0]]
+            if self.socket.isGestureValid(self.sequence_of_gestures[0]):
+                self.selected_appliance =  self.socket.getAppliance(self.sequence_of_gestures[0])
                 second = self.sequence_of_gestures[1]
                 if second == '1':
                     self.last_command.config(text="{} turned on".format(self.selected_appliance))
-                    # print("{} turned on".format(self.selected_appliance))
                 if second == '2':
                     self.last_command.config(text="{} turned off".format(self.selected_appliance))
             self.sequence_of_gestures *= 0
