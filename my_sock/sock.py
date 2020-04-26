@@ -1,13 +1,13 @@
 """
 CONTRIBUTORS:
-    Joseph Proctor
+    Joseph Proctor, Mitchell Perez, Paul Durham
 
 FILE CONTENT DESCRIPTION: 
-    The contents of the socket.py is essential in retreiving the gesture taken from the classifier to turn on/off the WIFI plug.
-    With using pyHS100 we were able to be able to discover the IP address using the naming feature that the app the plug uses.
-    After getting the IP address we look for a gesture being found and with that we can turn on and off the plug 
-    and output the status of the plug.
-
+    The following contents of sock.py consist of the necessary methods, attributes
+	and algorithms to control the corresponding smart plug after a valid command is recognized.
+	Though numerous features have been deprecated as a result of smart plug inaccessibility, the following
+	methods are used to simulate the actions that would take place if the sockets were to be readily available. 
+	
 REQUIREMENTS ADDRESSED:
     FR.5
 """
