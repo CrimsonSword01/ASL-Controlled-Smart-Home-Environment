@@ -82,7 +82,7 @@ class Slish:
         self.window = tkinter.Tk()
         
         ## Changing the shape of the window
-        self.window.geometry("1000x800")
+        self.window.geometry("1000x700")
         self.window.title("Slish")
         self.window.config(background='#c9e4ff')
 
@@ -136,10 +136,13 @@ class Slish:
         self.btn2.grid(row=0,column=0,padx=2, pady=2)
         self.btn3 =ttk.Button(self.logBtn_frame, text = 'Save Log', command = self.save) 
         self.btn3.grid(row=0,column=1, pady = 2, padx = 2)
+        self.btn4 =ttk.Button(self.logBtn_frame, text='Update Log', command = self.update_log)
+        self.btn4.grid(row=0,column=2,padx=2, pady=2)
         self.log=tkinter.Text(self.log_frame)
         self.S = tkinter.Scrollbar(self.log_frame)
         self.S.config(command=self.log.yview)
         self.S.pack(side=tkinter.RIGHT, fill=tkinter.Y)
+        self.log.config(yscrollcommand=self.S.set)
         self.logo = ImageTk.PhotoImage(Image.open('pic.png'))
         self.label = tkinter.Label(self.header_frame, image=self.logo)
         self.label.image= self.logo
@@ -218,15 +221,22 @@ class Slish:
         else:
             self.log.insert(tkinter.INSERT, "{0}".format(history))
 
+    def update_log(self):
+        with open('logHistory.txt','r') as f:
+            data = f.read()
+            self.log.delete('1.0', 'end')# Remove previous content 
+            for x in data:
+                self.log.insert(tkinter.INSERT, x)#Insert text from file
+
     ## Writes log history to the log widget
     def displayProgramClosing(self):
         current_time = datetime.now()
         file = open('logHistory.txt', 'a')
-        file.write('=========================================\n')
         file.write("program closed at: {0} ".format(current_time) + '\n')
+        file.write('=========================================\n')
         file.close()
-        self.log.insert(tkinter.INSERT, "=========================================\n'")
         self.log.insert(tkinter.INSERT, "program closed at: {0} ".format(current_time))
+        self.log.insert(tkinter.INSERT, "=========================================\n'")
         self.window.destroy()
 
     ## The update function that is called each iteration
@@ -346,9 +356,13 @@ class Slish:
                 second = self.sequence_of_gestures[1]
                 if second == '1':
                     self.last_command.config(text="{} turned on".format(self.selected_appliance))
+                    with open('logHistory.txt', 'a') as file:
+                        file.write(self.last_command.cget("text")+'\n')
                     # print("{} turned on".format(self.selected_appliance))
                 if second == '2':
                     self.last_command.config(text="{} turned off".format(self.selected_appliance))
+                    with open('logHistory.txt', 'a') as file:
+                        file.write(self.last_command.cget("text")+'\n')
             self.sequence_of_gestures *= 0
             self.recently_executed = True
             self.cmd_execution_time = time.time() 
