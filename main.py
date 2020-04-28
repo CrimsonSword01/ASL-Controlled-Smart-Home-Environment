@@ -55,7 +55,6 @@ import sys
 from tkinter import *
 from multiprocessing import Process
 from tkinter import *
-from tkinter import filedialog
 from PIL import Image, ImageTk#from PIL import ImageTk
 from threading import Thread
 import time
@@ -197,17 +196,13 @@ class Slish:
     def clear_log(self):
         f = open('logHistory.txt', 'r+')
         f.truncate(0)
-        current_time = datetime.now()
-        self.log.delete("1.0", "end")
-        file = open('logHistory.txt', 'a')
-        file.write("log has been cleared at: {0} ".format(current_time) + '\n')
 
     ## Saves the logHistory as a copy
-    def save(self):
-        with open("logHistory.txt", "r") as logfile:
-            savefile = tkinter.filedialog.asksaveasfile(mode='w', defaultextension = ".txt")
-            savefile.write(logfile.read())
-            savefile.close()
+    def save(self): 
+        new_file = open("LogHistoryCopy.txt", "w")
+        with open("LogHistory.txt", "r") as f:
+            new_file.write(f.read())
+        new_file.close()
 
     ## Reads the log history from the text file named logHistory.txt
     def displayProgramAction(self, cam_is_open):
@@ -216,23 +211,11 @@ class Slish:
                 history = list(file_data)
                 for x in history:
                     self.log.insert(tkinter.INSERT, x)
-                self.log.config(width=640)
+                self.log.config(state='disabled',width=640)
                 self.log.pack(fill='x')
         else:
             self.log.insert(tkinter.INSERT, "{0}".format(history))
 
-<<<<<<< HEAD
-=======
-    def update_log(self):
-        with open('logHistory.txt','r') as f:
-            data = f.read()
-            self.log.delete('1.0', 'end')# Remove previous content 
-            for x in data:
-                print("this is :"+x)
-                self.log.insert(tkinter.INSERT, x)#Insert text from file
-            
-
->>>>>>> 5b39cb7fbf1a7c9ea005b1b447bf6f39dcd469c5
     ## Writes log history to the log widget
     def displayProgramClosing(self):
         current_time = datetime.now()
@@ -278,7 +261,7 @@ class Slish:
         ## We need to reclassify an image
             else:
                 ## Classify the frame from the camera
-                pred = self.classifier.classify(no_background)
+                pred = self.classifier.classify(frame)
 
             ## We process the prediction queue
                 self.processPred(pred)
@@ -310,7 +293,6 @@ class Slish:
             ## If res percentage is .6 and it is not None
             if res[0][1]/6 > .66 and res[0][0] != None:
                 self.pred_queue_last_gesture = res[0][0]
-                self.cmd_execution_time = time.time()                
                 ## This will push the gesture to the gesture list as a gesture has been recognized
                 self.processQueue(res[0][0])
                 
@@ -345,18 +327,13 @@ class Slish:
         if self.last_pred.isalpha() and len(self.sequence_of_gestures) == 0: #assures 1st gesture is alphabetic
             self.sequence_of_gestures.append(label)
             self.ten_sec_window = time.time()
-            print(self.sequence_of_gestures)
+            self.recently_executed = True
+            self.cmd_execution_time = time.time() 
 
         elif self.last_pred.isnumeric() and len(self.sequence_of_gestures) ==1:#assures 2nd gesture is numeric
             self.sequence_of_gestures.append(label)
-        else:
-            pass #simply keep looking for more gestures
-
-
-        self.recognized_sequence = True  #SLISH has recognized a valid alphabetic -> numeric sequence
-
+            self.recognized_sequence = True  #SLISH has recognized a valid alphabetic -> numeric sequence
         ## If the gestures list has 2 gestures, we need to clear it...
-        if len(self.sequence_of_gestures) > 1:
             self.sequence_of_gestures_backup =list(self.sequence_of_gestures)
             if self.socket.isGestureValid(self.sequence_of_gestures[0]):
                 self.selected_appliance =  self.socket.getAppliance(self.sequence_of_gestures[0])
@@ -367,6 +344,9 @@ class Slish:
                     self.last_command.config(text="{} turned off".format(self.selected_appliance))
             self.sequence_of_gestures *= 0
             self.recently_executed = True
+            self.cmd_execution_time = time.time()    
+        else:
+            pass            
 
             
 
