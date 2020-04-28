@@ -31,6 +31,7 @@ LICENSE INFORMATION:
     STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
+import sys
 import torch
 from torchvision.transforms import transforms
 from PIL import Image
@@ -58,10 +59,14 @@ class Classifier:
             self.model.load_state_dict(torch.load('model_handler/model.pt'))
             self.model.eval()
         except Exception:
-            ## Loading model
-            self.model = torch.hub.load('pytorch/vision:v0.5.0', 'alexnet', pretrained=True)
-            self.model.load_state_dict(torch.load('model.pt'))
-            self.model.eval()
+            try:
+                ## Loading model
+                self.model = torch.hub.load('pytorch/vision:v0.5.0', 'alexnet', pretrained=True)
+                self.model.load_state_dict(torch.load('model.pt'))
+                self.model.eval()
+            except:
+                print('System model not detected, please assure that "model.pt" is downloaded..')
+                sys.exit(1)
         ## Creates a transformer object.
         ## This transformer does the following, resizes the image and crops to the resize. Grayscales it.  transforms it to a tensor object and normalizes the pixel values
         self.trans = transforms.Compose([
