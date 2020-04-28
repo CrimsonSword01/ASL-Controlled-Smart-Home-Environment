@@ -55,7 +55,7 @@ class Camera:
     def __init__(self):
         
         ### EDIT THIS VARIABLE TO CHANGE THE SPEED OF THE BACKGROUND REMOVER
-        self.speed = .0005
+        self.speed = .01
         ### larger number = faster melting
         ### smaller number it will take longer
         
