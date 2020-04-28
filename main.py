@@ -210,7 +210,15 @@ class Slish:
             savefile = filedialog.asksaveasfile(mode='w', defaultextension = ".txt")
             savefile.write(logfile.read())
             savefile.close()
-            
+
+    ## Updates the log
+    def update_log(self):
+        with open('logHistory.txt','r') as f:
+            data = f.read()
+            self.log.delete('1.0', 'end')# Remove previous content 
+            for x in data:
+                self.log.insert(tkinter.INSERT, x)#Insert text from file
+
     ## Reads the log history from the text file named logHistory.txt
     def displayProgramAction(self, cam_is_open):
         if cam_is_open:
@@ -218,7 +226,7 @@ class Slish:
                 history = list(file_data)
                 for x in history:
                     self.log.insert(tkinter.INSERT, x)
-                self.log.config(state='disabled',width=640)
+                self.log.config(width=640)
                 self.log.pack(fill='x')
         else:
             self.log.insert(tkinter.INSERT, "{0}".format(history))
