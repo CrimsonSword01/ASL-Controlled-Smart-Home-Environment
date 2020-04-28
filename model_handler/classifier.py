@@ -10,8 +10,8 @@ the system model with a uniform data set to further increase the system's accura
 [Paul please elaborate more about specificities.......]
 
 REQUIREMENTS ADDRESSED:
-    FR.5, FR.7, FR.10, FR.12 [placeholders, need to change...]
-
+    FR.3, FR.4 
+    NFR.2, NFR.3, NFR.4
 LICENSE INFORMATION:
     Copyright (c) 2019, CSC 450 Group 1
     All rights reserved.
@@ -31,6 +31,7 @@ LICENSE INFORMATION:
     STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
     EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
+import sys
 import torch
 from torchvision.transforms import transforms
 from PIL import Image
@@ -58,10 +59,14 @@ class Classifier:
             self.model.load_state_dict(torch.load('model_handler/model.pt'))
             self.model.eval()
         except Exception:
-            ## Loading model
-            self.model = torch.hub.load('pytorch/vision:v0.5.0', 'alexnet', pretrained=True)
-            self.model.load_state_dict(torch.load('model.pt'))
-            self.model.eval()
+            try:
+                ## Loading model
+                self.model = torch.hub.load('pytorch/vision:v0.5.0', 'alexnet', pretrained=True)
+                self.model.load_state_dict(torch.load('model.pt'))
+                self.model.eval()
+            except:
+                print('System model not detected, please assure that "model.pt" is downloaded..')
+                sys.exit(1)
         ## Creates a transformer object.
         ## This transformer does the following, resizes the image and crops to the resize. Grayscales it.  transforms it to a tensor object and normalizes the pixel values
         self.trans = transforms.Compose([
