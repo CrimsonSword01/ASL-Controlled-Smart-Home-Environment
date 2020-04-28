@@ -106,6 +106,7 @@ class Slish:
         self.recognized_sequence = False
         self.camera_status = self.vid.logStatus(True)
         self.get_background_bool = True
+        self.last_time = 0
         
         ## Variables for timing the functions
         self.timing_list = set()
@@ -236,10 +237,15 @@ class Slish:
         
 
         if self.get_background_bool == True:
-            if time.time() - self.start_time > 5:
+            current_time = int(time.time() - self.start_time)
+            if current_time > 5:
                 self.get_background_bool = False
+                print("Background acquired...")
             else:
-                print('beginning code..')
+                if current_time != self.last_time:
+                    self.last_time = current_time
+                    print(str(current_time)+" seconds out 20 5 seconds")
+                
                 self.window.after(self.delay, self.update)
 
         if not self.get_background_bool:

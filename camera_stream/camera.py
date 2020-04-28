@@ -55,7 +55,7 @@ class Camera:
     def __init__(self):
         
         ### EDIT THIS VARIABLE TO CHANGE THE SPEED OF THE BACKGROUND REMOVER
-        self.speed = .0005
+        self.speed = .01
         ### larger number = faster melting
         ### smaller number it will take longer
         
@@ -161,15 +161,3 @@ class Camera:
     # returns FPS
     def getFPS(self):
         return self.prior_total
-
-if __name__ == "__main__":
-    cap = Camera()
-    while True:
-        success,frame,nobackground = cap.capture_image()
-        cv2.imshow("frame",frame)
-        cv2.imshow("nobackground",nobackground)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    cap.release()
-    cv2.destroyAllWindows()
-
