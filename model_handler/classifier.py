@@ -10,8 +10,8 @@ the system model with a uniform data set to further increase the system's accura
 [Paul please elaborate more about specificities.......]
 
 REQUIREMENTS ADDRESSED:
-    FR.5, FR.7, FR.10, FR.12 [placeholders, need to change...]
-
+    FR.3, FR.4 
+    NFR.2, NFR.3, NFR.4
 LICENSE INFORMATION:
     Copyright (c) 2019, CSC 450 Group 1
     All rights reserved.

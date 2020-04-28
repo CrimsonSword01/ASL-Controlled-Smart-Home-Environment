@@ -9,7 +9,7 @@ previous minute. If not, motion_detection.py indicates to SLISH that the system 
 motion is once again detected. The overall purpose of this file is to lessen the processing power that SLISH utilizes
 in addition to making the software more usable. 
 REQUIREMENTS ADDRESSED:
-    FR.5, FR.7, FR.10, FR.12
+   NFR.6
 LICENSE INFORMATION:
     Copyright (c) 2019, CSC 450 Group 1
     All rights reserved.

@@ -1,6 +1,6 @@
 """
 CONTRIBUTORS:
-    Mitchell Perez, Paul Durham
+    Mitchell Perez, Paul Durham, Omnia Awad
 
 FILE CONTENT DESCRIPTION:
 	The contents of the camera file are essential in retrieving the external camera feed that is to be processed by the 
@@ -11,8 +11,10 @@ FILE CONTENT DESCRIPTION:
 	used to retrieve external input. 
 
 REQUIREMENTS ADDRESSED:
-    FR.5, FR.7, FR.10, FR.12 [edit these, just placeholders rn...]
-LICENSE INFORMATION:[placeholder?]
+    FR.1, 2.2 
+	NFR.1, NFR.7
+	EIR.1
+LICENSE INFORMATION:
     Copyright (c) 2019, CSC 450 Group 1
     All rights reserved.
     Redistribution and use in source and binary forms, with or without modification, are permitted provided that the

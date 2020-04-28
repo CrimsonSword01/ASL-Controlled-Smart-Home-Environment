@@ -19,7 +19,9 @@ FILE CONTENT DESCRIPTION:
 	Last, methods from the socket class are utilized to control the web sockets that correspond to the command received.
 	The actions that are executed are clearly displayed within the contents of the user interface. 
 REQUIREMENTS ADDRESSED:
-    FR.5, FR.7, FR.10, FR.12
+    FR.2, FR.2.1, FR 2.1.1, FR.2.1.2, FR.2.1.3, FR2.2, FR.2.3,
+	NFR.2, NFR.4, NFR.5, NFR.6, NFR.7, NFR.8, NFR.9
+	EIR.1, EIR.2
 LICENSE INFORMATION:
     Copyright (c) 2019, CSC 450 Group 1
     All rights reserved.
@@ -103,14 +105,14 @@ class Slish:
         self.pred_queue_last_gesture = None
         self.recognized_sequence = False
         self.camera_status = self.vid.logStatus(True)
+        self.get_background_bool = True
         
         ## Variables for timing the functions
         self.timing_list = set()
         self.time = {}
 
         ## Create mappings for plugs
-        self.plug_mappings = {'A': 'Fan', 'B' : 'Music', 'C':'Lights'}
-        self.selected_appliance = '';
+        self.socket = Socket()
 	## Ccreate tkinter Frame and widgets
         self.header_frame= tkinter.Frame(self.window, bg='#c9e4ff')
         self.header_frame.pack(fill='x')
@@ -177,6 +179,7 @@ class Slish:
         self.displayProgramAction(self.camera_status)
         self.window.protocol("WM_DELETE_WINDOW", self.displayProgramClosing)
         self.recently_executed = False
+        self.start_time = time.time()
 
         ## Begin main loop
         self.ten_sec_window = 0
@@ -231,42 +234,50 @@ class Slish:
         self.modif_frame = self.checkformotion.processCurrentFrame(frame)
         self.frame_difference = self.checkformotion.subtractFrames(self.modif_frame, self.background_image)
         
+
+        if self.get_background_bool == True:
+            if time.time() - self.start_time > 5:
+                self.get_background_bool = False
+            else:
+                print('beginning code..')
+                self.window.after(self.delay, self.update)
+
+        if not self.get_background_bool:
 	## Quantify the number of pixels that have changed
-        changedPixels = self.checkformotion.checkPixelDiff(self.frame_difference)
+            changedPixels = self.checkformotion.checkPixelDiff(self.frame_difference)
         
 	## Quanity the total number of pixels
-        totalPixels = self.checkformotion.getNumPixels(self.background_image)
+            totalPixels = self.checkformotion.getNumPixels(self.background_image)
 
         ## Wasn't enough movement
-        if changedPixels/totalPixels < .10:
-            self.window.after(self.delay, self.update)
+            if changedPixels/totalPixels < .10:
+                self.window.after(self.delay, self.update)
         ## Program will continue past this section if the threshold is met        
 
         ## If there has been a recent classified image and doesnt need to run
-        if self.recent_image():
-            self.window.after(self.delay, self.update)
+            if self.recent_image():
+                self.window.after(self.delay, self.update)
 
         ## We need to reclassify an image
-        else:
-            ## Classify the frame from the camera
-            pred = self.classifier.classify(no_background)
+            else:
+                ## Classify the frame from the camera
+                pred = self.classifier.classify(no_background)
 
             ## We process the prediction queue
-            self.processPred(pred)
+                self.processPred(pred)
 
             ## Display images if needed based on checkbuttons
-            if self.display_image_bool.get() == 1:
-                cv2.imshow("Camera Image",frame)
-            if self.display_classified_image_bool.get() == 1:
-                cv2.imshow("Classified Image",no_background)
+                if self.display_image_bool.get() == 1:
+                    cv2.imshow("Camera Image",frame)
+                if self.display_classified_image_bool.get() == 1:
+                    cv2.imshow("Classified Image",no_background)
 
             ## Update text fields
-            self.fps_text.config(text=self.vid.getFPS())
-            # self.last_command.config(text="WE NEED TO INSERT LAST COMMAND")
-            self.last_sequence_of_gestures.config(text=str(self.sequence_of_gestures_backup[0])+" : "+str(self.sequence_of_gestures_backup[1]))
-            self.last_gesture.config(text=self.pred_queue_last_gesture)
+                self.fps_text.config(text=self.vid.getFPS())
+                self.last_sequence_of_gestures.config(text=str(self.sequence_of_gestures_backup[0])+" : "+str(self.sequence_of_gestures_backup[1]))
+                self.last_gesture.config(text=self.pred_queue_last_gesture)
 
-            self.window.after(self.delay, self.update)
+                self.window.after(self.delay, self.update)
 
             
 #frames are classified and the classification is sent to a queue > 60% = valid cmd
@@ -325,17 +336,16 @@ class Slish:
             pass #simply keep looking for more gestures
 
 
-        self.recognized_sequence = True  #if it's being processed isn't it recognized?
+        self.recognized_sequence = True  #SLISH has recognized a valid alphabetic -> numeric sequence
 
         ## If the gestures list has 2 gestures, we need to clear it...
         if len(self.sequence_of_gestures) > 1:
             self.sequence_of_gestures_backup =list(self.sequence_of_gestures)
-            if self.sequence_of_gestures[0] in self.plug_mappings.keys():
-                self.selected_appliance =  self.plug_mappings[self.sequence_of_gestures[0]]
+            if self.socket.isGestureValid(self.sequence_of_gestures[0]):
+                self.selected_appliance =  self.socket.getAppliance(self.sequence_of_gestures[0])
                 second = self.sequence_of_gestures[1]
                 if second == '1':
                     self.last_command.config(text="{} turned on".format(self.selected_appliance))
-                    # print("{} turned on".format(self.selected_appliance))
                 if second == '2':
                     self.last_command.config(text="{} turned off".format(self.selected_appliance))
             self.sequence_of_gestures *= 0
@@ -378,3 +388,5 @@ class Slish:
 
 #beginning of program
 Slish()
+
+        
