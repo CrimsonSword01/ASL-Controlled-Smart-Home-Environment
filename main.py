@@ -51,6 +51,7 @@ import tkinter as tkinter
 import keyboard
 import pathlib
 from sys import platform
+from tkinter import filedialog
 import sys
 from tkinter import *
 from multiprocessing import Process
@@ -197,14 +198,19 @@ class Slish:
     def clear_log(self):
         f = open('logHistory.txt', 'r+')
         f.truncate(0)
+        current_time = datetime.now()
+        self.log.delete("1.0", "end")
+        file = open('logHistory.txt', 'a')
+        file.write("log has been cleared at: {0} ".format(current_time) + '\n')
 
     ## Saves the logHistory as a copy
-    def save(self): 
-        new_file = open("LogHistoryCopy.txt", "w")
-        with open("LogHistory.txt", "r") as f:
-            new_file.write(f.read())
-        new_file.close()
+    def save(self):
 
+        with open("logHistory.txt", "r") as logfile:
+            savefile = filedialog.asksaveasfile(mode='w', defaultextension = ".txt")
+            savefile.write(logfile.read())
+            savefile.close()
+            
     ## Reads the log history from the text file named logHistory.txt
     def displayProgramAction(self, cam_is_open):
         if cam_is_open:
