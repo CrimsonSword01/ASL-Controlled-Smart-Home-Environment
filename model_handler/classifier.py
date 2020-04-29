@@ -74,7 +74,7 @@ class Classifier:
             transforms.Grayscale(num_output_channels=3),
             transforms.CenterCrop(224),
             transforms.ToTensor(),
-            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+            transforms.Normalize([.5, 0.5, 0.5], [0.5, 0.5, 0.5])
         ])
 
     ## This function takes a frame from cv2 and attempts to classify it.
@@ -93,10 +93,7 @@ class Classifier:
         ## Removes the probability from the tensor object
         max_probability = max_probability.data.cpu().numpy()[0]
         ## Finds the label as predicted is the index value of the predicted
-        if predicted > len(self.labels):
-            max_probability = 0
-        else:
-            res = self.labels[predicted]
+        res = self.labels[predicted]
         ## If the probability is over the threshold
         if max_probability > .7:
             return res
@@ -121,9 +118,9 @@ class Classifier:
             output = torch.nn.Softmax()(res.float())
             max_probability , predicted = torch.max(output, 1)
             max_probability = max_probability.data.cpu().numpy()[0]
-            if predicted in self.labels:
-                res = self.labels[predicted]
-                x = x.split("--")[1]
+            res = self.labels[predicted]
+            print(x)
+            x = x.split("--")[1]
 
             if x == res:
                 print(res+" == "+x)
