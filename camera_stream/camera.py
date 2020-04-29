@@ -66,7 +66,7 @@ class Camera:
         self.out = cv2.VideoWriter('output.avid', self.fourcc, 20.0,
                       (640, 480))  # size of screen
         self.mask = None
-        self.backSub = cv2.createBackgroundSubtractorMOG2(detectShadows = 0)
+        self.backSub = cv2.createBackgroundSubtractorMOG2(history = 500, varThreshold = 16, detectShadows = 0,)
         self.img_count = 0 # keep track of number of images saved
         self.gestures_per_second = self.set_gestures_per_second(1) # number of a gestures a second to be processed
         self.path = '../image_gathering/'  # folder files are being saved to
