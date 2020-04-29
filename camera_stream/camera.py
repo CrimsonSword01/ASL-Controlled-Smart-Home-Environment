@@ -55,7 +55,7 @@ class Camera:
     def __init__(self):
         
         ### EDIT THIS VARIABLE TO CHANGE THE SPEED OF THE BACKGROUND REMOVER
-        self.speed = .01
+        self.speed = .004
         ### larger number = faster melting
         ### smaller number it will take longer
         
@@ -66,7 +66,7 @@ class Camera:
         self.out = cv2.VideoWriter('output.avid', self.fourcc, 20.0,
                       (640, 480))  # size of screen
         self.mask = None
-        self.backSub = cv2.createBackgroundSubtractorMOG2()
+        self.backSub = cv2.createBackgroundSubtractorMOG2(detectShadows = 0)
         self.img_count = 0 # keep track of number of images saved
         self.gestures_per_second = self.set_gestures_per_second(1) # number of a gestures a second to be processed
         self.path = '../image_gathering/'  # folder files are being saved to
@@ -104,11 +104,11 @@ class Camera:
         ret, frame = self.capture.read()  # retrieving the video frame
         # self.save_image(frame)
 
-        self.mask = self.backSub.apply(frame,self.mask,self.speed)
-        self.mask = cv2.merge((self.mask,self.mask,self.mask))
-        dst = cv2.bitwise_and(self.mask,frame)
+        self.mask = self.backSub.apply(frame)
+        # self.mask = cv2.merge((self.mask,self.mask,self.mask))
+        # dst = cv2.bitwise_and(self.mask,frame)
         
-        return True,frame,dst
+        return True,frame,self.mask
     # Uupdates the FPS if necessary
     def update_fps(self):
         self.current_total += 1

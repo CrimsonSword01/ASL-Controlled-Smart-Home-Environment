@@ -238,7 +238,7 @@ class Slish:
 
         if self.get_background_bool == True:
             current_time = int(time.time() - self.start_time)
-            if current_time > 5:
+            if current_time > 3:
                 self.get_background_bool = False
                 print("Background acquired...")
             else:
@@ -267,7 +267,7 @@ class Slish:
         ## We need to reclassify an image
             else:
                 ## Classify the frame from the camera
-                pred = self.classifier.classify(frame)
+                pred = self.classifier.classify(no_background)
 
             ## We process the prediction queue
                 self.processPred(pred)
@@ -335,19 +335,22 @@ class Slish:
             self.ten_sec_window = time.time()
             self.recently_executed = True
             self.cmd_execution_time = time.time() 
-
+            print(self.sequence_of_gestures)
         elif self.last_pred.isnumeric() and len(self.sequence_of_gestures) ==1:#assures 2nd gesture is numeric
             self.sequence_of_gestures.append(label)
+            print(self.sequence_of_gestures)
             self.recognized_sequence = True  #SLISH has recognized a valid alphabetic -> numeric sequence
-        ## If the gestures list has 2 gestures, we need to clear it...
             self.sequence_of_gestures_backup =list(self.sequence_of_gestures)
             if self.socket.isGestureValid(self.sequence_of_gestures[0]):
                 self.selected_appliance =  self.socket.getAppliance(self.sequence_of_gestures[0])
                 second = self.sequence_of_gestures[1]
                 if second == '1':
                     self.last_command.config(text="{} turned on".format(self.selected_appliance))
-                if second == '2':
+                elif second == '2':
                     self.last_command.config(text="{} turned off".format(self.selected_appliance))
+                    self.last_sequence_of_gestures.config(text=str(self.sequence_of_gestures[0])+" : "+str(self.sequence_of_gestures[1]))
+                else:
+                    self.last_command.config(text="command {} controls {}".format(self.sequence_of_gestures[0], self.selected_appliance))
             self.sequence_of_gestures *= 0
             self.recently_executed = True
             self.cmd_execution_time = time.time()    

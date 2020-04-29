@@ -93,6 +93,7 @@ class Classifier:
         ## Removes the probability from the tensor object
         max_probability = max_probability.data.cpu().numpy()[0]
         ## Finds the label as predicted is the index value of the predicted
+        print(predicted)
         res = self.labels[predicted]
         ## If the probability is over the threshold
         if max_probability > .7:
@@ -118,8 +119,8 @@ class Classifier:
             output = torch.nn.Softmax()(res.float())
             max_probability , predicted = torch.max(output, 1)
             max_probability = max_probability.data.cpu().numpy()[0]
+            print(predicted)
             res = self.labels[predicted]
-            print(x)
             x = x.split("--")[1]
 
             if x == res:
