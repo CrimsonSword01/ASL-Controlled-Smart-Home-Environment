@@ -125,8 +125,8 @@ class Camera:
         if status == True:  # if program is being opened, document that it's being opened
             print('writing to open')
             file = open('logHistory.txt', 'a')
-            file.write('=========================================\n')
-            file.write('program opened at: ' + current_time + '\n')
+            #file.write('=========================================\n')
+            file.write('SLISH opened at: ' + current_time + '\n')
             file.close()
             return True
         elif status == 'closing':  # if program is being closed, document that it's being closed
