@@ -1,8 +1,0 @@
-NIGHTLY BUILD -- 2/11/2020
-	WORKING - camera saving images to disk,camera streaming to window
-	NOT WORKING - none
-	BUGS - none
-NIGHTLY BUILD -- 2/18/2020
-	WORKING - (new) gesture recog, output of estimated class onto image, changing the GPS (gestures per second)
-	NOT WORKING - none
-	BUGS - none
