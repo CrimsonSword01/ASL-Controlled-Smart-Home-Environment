@@ -1,4 +1,6 @@
 """
+CLASSIFIER COMPONENT
+
 CONTRIBUTORS:
     Paul Durham
 	
@@ -12,6 +14,17 @@ the system model with a uniform data set to further increase the system's accura
 REQUIREMENTS ADDRESSED:
     FR.3, FR.4 
     NFR.2, NFR.3, NFR.4
+
+CORRESPONDING SDD SECTIONS: 
+Processing narrative for Classifier Object - 3.2.1.C
+Classifier Object Interface Description - 3.2.2.C
+Classifier Object processing detail  - 3.2.3.C
+Restrictions/limitations for Classifier Object - 3.2.3.2.C
+Performance issues for Classifier Object - 3.2.3.3.C
+Processing detail for each operation of Classifier Object - 3.2.3.5.C
+Processing narrative for each operation - 3.2.3.5.1.C
+Algorithmic model for each operation - 3.2.3.5.2.C
+
 LICENSE INFORMATION:
     Copyright (c) 2019, CSC 450 Group 1
     All rights reserved.
@@ -42,9 +55,6 @@ import torch.nn as nn
 import numpy as np
 from matplotlib import cm
 import cv2
-#global vars
-# onOrOffFan = 0
-# onOrOffLights = 0
 
 ## Classifier class that can classify ASL alphabet gestures
 class Classifier:
@@ -137,7 +147,6 @@ class Classifier:
 
 ## If the .py is ran directly this will run and attempt to classify everything image in the test folder.
 if __name__ == "__main__":
-    ## begin test ##
     files = []
     cls = Classifier()
     path = "testing_dataset/"

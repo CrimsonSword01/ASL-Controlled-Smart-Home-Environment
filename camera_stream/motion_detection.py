@@ -1,4 +1,6 @@
 """
+MOTION DETECTION FEATURE
+
 CONTRIBUTORS:
     Mitchell Perez
 
@@ -8,8 +10,12 @@ previous minute. If not, motion_detection.py indicates to SLISH that the system 
 "sleep mode" where the system does not attempt to classify external camera frames until
 motion is once again detected. The overall purpose of this file is to lessen the processing power that SLISH utilizes
 in addition to making the software more usable. 
-REQUIREMENTS ADDRESSED:
+REQUIREMENTS ADDRESSED IN SRS:
    NFR.6
+
+CORRESPONING SDD SECTIONS:
+Processing detail for each operation of Camera Frame Retrieval Component - 3.2.3.5.A
+
 LICENSE INFORMATION:
     Copyright (c) 2019, CSC 450 Group 1
     All rights reserved.

@@ -1,6 +1,6 @@
 """
 CONTRIBUTORS:
-    Paul Durham, Omnia Awad, Allison Dorsett, Joseph Proctor, Mitchell Perez, 
+    Paul Durham, Omnia Awad, Allison Dorsett, Joseph Proctor, Mitchell Perez
 FILE CONTENT DESCRIPTION:
 	The file main.py leverages functionality from the various components of SLISH in order to produce a working, efficient 
 	software. The user interface design and functionalities are implemented utilizing the tkinter library for its development.
@@ -22,6 +22,14 @@ REQUIREMENTS ADDRESSED:
     FR.2, FR.2.1, FR 2.1.1, FR.2.1.2, FR.2.1.3, FR2.2, FR.2.3,
 	NFR.2, NFR.4, NFR.5, NFR.6, NFR.7, NFR.8, NFR.9
 	EIR.1, EIR.2
+
+CORRESPONDING SDD SECTIONS: 
+GUI (Lines 79-249 and 403-405 in code) - Sections: 4.0, 4.1, 4.1.1, 4.1.2, 4.2, 4.3
+Camera Frame Retrieval Component methods that are being leveraged in main.py (lines 252-306 and 394-400) - Sections: 3.2.A - 3.2.3.5.2.A
+Classifier Component methods that are being leveraged in main.py (lines 313-345) = Sections: 3.2.1.C - 3.2.3.5.2.C
+Plug Component methods that are being leveraged in main.py (lines 349-387) - Sections : 3.2.1.D - 3.2.3.5.2.D
+Timer functions used for efficiency/unit testing (lines 409-421) - Section: 2.1
+
 LICENSE INFORMATION:
     Copyright (c) 2019, CSC 450 Group 1
     All rights reserved.
@@ -31,7 +39,7 @@ LICENSE INFORMATION:
           following disclaimer.
         * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and
           the following disclaimer in the documentation and/or other materials provided with the distribution.
-        * Neither the name of the CSC 450 Group 4 nor the names of its contributors may be used to endorse or
+        * Neither the name of the CSC 450 Group 1 nor the names of its contributors may be used to endorse or
           promote products derived from this software without specific prior written permission.
     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
     INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -115,7 +123,7 @@ class Slish:
 
         ## Create mappings for plugs
         self.socket = Socket()
-	## Ccreate tkinter Frame and widgets
+	    # Create tkinter Frame and widgets
         self.header_frame= tkinter.Frame(self.window, bg='#c9e4ff')
         self.header_frame.pack(fill='x')
         self.middle_frame= tkinter.Frame(self.window)
@@ -244,14 +252,14 @@ class Slish:
         self.log.insert(tkinter.INSERT, "=========================================\n'")
         self.window.destroy()
 
-    ## The update function that is called each iteration
+    #The update function that is called each iteration
     def update(self):
-        #@ Success means that a valid image came back as the image will be an array and will not equal None
+        #Success means that a valid image came back as the image will be an array and will not equal None
         success, frame, no_background = self.vid.capture_image()
         self.modif_frame = self.checkformotion.processCurrentFrame(frame)
         self.frame_difference = self.checkformotion.subtractFrames(self.modif_frame, self.background_image)
         
-
+        #SLISH waits 3 seconds before classifying gestures, thus giving the background remover time to settle.
         if self.get_background_bool == True:
             current_time = int(time.time() - self.start_time)
             if current_time > 3:
@@ -265,27 +273,27 @@ class Slish:
                 self.window.after(self.delay, self.update)
 
         if not self.get_background_bool:
-	## Quantify the number of pixels that have changed
+	        # Quantify the number of pixels that have changed
             changedPixels = self.checkformotion.checkPixelDiff(self.frame_difference)
         
-	## Quanity the total number of pixels
+	        # Quanity the total number of pixels
             totalPixels = self.checkformotion.getNumPixels(self.background_image)
 
-        ## Wasn't enough movement
+            # Wasn't enough movement
             if changedPixels/totalPixels < .10:
                 self.window.after(self.delay, self.update)
-        ## Program will continue past this section if the threshold is met        
+            #Program will continue past this section if the threshold is met        
 
-        ## If there has been a recent classified image and doesnt need to run
+            # If there has been a recent classified image and doesnt need to run (COOL DOWN PERIOD)
             if self.recent_image():
                 self.window.after(self.delay, self.update)
 
-        ## We need to reclassify an image
+           #If the cool down period is not active, classify the frame for a gesture....
             else:
                 ## Classify the frame from the camera
                 pred = self.classifier.classify(no_background)
 
-            ## We process the prediction queue
+                #We process the prediction queue
                 self.processPred(pred)
 
             ## Display images if needed based on checkbuttons
@@ -302,7 +310,6 @@ class Slish:
                 self.window.after(self.delay, self.update)
 
             
-#frames are classified and the classification is sent to a queue > 60% = valid cmd
     
     ## This method takes a prediction and pushes it to the queue
     def processPred(self,pred):
@@ -352,6 +359,7 @@ class Slish:
             self.recently_executed = True
             self.cmd_execution_time = time.time() 
             print(self.sequence_of_gestures)
+        #if it's the 2nd gesture and the gesture is numeric, process the gesture
         elif self.last_pred.isnumeric() and len(self.sequence_of_gestures) ==1:#assures 2nd gesture is numeric
             self.sequence_of_gestures.append(label)
             print(self.sequence_of_gestures)
@@ -360,15 +368,18 @@ class Slish:
             if self.socket.isGestureValid(self.sequence_of_gestures[0]):
                 self.selected_appliance =  self.socket.getAppliance(self.sequence_of_gestures[0])
                 second = self.sequence_of_gestures[1]
+                #if the second gesture presented is 1, turn on the appliance
                 if second == '1':
                     self.last_command.config(text="{} turned on".format(self.selected_appliance))
                     with open('logHistory.txt', 'a') as file:
                         file.write(self.last_command.cget("text")+'\n')
+                #if the second gesture presented is 2, turn off the appliance
                 elif second == '2':
                     self.last_command.config(text="{} turned off".format(self.selected_appliance))
                     with open('logHistory.txt', 'a') as file:
                         file.write(self.last_command.cget("text")+'\n')
                     self.last_sequence_of_gestures.config(text=str(self.sequence_of_gestures[0])+" : "+str(self.sequence_of_gestures[1]))
+                #if the second gesture presented is 3, display the appliance that corresponds to the previously presented letter
                 else:
                     self.last_command.config(text="command {} controls {}".format(self.sequence_of_gestures[0], self.selected_appliance))
                     with open('logHistory.txt', 'a') as file:

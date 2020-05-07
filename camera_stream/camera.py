@@ -1,4 +1,6 @@
 """
+CAMERA FRAME RETRIEVAL COMPONENT
+
 CONTRIBUTORS:
     Mitchell Perez, Paul Durham, Omnia Awad
 
@@ -10,10 +12,23 @@ FILE CONTENT DESCRIPTION:
 	handling input to both Unix and Windows based operating systems as well as asserting that the required USB camera is being
 	used to retrieve external input. 
 
-REQUIREMENTS ADDRESSED:
+REQUIREMENTS ADDRESSED IN SRS:
     FR.1, 2.2 
 	NFR.1, NFR.7
 	EIR.1
+
+CORRESPONDING SDD SECTIONS: 
+Camera Frame Retrieval Component Processing Narrative - 3.2.A
+Camera Frame Retrieval Component Interface Description - 3.2.2.A
+Camera Frame Retrieval Component Processing detail - 3.2.3.A
+Restrictions/limitations for Camera Frame Retrieval Component - 3.2.3.2.A
+Performance issues for Camera Frame Retrieval Component - 3.2.3.3.A
+Design constraints for Camera Frame Retrieval Component - 3.2.3.4.A
+Processing detail for each operation of Camera Frame Retrieval Component - 3.2.3.5.A
+Processing Narrative for each operation - 3.2.3.5.1.A
+Algorithmic model for each operation - 3.2.3.5.2.A
+
+
 LICENSE INFORMATION:
     Copyright (c) 2019, CSC 450 Group 1
     All rights reserved.
@@ -23,7 +38,7 @@ LICENSE INFORMATION:
           following disclaimer.
         * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and
           the following disclaimer in the documentation and/or other materials provided with the distribution.
-        * Neither the name of the CSC 450 Group 4 nor the names of its contributors may be used to endorse or
+        * Neither the name of the CSC 450 Group 1 nor the names of its contributors may be used to endorse or
           promote products derived from this software without specific prior written permission.
     THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
     INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -97,17 +112,12 @@ class Camera:
             return True
         return False
         
-    # Returns one frame to the SLISH application
+    # Returns a success boolean, the unedited frame, and the frame with the background removed
     def capture_image(self):
-        # Sees if the FPS needs to be updated
+        #Updates the FPS at which SLISH is being displayed at
         self.update_fps()
         ret, frame = self.capture.read()  # retrieving the video frame
-        # self.save_image(frame)
-
-        self.mask = self.backSub.apply(frame)
-        # self.mask = cv2.merge((self.mask,self.mask,self.mask))
-        # dst = cv2.bitwise_and(self.mask,frame)
-        
+        self.mask = self.backSub.apply(frame)       
         return True,frame,self.mask
     # Uupdates the FPS if necessary
     def update_fps(self):
@@ -125,8 +135,8 @@ class Camera:
         if status == True:  # if program is being opened, document that it's being opened
             print('writing to open')
             file = open('logHistory.txt', 'a')
-            #file.write('=========================================\n')
-            file.write('SLISH opened at: ' + current_time + '\n')
+            file.write('=========================================\n')
+            file.write('program opened at: ' + current_time + '\n')
             file.close()
             return True
         elif status == 'closing':  # if program is being closed, document that it's being closed
