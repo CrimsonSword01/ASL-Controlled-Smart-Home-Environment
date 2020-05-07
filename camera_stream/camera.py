@@ -85,7 +85,6 @@ class Camera:
         self.img_count = 0 # keep track of number of images saved
         self.gestures_per_second = self.set_gestures_per_second(1) # number of a gestures a second to be processed
         self.path = '../image_gathering/'  # folder files are being saved to
-        self.gestures_per_second_time_check = time.time() # Used to determine if a gesture needs to be captured and processed
         self.last_second_duration = 0
         self.prior_total = 0 # Used to keep track of the last second's number of frames
         self.current_total = 0 # Used to keep track of the current second's number of frames
@@ -105,12 +104,6 @@ class Camera:
         self.capture.release()
         self.out.release()
         cv2.destroyAllWindows()
-
-    # Checks to see if a gesture needs to be processed
-    def gesture_check(self):
-        if time.time() - self.gestures_per_second_time_check > self.gestures_per_second:
-            return True
-        return False
         
     # Returns a success boolean, the unedited frame, and the frame with the background removed
     def capture_image(self):
