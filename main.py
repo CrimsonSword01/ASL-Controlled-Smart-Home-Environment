@@ -1,6 +1,6 @@
 """
 CONTRIBUTORS:
-    Paul Durham, Omnia Awad, Allison Dorsett, Joseph Proctor, Mitchell Perez
+    Paul Durham, Mitchell Perez, Omnia Awad, Allison Dorsett, Ben Jinkerson, Joseph Proctor
 FILE CONTENT DESCRIPTION:
 	The file main.py leverages functionality from the various components of SLISH in order to produce a working, efficient 
 	software. The user interface design and functionalities are implemented utilizing the tkinter library for its development.
