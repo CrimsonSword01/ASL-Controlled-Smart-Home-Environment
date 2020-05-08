@@ -59,7 +59,7 @@ cd ASL-Controlled-Smart-Home-Environment/
 
 # Model and Data Sets
 
-The model and data sets are to large to be put onto Github. If you would like access to these files, please contact us and we can send them to you. Once you have these files copy them into the model_handler folder. Once these files are copied in you can then type the command below into the anaconda console to run the program.
+The model and data sets are too large to be put onto Github. If you would like access to these files, please contact us and we can send them to you. Once you have these files copy them into the model_handler folder. Once these files are copied in you can then type the command below into the anaconda console to run the program.
 
 ```bash
 python main.py
