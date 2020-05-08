@@ -25,7 +25,7 @@ Cick the Windows button in the bottom left corner (for Windows 10 Users) and cli
 Type "Anaconda Prompt (Anaconda3)" and click on it. When the console opens up click into the console and type each line below (after you type one line press the Enter button):
 
 
-Creating a Testing Enironment within Anaconda:
+Creating a Testing Environment within Anaconda:
 ```bash
 conda create --name ASL
 y
