@@ -46,7 +46,7 @@ pip install imutils
 ```
 
 ## Repository
-You can either download a zip file or clone our repo via terminal. If you wish to download the zip go to: "https://github.com/CrimsonSword01/ASL-Controlled-Smart-Home-Environment"
+You can either download a zip file or clone our repo via terminal. If you wish to download the zip go to: "https://github.com/mjp1997/ASL-Controlled-Smart-Home-Environment"
 
 If you wish to clone our repo you must create a folder (in whatever directory you wish; for simplification we will specify the Desktop) on the Desktop. Go into the folder you created and copy the system path. Within the anaconda terminal please follow the instructions below:
 
